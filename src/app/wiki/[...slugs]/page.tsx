@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { notFound } from "next/navigation";
+import MDXRemote from "@/components/wiki-markdown-remote/wiki-markdown-remote";
 
 type WikiPageProps = {
   params: {
@@ -14,5 +15,5 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
 
   if (!article) return notFound();
 
-  return <p>{article.markdown}</p>;
+  return <MDXRemote source={article.markdown} />;
 }
