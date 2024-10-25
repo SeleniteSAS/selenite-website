@@ -1,5 +1,3 @@
-import { HomeIcon } from "lucide-react";
-
 type WikiNavigation = {
   title: string;
   items: WikiNavigationGroup[];
