@@ -14,7 +14,7 @@ import {
 } from "@/components/_ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/_ui/collapsible";
 import Link from "next/link";
-import { ChevronRightIcon, icons } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 import Icon from "@/components/_ui/icon";
 
 export default async function WikiSidebarMenu(): Promise<JSX.Element> {
