@@ -1,21 +1,22 @@
 import { HomeIcon } from "lucide-react";
 
-type IconType = typeof HomeIcon;
-
 type WikiNavigation = {
   title: string;
   items: WikiNavigationGroup[];
+  slug: string;
 };
 
 type WikiNavigationGroup = {
   title: string;
   url: string;
-  icon: IconType;
+  slug: string;
+  icon?: string;
   items: WikiNavigationItem[];
 };
 
 type WikiNavigationItem = {
   title: string;
+  slug: string;
   url: string;
 };
 
