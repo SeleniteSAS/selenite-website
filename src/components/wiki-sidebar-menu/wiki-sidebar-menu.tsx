@@ -14,7 +14,8 @@ import {
 } from "@/components/_ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/_ui/collapsible";
 import Link from "next/link";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, icons } from "lucide-react";
+import Icon from "@/components/_ui/icon";
 
 export default async function WikiSidebarMenu(): Promise<JSX.Element> {
   const navigationItems: WikiNavigation[] = await WikiNavigationServices.getNavigationItem();
@@ -30,7 +31,7 @@ export default async function WikiSidebarMenu(): Promise<JSX.Element> {
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild={true} tooltip={item.title}>
                     <Link href={item.url}>
-                      <item.icon />
+                      <Icon name={item.icon ?? "home"} />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
