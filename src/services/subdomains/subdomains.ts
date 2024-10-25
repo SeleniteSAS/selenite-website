@@ -1,6 +1,6 @@
 import { Subdomain } from "@/types/subdomain";
 
-class Index {
+class SubdomainsService {
   static subdomains: Subdomain[] = [
     {
       name: "Website",
@@ -40,4 +40,4 @@ class Index {
   }
 }
 
-export default Index;
+export default SubdomainsService;
