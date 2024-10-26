@@ -8,7 +8,7 @@ export default function Layout({ children }: WikiLayoutProps): ReactNode {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>{children}</main>
+      <main className="w-full">{children}</main>
     </SidebarProvider>
   );
 }

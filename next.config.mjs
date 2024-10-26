@@ -1,8 +1,21 @@
 import createNextIntlPlugin from "next-intl/plugin";
+import withMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
 
-const withNextIntl = createNextIntlPlugin("./src/lang/request.ts");
+/** @type {string} */
+const i18nPath = "./src/lang/request.ts";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  pageExtensions: ["ts", "tsx", "mdx", "jsx", "js"],
+};
 
-export default withNextIntl(nextConfig);
+/** @type {import('@next/mdx').NextMDXOptions} */
+const mdxConfig = {
+  options: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [],
+  },
+};
+
+export default createNextIntlPlugin(i18nPath)(withMDX(mdxConfig)(nextConfig));
