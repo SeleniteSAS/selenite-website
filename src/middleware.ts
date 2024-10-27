@@ -2,16 +2,17 @@ import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/serv
 import type { NextURL } from "next/dist/server/web/next-url";
 import SubdomainsService from "@/services/subdomains/subdomains";
 import { Subdomain } from "@/types/subdomain";
+import { auth } from "@/lib/auth";
 
 export const config: MiddlewareConfig = {
   matcher: ["/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
 };
 
-async function middleware(req: NextRequest): Promise<NextResponse> {
+async function subdomains(req: NextRequest): Promise<NextResponse> {
   const requestUrl: NextURL = req.nextUrl;
   const hostname: string | undefined = req.headers
     .get("host")
-    ?.replace("localhost:3000", `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+    ?.replace("localhost:80", `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
   const params: string = requestUrl.searchParams.toString();
   const path: string = `${requestUrl.pathname}${params.length > 0 ? `?${params}` : ""}`;
@@ -27,5 +28,7 @@ async function middleware(req: NextRequest): Promise<NextResponse> {
 
   return NextResponse.rewrite(SubdomainsService.buildSubdomainUrl(subdomains[0], path, requestUrl.href));
 }
+
+const middleware = process.env.NODE_ENV === "production" ? auth(subdomains) : subdomains;
 
 export default middleware;

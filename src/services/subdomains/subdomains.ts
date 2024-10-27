@@ -22,6 +22,11 @@ class SubdomainsService {
       subdomain: "www",
       slug: "website",
     },
+    {
+      name: "Authenticator",
+      subdomain: "auth",
+      slug: "auth",
+    },
   ];
 
   static getSubdomains(): Subdomain[] {
