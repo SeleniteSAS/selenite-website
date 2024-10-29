@@ -2,16 +2,12 @@ import React, { ReactNode, Suspense } from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
-  SidebarInput,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
 import { AlbumIcon, ChevronsRightIcon } from "lucide-react";
-import { Button } from "@/components/_ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/_ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,24 +56,8 @@ export default function WikiSidebar(): ReactNode {
           <WikiSidebarMenu />
         </Suspense>
       </SidebarContent>
-      <SidebarFooter>
-        <div className="p-1 group-data-[state=collapsed]:hidden">
-          <Card className="shadow-none">
-            <form>
-              <CardHeader className="p-4 pb-0">
-                <CardTitle className="text-sm">Subscribe to our newsletter</CardTitle>
-                <CardDescription>Opt-in to receive updates and news about the sidebar.</CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-2.5 p-4">
-                <SidebarInput type="email" placeholder="Email" />
-                <Button className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none" size="sm">
-                  Subscribe
-                </Button>
-              </CardContent>
-            </form>
-          </Card>
-        </div>
-      </SidebarFooter>
+      {/*<SidebarFooter>*/}
+      {/*</SidebarFooter>*/}
     </Sidebar>
   );
 }

@@ -11,9 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/_ui/form";
 import { Input } from "@/components/_ui/input";
 import login from "@/actions/auth/login";
-import { revalidatePath } from "next/cache";
 
-export default function AuthLoginForm(): ReactNode {
+type AuthLoginFormProps = { redirectTo?: string };
+
+export default function AuthLoginForm({ redirectTo }: AuthLoginFormProps): ReactNode {
   const { toast } = useToast();
   const [pending, startTransition] = useTransition();
 
@@ -27,7 +28,7 @@ export default function AuthLoginForm(): ReactNode {
 
   const handleSubmit = async (data: LoginSchema) => {
     startTransition(async () => {
-      const result = await login(data);
+      const result = await login(data, redirectTo);
       if ("error" in result) {
         toast({
           title: "An error occured",

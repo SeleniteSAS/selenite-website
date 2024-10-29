@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
 
-export default function WikiPage(): ReactNode {
+export default async function WikiPage(): Promise<ReactNode> {
   return <p>Wiki Page</p>;
 }

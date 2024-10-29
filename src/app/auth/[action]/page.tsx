@@ -5,31 +5,25 @@ import AuthRegisterForm from "@/components/auth-register-form/auth-register-form
 import { auth } from "@/lib/auth";
 import { Session } from "next-auth";
 
-const actions = ["login", "register"];
-
 type AuthActionPageProps = {
   params: { action: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default async function AuthActionPage({
-  params: { action },
-  searchParams,
-}: AuthActionPageProps): Promise<ReactNode> {
+export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();
-  if (session) {
-    if ("redirect" in searchParams && typeof searchParams.redirect === "string") {
-      return redirect(searchParams.redirect);
-    } else {
-      return notFound();
-    }
+
+  const redirectUrl: string = typeof searchParams.redirect === "string" ? searchParams.redirect : process.env.ROOT_URL!;
+
+  if (params.action === "login") {
+    if (session) return redirect(redirectUrl);
+    return <AuthLoginForm redirectTo={redirectUrl} />;
   }
 
-  if (!actions.includes(action)) return notFound();
-
-  if (action === "login") return <AuthLoginForm />;
-
-  if (action === "register") return <AuthRegisterForm />;
+  if (params.action === "register") {
+    if (session) return redirect(redirectUrl);
+    return <AuthRegisterForm />;
+  }
 
   return notFound();
 }
