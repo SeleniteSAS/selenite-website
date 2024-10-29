@@ -8,22 +8,11 @@ import {
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
 import { AlbumIcon } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/_ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/_ui/dropdown-menu";
 import WikiSidebarMenu from "@/components/wiki-sidebar-menu/wiki-sidebar-menu";
 import WikiSidebarMenuSkeleton from "@/components/wiki-sidebar-menu-skeleton/wiki-sidebar-menu-skeleton";
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/_ui/button";
-import { logout } from "@/actions/auth/logout";
-import { headers } from "next/headers";
 import WikiSidebarAccount from "@/components/wiki-sidebar-account/wiki-sidebar-account";
 
 export default async function WikiSidebar() {
