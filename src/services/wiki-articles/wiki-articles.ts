@@ -34,8 +34,15 @@ class WikiArticlesService {
     return labels;
   }
 
-  static async getParentArticles(): Promise<{ slug: string; title: string }[]> {
-    const articles = await prisma.article.findMany({ where: { isPublished: true } });
+  static async getParentArticles(id: string): Promise<{ slug: string; title: string }[]> {
+    const articles = await prisma.article.findMany({
+      where: {
+        isPublished: true,
+        id: {
+          not: id,
+        },
+      },
+    });
 
     const result = articles
       .filter((article) => article.slug.split("/").length < 3)

@@ -23,7 +23,7 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
   if (!article) return notFound();
 
   if (isEditMode && session?.user.role === UserRole.ADMIN) {
-    const parentArticles: { slug: string; title: string }[] = await WikiArticlesService.getParentArticles();
+    const parentArticles: { slug: string; title: string }[] = await WikiArticlesService.getParentArticles(article.id);
 
     return <WikiMarkdownEdit article={article} parentArticles={parentArticles} />;
   }

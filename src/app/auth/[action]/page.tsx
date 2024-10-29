@@ -13,7 +13,8 @@ type AuthActionPageProps = {
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();
 
-  const redirectUrl: string = typeof searchParams.redirect === "string" ? searchParams.redirect : process.env.ROOT_URL!;
+  const redirectUrl: string =
+    typeof searchParams.redirect === "string" ? searchParams.redirect : process.env.NEXT_PUBLIC_ROOT_URL!;
 
   if (params.action === "login") {
     if (session) return redirect(redirectUrl);

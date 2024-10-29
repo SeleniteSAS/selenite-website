@@ -4,8 +4,8 @@ import UsersService from "@/services/users/users";
 import { loginSchema } from "@/schemas/auth";
 import { UserRole } from "@prisma/client";
 
-const useSecureCookies: boolean = process.env.AUTH_URL!.startsWith("https://");
-const domain: string = process.env.NEXT_PUBLIC_ROOT_DOMAIN!;
+const useSecureCookies: boolean = process.env.NEXT_PUBLIC_AUTH_URL!.startsWith("https://");
+const domain: string = new URL(process.env.NEXT_PUBLIC_ROOT_URL!).hostname;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -49,11 +49,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   useSecureCookies,
   callbacks: {
     jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.name = user.name;
+      }
       return token;
     },
     session({ session, token }) {
       session.user.role = token.role as UserRole;
+      session.user.name = token.name as string;
       return session;
     },
   },

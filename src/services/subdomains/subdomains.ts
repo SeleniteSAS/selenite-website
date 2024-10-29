@@ -38,9 +38,9 @@ class SubdomainsService {
   }
 
   static isValidSubdomain(subdomain: Subdomain, hostname: string): boolean {
+    const rootDomain: string = new URL(process.env.NEXT_PUBLIC_ROOT_URL!).hostname;
     return (
-      hostname === `${subdomain.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` ||
-      (hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN && subdomain.subdomain === "")
+      hostname === `${subdomain.subdomain}.${rootDomain}` || (hostname === rootDomain && subdomain.subdomain === "")
     );
   }
 }

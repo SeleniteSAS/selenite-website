@@ -1,4 +1,4 @@
-import React, { ReactNode, Suspense } from "react";
+import React, { Suspense } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -7,17 +7,28 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
-import { AlbumIcon, ChevronsRightIcon } from "lucide-react";
+import { AlbumIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/_ui/dropdown-menu";
 import WikiSidebarMenu from "@/components/wiki-sidebar-menu/wiki-sidebar-menu";
 import WikiSidebarMenuSkeleton from "@/components/wiki-sidebar-menu-skeleton/wiki-sidebar-menu-skeleton";
+import { Session } from "next-auth";
+import { auth } from "@/lib/auth";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/_ui/button";
+import { logout } from "@/actions/auth/logout";
+import { headers } from "next/headers";
+import WikiSidebarAccount from "@/components/wiki-sidebar-account/wiki-sidebar-account";
 
-export default function WikiSidebar(): ReactNode {
+export default async function WikiSidebar() {
+  const session: Session | null = await auth();
+
   return (
     <Sidebar collapsible={"icon"} side={"left"}>
       <SidebarHeader>
@@ -36,17 +47,9 @@ export default function WikiSidebar(): ReactNode {
                     <span className="truncate font-semibold">Selenite Lost Contact</span>
                     <span className="truncate text-xs">Official Documentation</span>
                   </div>
-                  <ChevronsRightIcon className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side="right"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="text-xs text-muted-foreground">Content</DropdownMenuLabel>
-              </DropdownMenuContent>
+              <WikiSidebarAccount session={session} />
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
