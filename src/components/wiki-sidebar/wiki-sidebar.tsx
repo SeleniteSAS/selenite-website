@@ -1,27 +1,27 @@
-import React, { ReactNode, Suspense } from "react";
+import React, { Fragment, Suspense } from "react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarInput,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
-import { AlbumIcon, ChevronsRightIcon } from "lucide-react";
-import { Button } from "@/components/_ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/_ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/_ui/dropdown-menu";
+import { AlbumIcon } from "lucide-react";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/_ui/dropdown-menu";
 import WikiSidebarMenu from "@/components/wiki-sidebar-menu/wiki-sidebar-menu";
 import WikiSidebarMenuSkeleton from "@/components/wiki-sidebar-menu-skeleton/wiki-sidebar-menu-skeleton";
+import { Session } from "next-auth";
+import { auth } from "@/lib/auth";
+import WikiSidebarAccount from "@/components/wiki-sidebar-account/wiki-sidebar-account";
+import { buttonVariants } from "@/components/_ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default function WikiSidebar(): ReactNode {
+export default async function WikiSidebar() {
+  const session: Session | null = await auth();
+
   return (
     <Sidebar collapsible={"icon"} side={"left"}>
       <SidebarHeader>
@@ -40,17 +40,9 @@ export default function WikiSidebar(): ReactNode {
                     <span className="truncate font-semibold">Selenite Lost Contact</span>
                     <span className="truncate text-xs">Official Documentation</span>
                   </div>
-                  <ChevronsRightIcon className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side="right"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="text-xs text-muted-foreground">Content</DropdownMenuLabel>
-              </DropdownMenuContent>
+              <WikiSidebarAccount session={session} />
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -60,24 +52,15 @@ export default function WikiSidebar(): ReactNode {
           <WikiSidebarMenu />
         </Suspense>
       </SidebarContent>
-      <SidebarFooter>
-        <div className="p-1 group-data-[state=collapsed]:hidden">
-          <Card className="shadow-none">
-            <form>
-              <CardHeader className="p-4 pb-0">
-                <CardTitle className="text-sm">Subscribe to our newsletter</CardTitle>
-                <CardDescription>Opt-in to receive updates and news about the sidebar.</CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-2.5 p-4">
-                <SidebarInput type="email" placeholder="Email" />
-                <Button className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none" size="sm">
-                  Subscribe
-                </Button>
-              </CardContent>
-            </form>
-          </Card>
-        </div>
-      </SidebarFooter>
+      {session?.user && session?.user.role === "ADMIN" ? (
+        <SidebarFooter>
+          <Link href="/new" className={cn(buttonVariants({ variant: "default" }), "w-full")}>
+            New Page
+          </Link>
+        </SidebarFooter>
+      ) : (
+        <Fragment />
+      )}
     </Sidebar>
   );
 }
