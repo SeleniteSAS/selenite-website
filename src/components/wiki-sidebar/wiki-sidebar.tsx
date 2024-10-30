@@ -15,7 +15,7 @@ import WikiSidebarMenuSkeleton from "@/components/wiki-sidebar-menu-skeleton/wik
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
 import WikiSidebarAccount from "@/components/wiki-sidebar-account/wiki-sidebar-account";
-import { Button, buttonVariants } from "@/components/_ui/button";
+import { buttonVariants } from "@/components/_ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 

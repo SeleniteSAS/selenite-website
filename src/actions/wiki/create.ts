@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
-import { redirect } from "next/navigation";
 
 type CreateReturn = { error: string } | { success: true; slug: string };
 
