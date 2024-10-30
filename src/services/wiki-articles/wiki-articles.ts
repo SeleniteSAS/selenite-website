@@ -34,13 +34,11 @@ class WikiArticlesService {
     return labels;
   }
 
-  static async getParentArticles(id: string): Promise<{ slug: string; title: string }[]> {
+  static async getParentArticles(id?: string): Promise<{ slug: string; title: string }[]> {
     const articles = await prisma.article.findMany({
       where: {
         isPublished: true,
-        id: {
-          not: id,
-        },
+        id: id ? { not: id } : undefined,
       },
     });
 
@@ -59,6 +57,20 @@ class WikiArticlesService {
     data: { label: string; markdown: string; icon?: string | undefined; slug: string },
   ): Promise<Article | null> {
     return prisma.article.update({ where: { id }, data });
+  }
+
+  static async createArticle(data: {
+    label: string;
+    markdown: string;
+    icon?: string | undefined;
+    slug: string;
+  }): Promise<Article> {
+    return prisma.article.create({
+      data: {
+        ...data,
+        isPublished: true,
+      },
+    });
   }
 }
 

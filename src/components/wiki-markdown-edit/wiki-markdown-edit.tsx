@@ -7,7 +7,7 @@ import { Button, buttonVariants } from "@/components/_ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
-import { EditPageSchema, editPageSchema } from "@/schemas/wiki";
+import { CreateUpdateWikiPage, createUpdateWikiPage } from "@/schemas/wiki";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/_ui/form";
 import { Input } from "@/components/_ui/input";
@@ -16,9 +16,11 @@ import { ChevronsUpDownIcon } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/_ui/command";
 import WikiIconPicker from "@/components/wiki-icon-picker/wiki-icon-picker";
 import edit from "@/actions/wiki/edit";
+import create from "@/actions/wiki/create";
+import { useToast } from "@/hooks/use-toast";
 
 type WikiMarkdownEditProps = {
-  article: Article;
+  article: Article | null;
   parentArticles: {
     slug: string;
     title: string;
@@ -27,22 +29,29 @@ type WikiMarkdownEditProps = {
 
 export default function WikiMarkdownEdit({ article, parentArticles }: WikiMarkdownEditProps): JSX.Element {
   const [pending, startTransition] = useTransition();
-  const editWithId = edit.bind(null, article.id);
-  const form = useForm<EditPageSchema>({
-    resolver: zodResolver(editPageSchema),
+  const action = article ? edit.bind(null, article.id) : create;
+  const { toast } = useToast();
+
+  const form = useForm<CreateUpdateWikiPage>({
+    resolver: zodResolver(createUpdateWikiPage),
     defaultValues: {
-      label: article.label,
-      markdown: article.markdown,
-      icon: article.icon ?? undefined,
-      slug: article.slug.split("/").length > 1 ? article.slug.split("/").slice(0, -1).join("/") : "/",
+      label: article ? article.label : "",
+      markdown: article ? article.markdown : "",
+      icon: article ? (article.icon ?? undefined) : "",
+      slug: article ? (article.slug.split("/").length > 1 ? article.slug.split("/").slice(0, -1).join("/") : "/") : "/",
     },
   });
 
-  const handleSubmit = (data: EditPageSchema) => {
+  const handleSubmit = (data: CreateUpdateWikiPage) => {
     startTransition(async () => {
-      const result = await editWithId(data);
-
-      console.log(result);
+      const result = await action(data);
+      if ("error" in result) {
+        toast({
+          variant: "destructive",
+          description: result.error,
+          title: "An error occured",
+        });
+      }
     });
   };
 
@@ -142,11 +151,13 @@ export default function WikiMarkdownEdit({ article, parentArticles }: WikiMarkdo
           />
         </div>
         <div className="my-4 flex justify-end space-x-4">
-          <Link className={cn(buttonVariants({ variant: "destructive" }), "h-8")} href={`/${article.slug}`}>
-            Cancel
-          </Link>
+          {article && (
+            <Link className={cn(buttonVariants({ variant: "destructive" }), "h-8")} href={`/${article.slug}`}>
+              Cancel
+            </Link>
+          )}
           <Button className="h-8" type="submit" disabled={pending}>
-            Save
+            {article ? "Update" : "Create"}
           </Button>
         </div>
       </form>

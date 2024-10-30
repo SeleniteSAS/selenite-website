@@ -1,6 +1,5 @@
 "use server";
 
-import "server-only";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
@@ -10,9 +9,9 @@ import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
 import { redirect } from "next/navigation";
 
-type EditReturn = { error: string } | never;
+type CreateReturn = { error: string } | never;
 
-export default async function edit(id: string, values: CreateUpdateWikiPage): Promise<EditReturn> {
+export default async function create(values: CreateUpdateWikiPage): Promise<CreateReturn> {
   const session: Session | null = await auth();
 
   if (!session?.user || session.user.role !== UserRole.ADMIN) {
@@ -20,7 +19,7 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
   }
 
   try {
-    const article: Article | null = await WikiArticlesService.updateArticle(id, {
+    const article: Article | null = await WikiArticlesService.createArticle({
       ...values,
       slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
     });
@@ -28,13 +27,13 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
     if (article) {
       try {
         revalidatePath("/wiki");
-        redirect(article.slug);
+        return redirect(article.slug);
       } catch {}
-      return { error: "An error occurred here" };
+      return { error: "An error occurred" };
     } else {
-      return { error: "An error occurred there" };
+      return { error: "An error occurred" };
     }
   } catch {
-    return { error: "An error occurred elsewhere" };
+    return { error: "An error occurred" };
   }
 }
