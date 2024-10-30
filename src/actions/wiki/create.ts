@@ -9,7 +9,7 @@ import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
 import { redirect } from "next/navigation";
 
-type CreateReturn = { error: string } | never;
+type CreateReturn = { error: string } | { success: true; slug: string };
 
 export default async function create(values: CreateUpdateWikiPage): Promise<CreateReturn> {
   const session: Session | null = await auth();
@@ -21,15 +21,14 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
   try {
     const article: Article | null = await WikiArticlesService.createArticle({
       ...values,
-      slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
+      slug: `${values.slug !== "/" ? values.slug : ""}${values.slug.endsWith("/") ? "" : "/"}${values.label}`
+        .toLowerCase()
+        .replace(/ /g, "-"),
     });
 
     if (article) {
-      try {
-        revalidatePath("/wiki");
-        return redirect(article.slug);
-      } catch {}
-      return { error: "An error occurred" };
+      revalidatePath("/wiki");
+      return { success: true, slug: article.slug };
     } else {
       return { error: "An error occurred" };
     }

@@ -18,6 +18,7 @@ import WikiIconPicker from "@/components/wiki-icon-picker/wiki-icon-picker";
 import edit from "@/actions/wiki/edit";
 import create from "@/actions/wiki/create";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 type WikiMarkdownEditProps = {
   article: Article | null;
@@ -31,6 +32,7 @@ export default function WikiMarkdownEdit({ article, parentArticles }: WikiMarkdo
   const [pending, startTransition] = useTransition();
   const action = article ? edit.bind(null, article.id) : create;
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<CreateUpdateWikiPage>({
     resolver: zodResolver(createUpdateWikiPage),
@@ -51,6 +53,12 @@ export default function WikiMarkdownEdit({ article, parentArticles }: WikiMarkdo
           description: result.error,
           title: "An error occured",
         });
+      } else {
+        toast({
+          description: "The article has been successfully saved",
+          title: "Article saved",
+        });
+        router.push(`/${result.slug}`);
       }
     });
   };

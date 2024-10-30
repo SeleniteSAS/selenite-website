@@ -10,7 +10,7 @@ import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
 import { redirect } from "next/navigation";
 
-type EditReturn = { error: string } | never;
+type EditReturn = { error: string } | { success: true; slug: string };
 
 export default async function edit(id: string, values: CreateUpdateWikiPage): Promise<EditReturn> {
   const session: Session | null = await auth();
@@ -26,11 +26,8 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
     });
 
     if (article) {
-      try {
-        revalidatePath("/wiki");
-        redirect(article.slug);
-      } catch {}
-      return { error: "An error occurred here" };
+      revalidatePath("/wiki");
+      return { success: true, slug: article.slug };
     } else {
       return { error: "An error occurred there" };
     }

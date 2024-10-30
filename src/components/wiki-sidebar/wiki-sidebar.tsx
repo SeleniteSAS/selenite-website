@@ -1,7 +1,8 @@
-import React, { Suspense } from "react";
+import React, { Fragment, Suspense } from "react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -14,6 +15,9 @@ import WikiSidebarMenuSkeleton from "@/components/wiki-sidebar-menu-skeleton/wik
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
 import WikiSidebarAccount from "@/components/wiki-sidebar-account/wiki-sidebar-account";
+import { Button, buttonVariants } from "@/components/_ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default async function WikiSidebar() {
   const session: Session | null = await auth();
@@ -48,8 +52,15 @@ export default async function WikiSidebar() {
           <WikiSidebarMenu />
         </Suspense>
       </SidebarContent>
-      {/*<SidebarFooter>*/}
-      {/*</SidebarFooter>*/}
+      {session?.user && session?.user.role === "ADMIN" ? (
+        <SidebarFooter>
+          <Link href="/new" className={cn(buttonVariants({ variant: "default" }), "w-full")}>
+            New Page
+          </Link>
+        </SidebarFooter>
+      ) : (
+        <Fragment />
+      )}
     </Sidebar>
   );
 }
