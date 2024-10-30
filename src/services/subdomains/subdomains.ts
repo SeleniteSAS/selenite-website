@@ -1,6 +1,6 @@
 import { Subdomain } from "@/types/subdomain";
 
-class Index {
+class SubdomainsService {
   static subdomains: Subdomain[] = [
     {
       name: "Website",
@@ -22,6 +22,11 @@ class Index {
       subdomain: "www",
       slug: "website",
     },
+    {
+      name: "Authenticator",
+      subdomain: "auth",
+      slug: "auth",
+    },
   ];
 
   static getSubdomains(): Subdomain[] {
@@ -33,11 +38,11 @@ class Index {
   }
 
   static isValidSubdomain(subdomain: Subdomain, hostname: string): boolean {
+    const rootDomain: string = new URL(process.env.NEXT_PUBLIC_ROOT_URL!).hostname;
     return (
-      hostname === `${subdomain.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` ||
-      (hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN && subdomain.subdomain === "")
+      hostname === `${subdomain.subdomain}.${rootDomain}` || (hostname === rootDomain && subdomain.subdomain === "")
     );
   }
 }
 
-export default Index;
+export default SubdomainsService;
