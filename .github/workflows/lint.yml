@@ -40,3 +40,4 @@ jobs:
           if [ $? -ne 0 ]; then
             echo "ESLint found errors. Failing the build."
             exit 1
+          fi
