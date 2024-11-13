@@ -27,6 +27,11 @@ class SubdomainsService {
       subdomain: "auth",
       slug: "auth",
     },
+    {
+      name: "Design",
+      subdomain: "weare",
+      slug: "design",
+    },
   ];
 
   static getSubdomains(): Subdomain[] {
