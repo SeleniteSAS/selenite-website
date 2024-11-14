@@ -1,4 +1,5 @@
 import { Subdomain } from "@/types/subdomain";
+import { env } from "@/lib/env";
 
 class SubdomainsService {
   static subdomains: Subdomain[] = [
@@ -43,7 +44,7 @@ class SubdomainsService {
   }
 
   static isValidSubdomain(subdomain: Subdomain, hostname: string): boolean {
-    const rootDomain: string = new URL(process.env.NEXT_PUBLIC_ROOT_URL!).hostname;
+    const rootDomain: string = new URL(env.NEXT_PUBLIC_ROOT_URL).hostname;
     return (
       hostname === `${subdomain.subdomain}.${rootDomain}` || (hostname === rootDomain && subdomain.subdomain === "")
     );

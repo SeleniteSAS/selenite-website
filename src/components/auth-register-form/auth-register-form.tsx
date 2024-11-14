@@ -10,9 +10,10 @@ import { useForm } from "react-hook-form";
 import { registerSchema, RegisterSchema } from "@/schemas/auth";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/_ui/form";
 import { Input } from "@/components/_ui/input";
+import { env } from "@/lib/env";
 
 export default function AuthRegisterForm(): ReactNode {
-  const link = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://selenite.live";
+  const link: string = env.NEXT_PUBLIC_ROOT_URL;
   const { toast } = useToast();
 
   const registerForm = useForm<RegisterSchema>({

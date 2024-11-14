@@ -3,9 +3,10 @@ import Credentials from "next-auth/providers/credentials";
 import UsersService from "@/services/users/users";
 import { loginSchema } from "@/schemas/auth";
 import { UserRole } from "@prisma/client";
+import { env } from "@/lib/env";
 
-const useSecureCookies: boolean = process.env.NEXT_PUBLIC_AUTH_URL!.startsWith("https://");
-const domain: string = new URL(process.env.NEXT_PUBLIC_ROOT_URL!).hostname;
+const useSecureCookies: boolean = env.NEXT_PUBLIC_AUTH_URL.startsWith("https://");
+const domain: string = new URL(env.NEXT_PUBLIC_ROOT_URL).hostname;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
