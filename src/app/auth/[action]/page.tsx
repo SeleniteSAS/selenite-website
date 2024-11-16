@@ -4,6 +4,7 @@ import AuthLoginForm from "@/components/auth-login-form/auth-login-form";
 import AuthRegisterForm from "@/components/auth-register-form/auth-register-form";
 import { auth } from "@/lib/auth";
 import { Session } from "next-auth";
+import { env } from "@/lib/env";
 
 type AuthActionPageProps = {
   params: { action: string };
@@ -14,7 +15,7 @@ export default async function AuthActionPage({ params, searchParams }: AuthActio
   const session: Session | null = await auth();
 
   const redirectUrl: string =
-    typeof searchParams.redirect === "string" ? searchParams.redirect : process.env.NEXT_PUBLIC_ROOT_URL!;
+    typeof searchParams.redirect === "string" ? searchParams.redirect : env.NEXT_PUBLIC_ROOT_URL;
 
   if (params.action === "login") {
     if (session) return redirect(redirectUrl);

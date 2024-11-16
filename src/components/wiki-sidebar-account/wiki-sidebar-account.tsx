@@ -8,6 +8,7 @@ import { logout } from "@/actions/auth/logout";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { env } from "@/lib/env";
 
 type WikiSidebarAccountProps = {
   session: Session | null;
@@ -54,16 +55,12 @@ export default function WikiSidebarAccount({ session }: WikiSidebarAccountProps)
         <>
           <DropdownMenuLabel>Account</DropdownMenuLabel>
           <DropdownMenuItem>
-            <Link
-              href={`${process.env.NEXT_PUBLIC_AUTH_URL!}/login?redirect=${process.env.NEXT_PUBLIC_WIKI_URL}${pathname}`}
-            >
+            <Link href={`${env.NEXT_PUBLIC_AUTH_URL}/login?redirect=${env.NEXT_PUBLIC_WIKI_URL}${pathname}`}>
               Sign in
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link
-              href={`${process.env.NEXT_PUBLIC_AUTH_URL!}/register?redirect=${process.env.NEXT_PUBLIC_WIKI_URL}${pathname}`}
-            >
+            <Link href={`${env.NEXT_PUBLIC_AUTH_URL}/register?redirect=${env.NEXT_PUBLIC_WIKI_URL}${pathname}`}>
               Register
             </Link>
           </DropdownMenuItem>
