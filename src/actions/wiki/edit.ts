@@ -1,8 +1,9 @@
 "use server";
 
 import "server-only";
+
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
-import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
+import { updateArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { revalidatePath } from "next/cache";
 import { Session } from "next-auth";
@@ -19,7 +20,7 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
   }
 
   try {
-    const article: Article | null = await WikiArticlesService.updateArticle(id, {
+    const article: Article | null = await updateArticle(id, {
       ...values,
       slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
     });

@@ -1,6 +1,6 @@
 import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/server";
-import type { NextURL } from "next/dist/server/web/next-url";
-import SubdomainsService from "@/services/subdomains/subdomains";
+import { type NextURL } from "next/dist/server/web/next-url";
+import { getSubdomains, isValidSubdomain, buildSubdomainUrl } from "@/services/subdomains/subdomains";
 import { Subdomain } from "@/types/subdomain";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -21,16 +21,16 @@ async function subdomains(req: NextRequest): Promise<NextResponse> {
 
   if (!hostname) throw new Error("No hostname found");
 
-  const subdomains: Subdomain[] = SubdomainsService.getSubdomains();
+  const subdomains: Subdomain[] = getSubdomains();
 
   for (const subdomain of subdomains) {
-    if (SubdomainsService.isValidSubdomain(subdomain, hostname))
-      return NextResponse.rewrite(SubdomainsService.buildSubdomainUrl(subdomain, path, requestUrl.href));
+    if (isValidSubdomain(subdomain, hostname))
+      return NextResponse.rewrite(buildSubdomainUrl(subdomain, path, requestUrl.href));
   }
 
   headers().set("x-url", requestUrl.href);
 
-  return NextResponse.rewrite(SubdomainsService.buildSubdomainUrl(subdomains[0], path, requestUrl.href));
+  return NextResponse.rewrite(buildSubdomainUrl(subdomains[0], path, requestUrl.href));
 }
 
 const middleware = process.env.NODE_ENV === "production" ? auth(subdomains) : subdomains;
