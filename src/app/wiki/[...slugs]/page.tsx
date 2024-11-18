@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
+import { getArticleBySlug, getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { notFound } from "next/navigation";
 import WikiMarkdownRemote from "@/components/wiki-markdown-remote/wiki-markdown-remote";
@@ -18,12 +18,12 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
   const isEditMode: boolean = slugs.join("/").includes("/edit");
   const session: Session | null = await auth();
 
-  const article: Article | null = await WikiArticlesService.getArticleBySlug(slugs.join("/").replace("/edit", ""));
+  const article: Article | null = await getArticleBySlug(slugs.join("/").replace("/edit", ""));
 
   if (!article) return notFound();
 
   if (isEditMode && session?.user.role === UserRole.ADMIN) {
-    const parentArticles: { slug: string; title: string }[] = await WikiArticlesService.getParentArticles(article.id);
+    const parentArticles: { slug: string; title: string }[] = await getParentArticles(article.id);
 
     return <WikiMarkdownEdit article={article} parentArticles={parentArticles} />;
   }

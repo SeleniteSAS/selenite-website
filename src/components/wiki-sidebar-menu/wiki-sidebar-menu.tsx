@@ -1,6 +1,6 @@
 import React, { JSX } from "react";
 import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
-import WikiNavigationServices from "@/services/wiki-navigation/wiki-navigation";
+import { getNavigationItems } from "@/services/wiki-navigation/wiki-navigation";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -18,7 +18,7 @@ import { ChevronRightIcon } from "lucide-react";
 import Icon from "@/components/_ui/icon";
 
 export default async function WikiSidebarMenu(): Promise<JSX.Element> {
-  const navigationItems: WikiNavigation[] = await WikiNavigationServices.getNavigationItem();
+  const navigationItems: WikiNavigation[] = await getNavigationItems();
 
   return (
     <>

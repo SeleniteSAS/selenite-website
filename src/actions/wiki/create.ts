@@ -1,7 +1,7 @@
 "use server";
 
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
-import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
+import { createArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { revalidatePath } from "next/cache";
 import { Session } from "next-auth";
@@ -18,7 +18,7 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
   }
 
   try {
-    const article: Article | null = await WikiArticlesService.createArticle({
+    const article: Article | null = await createArticle({
       ...values,
       slug: `${values.slug !== "/" ? values.slug : ""}${values.slug.endsWith("/") ? "" : "/"}${values.label}`
         .toLowerCase()

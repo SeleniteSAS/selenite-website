@@ -1,4 +1,4 @@
-import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
+import { getParentArticlesLabelBySlug } from "@/services/wiki-articles/wiki-articles";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +11,7 @@ import { Fragment } from "react";
 type WikiBreadcrumbsProps = Readonly<{ slug: string }>;
 
 export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
-  const labels: string[] = await WikiArticlesService.getParentArticlesLabelBySlug(slug);
+  const labels: string[] = await getParentArticlesLabelBySlug(slug);
 
   return (
     <Breadcrumb>

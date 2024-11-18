@@ -1,6 +1,6 @@
 import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import UsersService from "@/services/users/users";
+import { getUserByEmail, comparePassword, updateLastLoginByEmail } from "@/services/users/users";
 import { loginSchema } from "@/schemas/auth";
 import { UserRole } from "@prisma/client";
 import { env } from "@/lib/env";
@@ -29,15 +29,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const { email, password } = await loginSchema.parseAsync(credentials);
 
-          const user = await UsersService.getUserByEmail(email);
+          const user = await getUserByEmail(email);
 
           if (!user) return null;
 
-          const isValid = await UsersService.comparePassword(password, user.password);
+          const isValid = await comparePassword(password, user.password);
 
           if (!isValid) return null;
 
-          await UsersService.updateLastLoginByEmail(email);
+          await updateLastLoginByEmail(email);
 
           return user;
         } catch {

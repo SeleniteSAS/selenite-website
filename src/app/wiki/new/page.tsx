@@ -1,5 +1,5 @@
 import WikiMarkdownEdit from "@/components/wiki-markdown-edit/wiki-markdown-edit";
-import WikiArticlesService from "@/services/wiki-articles/wiki-articles";
+import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
 import { notFound } from "next/navigation";
@@ -11,7 +11,7 @@ export default async function NewWikiPage() {
     return notFound();
   }
 
-  const parentArticles: { slug: string; title: string }[] = await WikiArticlesService.getParentArticles();
+  const parentArticles: { slug: string; title: string }[] = await getParentArticles();
 
   return (
     <section className="p-4">
