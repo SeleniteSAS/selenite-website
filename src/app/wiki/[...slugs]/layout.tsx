@@ -12,9 +12,9 @@ import { UserRole } from "@/types/user";
 
 type WikiSlugLayoutProps = Readonly<{
   children: ReactNode;
-  params: {
+  params: Promise<{
     slugs: string[];
-  };
+  }>;
 }>;
 
 export default async function WikiSlugLayout(props: WikiSlugLayoutProps): Promise<ReactNode> {
