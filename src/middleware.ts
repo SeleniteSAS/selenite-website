@@ -3,7 +3,6 @@ import { type NextURL } from "next/dist/server/web/next-url";
 import { getSubdomains, isValidSubdomain, buildSubdomainUrl } from "@/services/subdomains/subdomains";
 import { Subdomain } from "@/types/subdomain";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { env } from "@/lib/env";
 
 export const config: MiddlewareConfig = {
