@@ -44,7 +44,9 @@ export function buildSubdomainUrl(subdomain: Subdomain, path: string, url: strin
 
 export function isValidSubdomain(subdomain: Subdomain, hostname: string): boolean {
   const rootDomain: string = new URL(env.NEXT_PUBLIC_ROOT_URL).hostname;
-  return hostname === `${subdomain.subdomain}.${rootDomain}` || (hostname === rootDomain && subdomain.subdomain === "");
+  return (
+    hostname === `${subdomain.subdomain}.${rootDomain}` || (hostname === rootDomain && subdomain.subdomain === "")
+  );
 }
 
 export { subdomains };
