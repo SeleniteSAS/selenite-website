@@ -17,9 +17,7 @@ type WikiPageProps = {
 export default async function WikiPage(props: WikiPageProps): Promise<ReactNode> {
   const params = await props.params;
 
-  const {
-    slugs
-  } = params;
+  const { slugs } = params;
 
   const isEditMode: boolean = slugs.join("/").includes("/edit");
   const session: Session | null = await auth();
