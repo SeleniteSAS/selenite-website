@@ -6,7 +6,6 @@ import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { Toaster } from "@/components/_ui/toaster";
 import { poppins, martian } from "@/lib/fonts";
-import CommonLevaProvider from "@/components/common-leva-provider/common-leva-provider";
 
 export const metadata: Metadata = {
   // TODO : remove this robots when the site is ready to be indexed
@@ -23,10 +22,8 @@ export default async function RootLayout({ children }: RootLayoutProps): Promise
     <html lang={locale} dir="ltr">
       <body className={`antialiased ${poppins.variable} ${martian.variable}`} suppressHydrationWarning={true}>
         <NextIntlClientProvider messages={messages}>
-          <CommonLevaProvider>
-            {children}
-            <Toaster />
-          </CommonLevaProvider>
+          {children}
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

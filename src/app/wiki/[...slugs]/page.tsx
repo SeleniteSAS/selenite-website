@@ -9,16 +9,12 @@ import { Session } from "next-auth";
 import { UserRole } from "@/types/user";
 
 type WikiPageProps = {
-  params: Promise<{
+  params: {
     slugs: string[];
-  }>;
+  };
 };
 
-export default async function WikiPage(props: WikiPageProps): Promise<ReactNode> {
-  const params = await props.params;
-
-  const { slugs } = params;
-
+export default async function WikiPage({ params: { slugs } }: WikiPageProps): Promise<ReactNode> {
   const isEditMode: boolean = slugs.join("/").includes("/edit");
   const session: Session | null = await auth();
 
