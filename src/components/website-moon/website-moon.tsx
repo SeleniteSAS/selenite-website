@@ -6,7 +6,7 @@ import { type RefObject, type ReactNode, useRef } from "react";
 
 export default function WebsiteMoon(): ReactNode {
   const [color, normal] = useLoader(TextureLoader, ["/textures/moon/moon-color.png", "/textures/moon/moon-normal.png"]);
-  const sphereRef: RefObject<Mesh> = useRef<Mesh>(null);
+  const sphereRef: RefObject<Mesh | null> = useRef<Mesh>(null);
 
   return (
     <mesh ref={sphereRef} rotation={[0, 0, 0]} position={[0, 0, 0]} scale={1.7}>

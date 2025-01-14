@@ -6,7 +6,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import { type PerspectiveCamera as PC } from "three";
 
 export default function WebsiteCamera(): ReactNode {
-  const cameraRef: RefObject<PC> = useRef<PC>(null);
+  const cameraRef: RefObject<PC | null> = useRef<PC>(null);
   const initialPosition: [number, number, number] = [10, 0, 10];
 
   useFrame(({ clock }: RootState): void => {

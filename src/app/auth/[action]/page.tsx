@@ -7,11 +7,13 @@ import { Session } from "next-auth";
 import { env } from "@/lib/env";
 
 type AuthActionPageProps = {
-  params: { action: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ action: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
+export default async function AuthActionPage(props: AuthActionPageProps): Promise<ReactNode> {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const session: Session | null = await auth();
 
   const redirectUrl: string =

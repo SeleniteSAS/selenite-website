@@ -17,7 +17,17 @@ type WikiSlugLayoutProps = Readonly<{
   };
 }>;
 
-export default async function WikiSlugLayout({ children, params: { slugs } }: WikiSlugLayoutProps): Promise<ReactNode> {
+export default async function WikiSlugLayout(props: WikiSlugLayoutProps): Promise<ReactNode> {
+  const params = await props.params;
+
+  const {
+    slugs
+  } = params;
+
+  const {
+    children
+  } = props;
+
   const session: Session | null = await auth();
 
   const path: string = slugs.join("/");

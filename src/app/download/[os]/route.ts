@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 type DownloadRouteProps = {
-  params: { os: string };
+  params: Promise<{ os: string }>;
 };
 
 export const dynamic = "force-dynamic";
@@ -9,7 +9,8 @@ export const dynamic = "force-dynamic";
 const downloadUrl = (os: string): string =>
   `https://github.com/selenite-live/selenite-game/releases/latest/download/selenite-lost-contact-${os}.zip`;
 
-export function GET(_: NextRequest, { params }: DownloadRouteProps) {
+export async function GET(_: NextRequest, props: DownloadRouteProps) {
+  const params = await props.params;
   const availableOperatingSystems: string[] = ["windows", "macos"];
 
   if (!availableOperatingSystems.includes(params.os)) {
