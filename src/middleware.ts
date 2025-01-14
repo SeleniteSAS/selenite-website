@@ -3,11 +3,10 @@ import { type NextURL } from "next/dist/server/web/next-url";
 import { getSubdomains, isValidSubdomain, buildSubdomainUrl } from "@/services/subdomains/subdomains";
 import { Subdomain } from "@/types/subdomain";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { env } from "@/lib/env";
 
 export const config: MiddlewareConfig = {
-  matcher: ["/((?!api/|_next/|images/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
+  matcher: ["/((?!api/|_next/|images/|textures/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
 };
 
 async function subdomains(req: NextRequest): Promise<NextResponse> {
@@ -27,8 +26,6 @@ async function subdomains(req: NextRequest): Promise<NextResponse> {
     if (isValidSubdomain(subdomain, hostname))
       return NextResponse.rewrite(buildSubdomainUrl(subdomain, path, requestUrl.href));
   }
-
-  headers().set("x-url", requestUrl.href);
 
   return NextResponse.rewrite(buildSubdomainUrl(subdomains[0], path, requestUrl.href));
 }
