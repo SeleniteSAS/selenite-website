@@ -24,7 +24,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </section>
       <section
-        className="relative z-10 flex h-screen w-full bg-black bg-grid"
+        className="bg-grid relative z-10 flex h-screen w-full bg-black"
         style={{ backgroundSize: "1000px" }}
       ></section>
     </div>
