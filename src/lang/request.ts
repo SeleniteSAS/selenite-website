@@ -4,7 +4,7 @@ import { locales, defaultLocale } from "@/lang/locales";
 import type { Locale } from "@/types/locale";
 
 export default getRequestConfig(async () => {
-  let locale: string | undefined = (await cookies()).get("locale")?.value;
+  let locale: string | undefined = cookies().get("locale")?.value;
 
   if (locale === undefined || !locales.includes(locale as Locale)) locale = defaultLocale;
 
