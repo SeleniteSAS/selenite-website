@@ -1,4 +1,4 @@
-import WikiMarkdownEdit from "@/components/wiki-markdown-edit/wiki-markdown-edit";
+import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Session } from "next-auth";
 import { auth } from "@/lib/auth";
@@ -15,7 +15,7 @@ export default async function NewWikiPage() {
 
   return (
     <section className="p-4">
-      <WikiMarkdownEdit article={null} parentArticles={parentArticles} />
+      <MarkdownEdit article={null} parentArticles={parentArticles} />
     </section>
   );
 }

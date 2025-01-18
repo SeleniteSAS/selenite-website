@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { notFound, redirect } from "next/navigation";
-import AuthLoginForm from "@/components/auth-login-form/auth-login-form";
-import AuthRegisterForm from "@/components/auth-register-form/auth-register-form";
+import LoginForm from "@/components/auth/login-form/login-form";
+import RegisterForm from "@/components/auth/register-form/register-form";
 import { auth } from "@/lib/auth";
 import { Session } from "next-auth";
 import { env } from "@/lib/env";
@@ -19,12 +19,12 @@ export default async function AuthActionPage({ params, searchParams }: AuthActio
 
   if (params.action === "login") {
     if (session) return redirect(redirectUrl);
-    return <AuthLoginForm redirectTo={redirectUrl} />;
+    return <LoginForm redirectTo={redirectUrl} />;
   }
 
   if (params.action === "register") {
     if (session) return redirect(redirectUrl);
-    return <AuthRegisterForm />;
+    return <RegisterForm />;
   }
 
   return notFound();
