@@ -4,7 +4,7 @@ import { getNavigationItems } from "@/services/wiki-navigation/wiki-navigation";
 import {
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarMenu,
+  SidebarMenu as SidebarMenuComponent,
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -25,7 +25,7 @@ export default async function SidebarMenu(): Promise<JSX.Element> {
       {navigationItems.map(({ title, items }: WikiNavigation) => (
         <SidebarGroup key={title}>
           <SidebarGroupLabel>{title}</SidebarGroupLabel>
-          <SidebarMenu>
+          <SidebarMenuComponent>
             {items.map((item: WikiNavigationGroup) => (
               <Collapsible key={item.title} asChild={true} defaultOpen={false}>
                 <SidebarMenuItem>
@@ -61,7 +61,7 @@ export default async function SidebarMenu(): Promise<JSX.Element> {
                 </SidebarMenuItem>
               </Collapsible>
             ))}
-          </SidebarMenu>
+          </SidebarMenuComponent>
         </SidebarGroup>
       ))}
     </>

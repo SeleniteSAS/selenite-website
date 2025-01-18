@@ -1,10 +1,10 @@
 import React, { Fragment, Suspense } from "react";
 import {
-  Sidebar,
+  Sidebar as SidebarComponent,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
+  SidebarMenu as SidebarMenuComponent,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
@@ -23,9 +23,9 @@ export default async function Sidebar() {
   const session: Session | null = await auth();
 
   return (
-    <Sidebar collapsible={"icon"} side={"left"}>
+    <SidebarComponent collapsible={"icon"} side={"left"}>
       <SidebarHeader>
-        <SidebarMenu>
+        <SidebarMenuComponent>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild={true}>
@@ -45,7 +45,7 @@ export default async function Sidebar() {
               <SidebarAccount session={session} />
             </DropdownMenu>
           </SidebarMenuItem>
-        </SidebarMenu>
+        </SidebarMenuComponent>
       </SidebarHeader>
       <SidebarContent>
         <Suspense fallback={<SidebarMenuSkeleton />}>
@@ -61,6 +61,6 @@ export default async function Sidebar() {
       ) : (
         <Fragment />
       )}
-    </Sidebar>
+    </SidebarComponent>
   );
 }
