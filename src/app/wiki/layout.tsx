@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { SidebarProvider } from "@/components/_ui/sidebar";
-import AppSidebar from "@/components/wiki-sidebar/wiki-sidebar";
+import AppSidebar from "@/components/wiki/sidebar/sidebar";
 
 type WikiLayoutProps = Readonly<{ children: ReactNode }>;
 
