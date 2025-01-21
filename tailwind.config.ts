@@ -65,7 +65,7 @@ const config: Config = {
       },
       fontFamily: {
         poppins: "var(--poppins)",
-        martian: "var(--martian)",
+        orbitron: "var(--orbitron)",
       },
       backgroundImage: {
         grid: "url('/images/grid.svg')",
