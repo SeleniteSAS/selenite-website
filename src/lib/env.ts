@@ -12,5 +12,6 @@ export const env = createEnv({
     NEXT_PUBLIC_AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL,
     NEXT_PUBLIC_DOWNLOAD_URL: process.env.NEXT_PUBLIC_DOWNLOAD_URL,
     NEXT_PUBLIC_WIKI_URL: process.env.NEXT_PUBLIC_WIKI_URL,
+    NEXT_PUBLIC_STUDIO_URL: process.env.NEXT_PUBLIC_STUDIO_URL,
   },
 });
