@@ -32,7 +32,7 @@ export default function Header() {
           <div className="h-px w-10 flex-none origin-[0_0] rotate-45 bg-gray-400"></div>
         </div>
         <div className="relative top-4 pl-4">
-          <span className="font-orbitron inline-block text-4xl uppercase leading-none">Selenite</span>
+          <span className="inline-block font-orbitron text-4xl uppercase leading-none">Selenite</span>
         </div>
       </div>
       <nav>

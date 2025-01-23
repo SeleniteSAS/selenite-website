@@ -65,7 +65,7 @@ export default function DesignMainPage() {
                       >
                         {i === 0 && (
                           <span
-                            className="font-orbitron absolute left-0 top-0 p-4 text-xl font-bold uppercase text-white"
+                            className="absolute left-0 top-0 p-4 font-orbitron text-xl font-bold uppercase text-white"
                             style={{
                               color: getContrasted(color),
                             }}

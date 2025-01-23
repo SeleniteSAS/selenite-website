@@ -21,7 +21,7 @@ export default function Header(): ReactNode {
       <div
         className={cn("mx-auto flex h-16 justify-between px-24 transition-[padding]", state === "expanded" && "px-8")}
       >
-        <Link href={env.NEXT_PUBLIC_ROOT_URL} className="font-orbitron flex h-fit items-center text-2xl">
+        <Link href={env.NEXT_PUBLIC_ROOT_URL} className="flex h-fit items-center font-orbitron text-2xl">
           <Image
             src={"/images/studio-logo.png"}
             alt={"SELENITE STUDIO"}

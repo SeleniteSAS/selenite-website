@@ -50,7 +50,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </div>
       <div className="h-screen bg-blue-100"></div>
-      <div className="font-orbitron fixed bottom-8 left-8 text-lg">
+      <div className="fixed bottom-8 left-8 font-orbitron text-lg">
         DEVELOPED BY
         <br />
         <Link
