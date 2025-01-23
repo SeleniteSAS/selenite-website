@@ -17,7 +17,7 @@ export default function Header(): ReactNode {
   const flattenItems = Object.values(items).flat();
 
   return (
-    <header className={cn("sticky left-0 top-12 my-12 h-16 w-full text-black", state === "expanded" && "[&+div]:px-8")}>
+    <header className={cn("sticky left-0 top-12 z-50 my-12 h-16 w-full")}>
       <div
         className={cn("mx-auto flex h-16 justify-between px-24 transition-[padding]", state === "expanded" && "px-8")}
       >
@@ -27,13 +27,13 @@ export default function Header(): ReactNode {
             alt={"SELENITE STUDIO"}
             width={64}
             height={64}
-            className={"size-16 rounded"}
+            className={"relative size-16 rounded"}
           />
-          <span className="ml-4">SELENITE STUDIO</span>
+          <span className="relative ml-4 text-black">SELENITE STUDIO</span>
         </Link>
         <Button
           onClick={(): void => toggleSidebar()}
-          className={"group h-fit flex-col p-0 pt-4 no-underline hover:no-underline active:no-underline"}
+          className={"group h-fit flex-col p-0 pt-4 text-black no-underline hover:no-underline active:no-underline"}
           variant={"link"}
         >
           <span className="flex h-4 w-6 origin-top flex-col justify-between border-0 transition-[height] group-hover:h-6">
@@ -45,7 +45,7 @@ export default function Header(): ReactNode {
             style={{
               writingMode: "vertical-rl",
             }}
-            className="mt-6 font-poppins text-lg font-light"
+            className="mt-6 font-poppins text-lg font-light text-black"
           >
             {flattenItems.find((item): boolean => item.path === pathname)?.name}
           </span>

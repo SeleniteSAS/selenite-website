@@ -17,9 +17,9 @@ export default function DesignMainPage({ children }: DesignLayoutProps): ReactNo
         } as CSSProperties
       }
     >
-      <div className="min-h-screen w-full bg-white text-black">
+      <div className="min-h-screen w-full bg-white">
         <Header />
-        <div className="px-24 transition-[padding]">{children}</div>
+        <div className="transition-[padding]">{children}</div>
       </div>
       <Sidebar />
     </SidebarProvider>
