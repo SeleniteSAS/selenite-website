@@ -1,3 +1,3 @@
 export default function DesignMainPage() {
-  return <p>Introduction page</p>;
+  return <p>Color page</p>;
 }

@@ -4,6 +4,7 @@ import Canvas from "@/components/website/canvas/canvas";
 import Moon from "@/components/website/moon/moon";
 import Link from "next/link";
 import { env } from "@/lib/env";
+
 export default async function WebsitePage(): Promise<ReactNode> {
   return (
     <div className="mt-32 h-[400vh]">

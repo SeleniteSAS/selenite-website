@@ -1,0 +1,27 @@
+import type { CSSProperties, ReactNode } from "react";
+
+import { SidebarProvider } from "@/components/_ui/sidebar";
+import Sidebar from "@/components/design/sidebar/sidebar";
+import Header from "@/components/design/header/header";
+
+type DesignLayoutProps = Readonly<{ children: ReactNode }>;
+
+export default function DesignMainPage({ children }: DesignLayoutProps): ReactNode {
+  return (
+    <SidebarProvider
+      defaultOpen={false}
+      style={
+        {
+          "--sidebar-width": "15rem",
+          "--sidebar-width-mobile": "20rem",
+        } as CSSProperties
+      }
+    >
+      <div className="min-h-screen w-full bg-white text-black">
+        <Header />
+        <div className="px-24 transition-[padding]">{children}</div>
+      </div>
+      <Sidebar />
+    </SidebarProvider>
+  );
+}
