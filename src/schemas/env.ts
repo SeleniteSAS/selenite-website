@@ -11,4 +11,5 @@ export const clientEnvSchemas = {
   NEXT_PUBLIC_AUTH_URL: z.string().url().min(1),
   NEXT_PUBLIC_DOWNLOAD_URL: z.string().url().min(1),
   NEXT_PUBLIC_WIKI_URL: z.string().url().min(1),
+  NEXT_PUBLIC_STUDIO_URL: z.string().url().min(1),
 };

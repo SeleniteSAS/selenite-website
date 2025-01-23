@@ -3,10 +3,9 @@ import Credentials from "next-auth/providers/credentials";
 import { getUserByEmail, comparePassword, updateLastLoginByEmail } from "@/services/users/users";
 import { loginSchema } from "@/schemas/auth";
 import { UserRole } from "@prisma/client";
-import { env } from "@/lib/env";
+import { User as UserWithPassword } from "@/types/user";
 
-const useSecureCookies: boolean = env.NEXT_PUBLIC_AUTH_URL.startsWith("https://");
-const domain: string = new URL(env.NEXT_PUBLIC_ROOT_URL).hostname;
+import { useSecureCookies, domain } from "@/lib/cookies";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -29,11 +28,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const { email, password } = await loginSchema.parseAsync(credentials);
 
-          const user = await getUserByEmail(email);
+          const user: UserWithPassword | null = await getUserByEmail(email);
 
           if (!user) return null;
 
-          const isValid = await comparePassword(password, user.password);
+          const isValid: boolean = await comparePassword(password, user.password);
 
           if (!isValid) return null;
 

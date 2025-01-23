@@ -8,7 +8,7 @@ const Skybox = memo(function (): null {
   const loader = new CubeTextureLoader();
 
   loader.setPath("/textures/skybox/");
-  scene.background = loader.load(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"]);
+  scene.background = loader.load(["right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"]);
 
   return null;
 });

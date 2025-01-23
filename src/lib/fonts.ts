@@ -1,5 +1,5 @@
 import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
-import { Martian_Mono, Poppins } from "next/font/google";
+import { Orbitron, Poppins } from "next/font/google";
 
 export const poppins: NextFontWithVariable = Poppins({
   subsets: ["latin"],
@@ -10,9 +10,10 @@ export const poppins: NextFontWithVariable = Poppins({
   fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
-export const martian: NextFontWithVariable = Martian_Mono({
+export const orbitron: NextFontWithVariable = Orbitron({
   subsets: ["latin"],
+  style: ["normal"],
   display: "swap",
-  variable: "--martian",
-  fallback: ["Courier New", "Courier", "monospace"],
+  variable: "--orbitron",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });

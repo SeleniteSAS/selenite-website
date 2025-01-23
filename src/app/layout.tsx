@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { Toaster } from "@/components/_ui/toaster";
-import { poppins, martian } from "@/lib/fonts";
+import { poppins, orbitron } from "@/lib/fonts";
 import LevaProvider from "@/components/common/leva-provider/leva-provider";
 
 export const metadata: Metadata = {
@@ -21,7 +21,10 @@ export default async function RootLayout({ children }: RootLayoutProps): Promise
 
   return (
     <html lang={locale} dir="ltr">
-      <body className={`antialiased ${poppins.variable} ${martian.variable}`} suppressHydrationWarning={true}>
+      <body
+        className={`antialiased ${poppins.variable} ${orbitron.variable} bg-black text-white`}
+        suppressHydrationWarning={true}
+      >
         <NextIntlClientProvider messages={messages}>
           <LevaProvider>
             {children}

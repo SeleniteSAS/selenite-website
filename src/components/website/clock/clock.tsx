@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect, useState, useMemo, type ReactNode, Fragment } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 
-export default function Countdown(): ReactNode {
-  const release: Date = new Date(2025, 0, 30, 9, 30, 0, 0);
+type Unit = { label: string; value: string };
+
+export default function Clock(): ReactNode {
+  const release: Date = new Date(2025, 0, 25, 13, 0, 0);
   const [now, setNow] = useState<Date>(new Date());
 
   useEffect((): (() => void) => {
     let animationFrameId: number;
 
-    const updateNow = (): void => {
+    const updateNow: () => void = (): void => {
       setNow(new Date());
       animationFrameId = requestAnimationFrame(updateNow);
     };
@@ -21,8 +23,8 @@ export default function Countdown(): ReactNode {
 
   const diff: number = release.getTime() - now.getTime();
 
-  const timeUnits = useMemo(
-    () => [
+  const units: Unit[] = useMemo(
+    (): Unit[] => [
       {
         label: "Days",
         value: Math.floor(diff / (1000 * 60 * 60 * 24))
@@ -52,13 +54,9 @@ export default function Countdown(): ReactNode {
   );
 
   return (
-    <Fragment>
-      <ul
-        className="relative z-10 flex items-center justify-around font-light text-white"
-        aria-live="polite"
-        aria-label="Countdown Timer"
-      >
-        {timeUnits.map((unit) => (
+    <ul className="relative z-10 flex items-center justify-around font-light text-white">
+      {units.map(
+        (unit: Unit): ReactNode => (
           <li
             key={unit.label}
             aria-label={unit.value && unit.label ? `${unit.value} ${unit.label}` : "N/A"}
@@ -66,11 +64,10 @@ export default function Countdown(): ReactNode {
             suppressHydrationWarning={true}
           >
             <p
-              className="font-martian tabular-nums"
+              className="font-orbitron tabular-nums"
               suppressHydrationWarning={true}
-              aria-hidden="true"
               style={{
-                fontSize: "11vw",
+                fontSize: "12vw",
                 lineHeight: "1",
               }}
             >
@@ -78,17 +75,8 @@ export default function Countdown(): ReactNode {
             </p>
             <p className="text-md w-full text-center font-poppins">{unit.label}</p>
           </li>
-        ))}
-      </ul>
-      <time
-        dateTime={release.toISOString()}
-        className={"sr-only"}
-        aria-label={"Release Date"}
-        aria-live="off"
-        aria-atomic="true"
-      >
-        {release.toDateString()}
-      </time>
-    </Fragment>
+        ),
+      )}
+    </ul>
   );
 }
