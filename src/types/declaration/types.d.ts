@@ -1,5 +1,6 @@
-import { UserRole } from "@/types/user";
 import { type DefaultSession } from "next-auth";
+
+import { UserRole } from "@/types/user";
 
 export type ExtendedUser = DefaultSession["user"] & {
   role: UserRole;

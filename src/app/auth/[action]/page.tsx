@@ -1,9 +1,12 @@
 import { ReactNode } from "react";
+
+import { Session } from "next-auth";
 import { notFound, redirect } from "next/navigation";
+
 import LoginForm from "@/components/auth/login-form/login-form";
 import RegisterForm from "@/components/auth/register-form/register-form";
+
 import { auth } from "@/lib/auth";
-import { Session } from "next-auth";
 import { env } from "@/lib/env";
 
 type AuthActionPageProps = {

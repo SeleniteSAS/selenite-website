@@ -1,12 +1,13 @@
 "use server";
 
-import "server-only";
-
-import { loginSchema, LoginSchema } from "@/schemas/auth";
-import { ZodError } from "zod";
-import { signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
+
+import { signIn } from "@/lib/auth";
+import { LoginSchema, loginSchema } from "@/schemas/auth";
+
+import "server-only";
+import { ZodError } from "zod";
 
 type LoginReturn = { error: string } | { success: true };
 

@@ -2,8 +2,9 @@
 
 import { MutableRefObject, ReactNode, RefObject, useEffect, useRef } from "react";
 import Confetti from "react-canvas-confetti";
-import { CreateTypes } from "canvas-confetti";
 import { TCanvasConfettiInstance } from "react-canvas-confetti/src/types";
+
+import { CreateTypes } from "canvas-confetti";
 
 type ConfettiProviderProps = {
   children: ReactNode;

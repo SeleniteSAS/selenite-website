@@ -1,6 +1,5 @@
-import { NavigationArticle } from "@/types/article";
 import prisma from "@/db/prisma";
-import { Article } from "@/types/article";
+import { Article, NavigationArticle } from "@/types/article";
 
 export async function getNavigationArticles(): Promise<NavigationArticle[]> {
   return prisma.article.findMany({

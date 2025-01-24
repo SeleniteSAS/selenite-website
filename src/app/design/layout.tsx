@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 
 import { SidebarProvider } from "@/components/_ui/sidebar";
-import Sidebar from "@/components/design/sidebar/sidebar";
 import Header from "@/components/design/header/header";
+import Sidebar from "@/components/design/sidebar/sidebar";
 
 type DesignLayoutProps = Readonly<{ children: ReactNode }>;
 

@@ -1,11 +1,12 @@
 "use server";
 
+import { Session } from "next-auth";
+import { revalidatePath } from "next/cache";
+
+import { auth } from "@/lib/auth";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { createArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
-import { revalidatePath } from "next/cache";
-import { Session } from "next-auth";
-import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
 
 type CreateReturn = { error: string } | { success: true; slug: string };

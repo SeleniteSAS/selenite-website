@@ -1,12 +1,15 @@
-import React, { type ReactNode } from "react";
-import { getUserPlatform } from "@/lib/user-agent";
+import { type ReactNode } from "react";
+
 import { headers } from "next/headers";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+
 import { buttonVariants } from "@/components/_ui/button";
 import { Separator } from "@/components/_ui/separator";
 import ConfettiProvider from "@/components/download/confetti-provider/confetti-provider";
+
 import { env } from "@/lib/env";
+import { getUserPlatform } from "@/lib/user-agent";
+import { cn } from "@/lib/utils";
 
 type Download = {
   os: string;
@@ -74,7 +77,7 @@ export default function DownloadPage(): ReactNode {
     <main className="flex h-screen w-screen items-center justify-center overflow-hidden font-poppins">
       <div>
         <ConfettiProvider>
-          <h1 className="font-orbitron mb-4 text-center text-2xl font-bold uppercase">Download Selenite</h1>
+          <h1 className="mb-4 text-center font-orbitron text-2xl font-bold uppercase">Download Selenite</h1>
           {currentDownload && (
             <Link
               href={currentDownload.url || "#"}

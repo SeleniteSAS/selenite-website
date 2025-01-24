@@ -1,21 +1,24 @@
-import React, { JSX } from "react";
-import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
-import { getNavigationItems } from "@/services/wiki-navigation/wiki-navigation";
+import { ChevronRightIcon } from "lucide-react";
+import { JSX } from "react";
+
+import Link from "next/link";
+
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/_ui/collapsible";
+import Icon from "@/components/_ui/icon";
 import {
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarMenu as SidebarMenuComponent,
   SidebarMenuAction,
   SidebarMenuButton,
+  SidebarMenu as SidebarMenuComponent,
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/_ui/sidebar";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/_ui/collapsible";
-import Link from "next/link";
-import { ChevronRightIcon } from "lucide-react";
-import Icon from "@/components/_ui/icon";
+
+import { getNavigationItems } from "@/services/wiki-navigation/wiki-navigation";
+import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
 
 export default async function SidebarMenu(): Promise<JSX.Element> {
   const navigationItems: WikiNavigation[] = await getNavigationItems();

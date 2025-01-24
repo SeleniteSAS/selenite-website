@@ -1,12 +1,16 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { ComponentProps, ReactNode } from "react";
-import { Separator } from "@/components/_ui/separator";
-import { Checkbox } from "@/components/_ui/checkbox";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/_ui/table";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
+
+import { Checkbox } from "@/components/_ui/checkbox";
+import { Separator } from "@/components/_ui/separator";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/_ui/table";
+
 import { cn } from "@/lib/utils";
+
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 type MDXRemoteProps = ComponentProps<typeof MDXRemote>;
 

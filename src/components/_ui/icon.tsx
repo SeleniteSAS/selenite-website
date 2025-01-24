@@ -1,7 +1,8 @@
-import dynamic from "next/dynamic";
-import { memo, ReactNode } from "react";
 import { LucideProps } from "lucide-react";
 import dynamicIconImports from "lucide-react/dynamicIconImports";
+import { ReactNode, memo } from "react";
+
+import dynamic from "next/dynamic";
 
 interface IconProps extends LucideProps {
   name: string;

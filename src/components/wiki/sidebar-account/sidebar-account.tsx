@@ -1,13 +1,14 @@
 "use client";
 
 import { Session } from "next-auth";
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from "@/components/_ui/dropdown-menu";
 import Image from "next/image";
-import { Button } from "@/components/_ui/button";
-import { logout } from "@/actions/auth/logout";
 import Link from "next/link";
-import React from "react";
 import { usePathname } from "next/navigation";
+
+import { Button } from "@/components/_ui/button";
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from "@/components/_ui/dropdown-menu";
+
+import { logout } from "@/actions/auth/logout";
 import { env } from "@/lib/env";
 
 type WikiSidebarAccountProps = {

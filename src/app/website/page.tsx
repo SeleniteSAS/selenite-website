@@ -1,8 +1,11 @@
-import React, { type ReactNode } from "react";
-import Clock from "@/components/website/clock/clock";
-import Canvas from "@/components/website/canvas/canvas";
-import Moon from "@/components/website/moon/moon";
+import { type ReactNode } from "react";
+
 import Link from "next/link";
+
+import Canvas from "@/components/website/canvas/canvas";
+import Clock from "@/components/website/clock/clock";
+import Moon from "@/components/website/moon/moon";
+
 import { env } from "@/lib/env";
 
 export default async function WebsitePage(): Promise<ReactNode> {

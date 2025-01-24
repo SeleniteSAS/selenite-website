@@ -1,12 +1,15 @@
-import React, { ReactNode, Suspense } from "react";
-import { SidebarTrigger } from "@/components/_ui/sidebar";
-import { Separator } from "@/components/_ui/separator";
-import WikiBreadcrumbs from "@/components/wiki/breadcrumb/breadcrumb";
-import WikiBreadcrumbsSkeleton from "@/components/wiki/breadcrumb-skeleton/breadcrumb-skeleton";
+import { ReactNode, Suspense } from "react";
+
 import { Session } from "next-auth";
-import { auth } from "@/lib/auth";
-import { buttonVariants } from "@/components/_ui/button";
 import Link from "next/link";
+
+import { buttonVariants } from "@/components/_ui/button";
+import { Separator } from "@/components/_ui/separator";
+import { SidebarTrigger } from "@/components/_ui/sidebar";
+import WikiBreadcrumbsSkeleton from "@/components/wiki/breadcrumb-skeleton/breadcrumb-skeleton";
+import WikiBreadcrumbs from "@/components/wiki/breadcrumb/breadcrumb";
+
+import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/types/user";
 

@@ -1,4 +1,5 @@
-import { getParentArticlesLabelBySlug } from "@/services/wiki-articles/wiki-articles";
+import { Fragment } from "react";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,7 +7,8 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/_ui/breadcrumb";
-import { Fragment } from "react";
+
+import { getParentArticlesLabelBySlug } from "@/services/wiki-articles/wiki-articles";
 
 type WikiBreadcrumbsProps = Readonly<{ slug: string }>;
 

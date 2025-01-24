@@ -18,4 +18,4 @@ type WikiNavigationItem = {
   url: string;
 };
 
-export type { WikiNavigation, WikiNavigationItem, WikiNavigationGroup };
+export type { WikiNavigation, WikiNavigationGroup, WikiNavigationItem };

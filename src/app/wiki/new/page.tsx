@@ -1,8 +1,10 @@
-import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
-import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Session } from "next-auth";
-import { auth } from "@/lib/auth";
 import { notFound } from "next/navigation";
+
+import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
+
+import { auth } from "@/lib/auth";
+import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
 
 export default async function NewWikiPage() {
   const session: Session | null = await auth();

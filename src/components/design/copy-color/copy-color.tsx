@@ -1,7 +1,9 @@
 "use client";
 
-import { ContextMenuItem } from "@/components/_ui/context-menu";
 import { CopyIcon } from "lucide-react";
+
+import { ContextMenuItem } from "@/components/_ui/context-menu";
+
 import { useToast } from "@/hooks/use-toast";
 
 type ContextMenuItemColorCopyProps = {
