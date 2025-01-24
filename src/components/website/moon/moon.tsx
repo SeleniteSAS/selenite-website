@@ -11,7 +11,10 @@ import { useControls } from "leva";
 import { DirectionalLightHelper, type PerspectiveCamera as PC, TextureLoader } from "three";
 
 export default function Moon(): ReactNode {
-  const [color, normal] = useLoader(TextureLoader, ["/textures/moon/moon-color.png", "/textures/moon/moon-normal.png"]);
+  const [color, normal] = useLoader(TextureLoader, [
+    "/textures/moon/moon-color.webp",
+    "/textures/moon/moon-normal.webp",
+  ]);
 
   const cameraRef: RefObject<PC> = useRef<PC>(null);
   const lightRef = useRef(null);
