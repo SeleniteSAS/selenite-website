@@ -1,6 +1,7 @@
-import bcryptjs from "bcryptjs";
 import prisma from "@/db/prisma";
 import { User } from "@/types/user";
+
+import bcryptjs from "bcryptjs";
 
 export async function saltPassword(password: string): Promise<string> {
   return await bcryptjs.hash(password, 10);

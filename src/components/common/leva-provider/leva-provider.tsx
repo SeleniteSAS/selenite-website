@@ -1,7 +1,8 @@
 "use client";
 
+import { Fragment, type ReactNode } from "react";
+
 import { Leva } from "leva";
-import { type ReactNode, Fragment } from "react";
 
 type LevaProviderProps = Readonly<{ children: ReactNode }>;
 

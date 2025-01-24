@@ -1,9 +1,10 @@
-import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/server";
 import { type NextURL } from "next/dist/server/web/next-url";
-import { getSubdomains, isValidSubdomain, buildSubdomainUrl } from "@/services/subdomains/subdomains";
-import { Subdomain } from "@/types/subdomain";
+import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/server";
+
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
+import { buildSubdomainUrl, getSubdomains, isValidSubdomain } from "@/services/subdomains/subdomains";
+import { Subdomain } from "@/types/subdomain";
 
 export const config: MiddlewareConfig = {
   matcher: ["/((?!api/|_next/|images/|textures/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],

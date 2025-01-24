@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { Canvas as ThreeCanvas } from "@react-three/fiber";
+import type { ReactNode } from "react";
 
 type CanvasProps = Parameters<typeof ThreeCanvas>[0];
 

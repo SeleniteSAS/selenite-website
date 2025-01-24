@@ -1,14 +1,15 @@
 "use server";
 
-import "server-only";
+import { Session } from "next-auth";
+import { revalidatePath } from "next/cache";
 
+import { auth } from "@/lib/auth";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { updateArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
-import { revalidatePath } from "next/cache";
-import { Session } from "next-auth";
-import { auth } from "@/lib/auth";
 import { UserRole } from "@/types/user";
+
+import "server-only";
 
 type EditReturn = { error: string } | { success: true; slug: string };
 

@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/_ui/skeleton";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/_ui/breadcrumb";
+import { Skeleton } from "@/components/_ui/skeleton";
 
 export default function WikiBreadcrumbsSkeleton() {
   return (

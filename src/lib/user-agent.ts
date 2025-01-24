@@ -1,4 +1,5 @@
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
+
 import { type IOS, UAParser } from "ua-parser-js";
 
 export function getUserPlatform(headers: ReadonlyHeaders): { os: string; version?: string } {

@@ -1,16 +1,20 @@
 "use client";
 
 import { ReactNode } from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/_ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { registerSchema, RegisterSchema } from "@/schemas/auth";
+
+import Link from "next/link";
+
+import { Button, buttonVariants } from "@/components/_ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/_ui/form";
 import { Input } from "@/components/_ui/input";
+
+import { useToast } from "@/hooks/use-toast";
 import { env } from "@/lib/env";
+import { cn } from "@/lib/utils";
+import { RegisterSchema, registerSchema } from "@/schemas/auth";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RegisterForm(): ReactNode {
   const link: string = env.NEXT_PUBLIC_ROOT_URL;

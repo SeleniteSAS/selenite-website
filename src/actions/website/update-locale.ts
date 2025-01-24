@@ -1,11 +1,11 @@
 "use server";
 
-import type { Locale } from "@/types/locale";
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { cookies } from "next/headers";
 
 import { locales } from "@/lang/locales";
-import { cookies } from "next/headers";
-import { useSecureCookies, domain } from "@/lib/cookies";
+import { domain, useSecureCookies } from "@/lib/cookies";
+import type { Locale } from "@/types/locale";
 
 export default async function updateLocale(lang: Locale): Promise<boolean> {
   if (!updateLocale) return false;

@@ -1,5 +1,5 @@
-import { Subdomain } from "@/types/subdomain";
 import { env } from "@/lib/env";
+import { Subdomain } from "@/types/subdomain";
 
 const subdomains: Subdomain[] = [
   {

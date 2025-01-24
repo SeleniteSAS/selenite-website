@@ -1,22 +1,25 @@
-import React, { Fragment, Suspense } from "react";
+import { AlbumIcon } from "lucide-react";
+import { Fragment, Suspense } from "react";
+
+import { Session } from "next-auth";
+import Link from "next/link";
+
+import { buttonVariants } from "@/components/_ui/button";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/_ui/dropdown-menu";
 import {
   Sidebar as SidebarComponent,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu as SidebarMenuComponent,
   SidebarMenuButton,
+  SidebarMenu as SidebarMenuComponent,
   SidebarMenuItem,
 } from "@/components/_ui/sidebar";
-import { AlbumIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuTrigger } from "@/components/_ui/dropdown-menu";
-import SidebarMenu from "@/components/wiki/sidebar-menu/sidebar-menu";
-import SidebarMenuSkeleton from "@/components/wiki/sidebar-menu-skeleton/sidebar-menu-skeleton";
-import { Session } from "next-auth";
-import { auth } from "@/lib/auth";
 import SidebarAccount from "@/components/wiki/sidebar-account/sidebar-account";
-import { buttonVariants } from "@/components/_ui/button";
-import Link from "next/link";
+import SidebarMenuSkeleton from "@/components/wiki/sidebar-menu-skeleton/sidebar-menu-skeleton";
+import SidebarMenu from "@/components/wiki/sidebar-menu/sidebar-menu";
+
+import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 export default async function Sidebar() {

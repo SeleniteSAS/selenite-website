@@ -1,9 +1,11 @@
+import { CopyIcon } from "lucide-react";
 import { Fragment } from "react";
+
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/_ui/context-menu";
+
+import { getCMYK, getContrasted, getHSL, getRGB } from "@/lib/color";
 import { colors } from "@/lib/design-color-theme";
 import { cn } from "@/lib/utils";
-import { getCMYK, getContrasted, getHSL, getRGB } from "@/lib/color";
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/_ui/context-menu";
-import { CopyIcon } from "lucide-react";
 
 export default function DesignMainPage() {
   return (

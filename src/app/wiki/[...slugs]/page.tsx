@@ -1,11 +1,14 @@
 import { ReactNode } from "react";
+
+import { Session } from "next-auth";
+import { notFound } from "next/navigation";
+
+import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
+import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remote";
+
+import { auth } from "@/lib/auth";
 import { getArticleBySlug, getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
-import { notFound } from "next/navigation";
-import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remote";
-import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
-import { auth } from "@/lib/auth";
-import { Session } from "next-auth";
 import { UserRole } from "@/types/user";
 
 type WikiPageProps = {

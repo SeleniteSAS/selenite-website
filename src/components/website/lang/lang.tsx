@@ -1,17 +1,20 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { ReactNode, useTransition } from "react";
+
+import { useLocale } from "next-intl";
+
+import { Button } from "@/components/_ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/_ui/dropdown-menu";
-import { completeLocale } from "@/lang/locales";
-import { Button } from "@/components/_ui/button";
-import { Locale } from "@/types/locale";
+
 import updateLocale from "@/actions/website/update-locale";
+import { completeLocale } from "@/lang/locales";
+import { Locale } from "@/types/locale";
 
 export default function Lang(): ReactNode {
   const [pending, startTransition] = useTransition();

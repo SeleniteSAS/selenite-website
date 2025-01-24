@@ -1,12 +1,15 @@
-import "../styles/globals.css";
+import { type ReactNode } from "react";
 
-import React, { type ReactNode } from "react";
 import type { Metadata } from "next";
 import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
-import { getMessages, getLocale } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
+
 import { Toaster } from "@/components/_ui/toaster";
-import { poppins, orbitron } from "@/lib/fonts";
 import LevaProvider from "@/components/common/leva-provider/leva-provider";
+
+import { orbitron, poppins } from "@/lib/fonts";
+
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   // TODO : remove this robots when the site is ready to be indexed

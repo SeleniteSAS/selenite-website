@@ -1,6 +1,6 @@
-import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
-import { NavigationArticle } from "@/types/article";
 import { getNavigationArticles } from "@/services/wiki-articles/wiki-articles";
+import { NavigationArticle } from "@/types/article";
+import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
 
 export async function getNavigationItems(): Promise<WikiNavigation[]> {
   const articles: NavigationArticle[] = await getNavigationArticles();

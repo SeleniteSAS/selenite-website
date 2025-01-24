@@ -1,12 +1,15 @@
 "use client";
 
-import { SidebarContent, Sidebar as ShadSidebar, useSidebar } from "@/components/_ui/sidebar";
-import { Fragment, ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import * as motion from "motion/react-client";
+import { Fragment, ReactNode } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { Sidebar as ShadSidebar, SidebarContent, useSidebar } from "@/components/_ui/sidebar";
+
 import { items } from "@/lib/design-sidebar-items";
+import { cn } from "@/lib/utils";
 
 export default function Sidebar(): ReactNode {
   const { toggleSidebar } = useSidebar();

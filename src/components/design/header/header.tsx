@@ -1,13 +1,16 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useSidebar } from "@/components/_ui/sidebar";
-import Link from "next/link";
-import { env } from "@/lib/env";
-import { Button } from "@/components/_ui/button";
+
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { Button } from "@/components/_ui/button";
+import { useSidebar } from "@/components/_ui/sidebar";
+
 import { items } from "@/lib/design-sidebar-items";
+import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 export default function Header(): ReactNode {

@@ -1,14 +1,14 @@
 "use client";
 
-import { Fragment, type ReactNode, type RefObject, useEffect, useRef } from "react";
-import { useLoader, useThree } from "@react-three/fiber";
-import { TextureLoader } from "three";
 import { PerspectiveCamera } from "@react-three/drei";
-import { type PerspectiveCamera as PC, DirectionalLightHelper } from "three";
-import { useControls } from "leva";
+import { useLoader, useThree } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useLenis } from "lenis/react";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { Fragment, type ReactNode, type RefObject, useEffect, useRef } from "react";
+
 import Lenis from "lenis";
+import { useControls } from "leva";
+import { DirectionalLightHelper, type PerspectiveCamera as PC, TextureLoader } from "three";
 
 export default function Moon(): ReactNode {
   const [color, normal] = useLoader(TextureLoader, ["/textures/moon/moon-color.png", "/textures/moon/moon-normal.png"]);

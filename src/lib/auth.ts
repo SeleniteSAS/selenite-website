@@ -1,11 +1,12 @@
 import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { getUserByEmail, comparePassword, updateLastLoginByEmail } from "@/services/users/users";
+
+import { domain, useSecureCookies } from "@/lib/cookies";
 import { loginSchema } from "@/schemas/auth";
-import { UserRole } from "@prisma/client";
+import { comparePassword, getUserByEmail, updateLastLoginByEmail } from "@/services/users/users";
 import { User as UserWithPassword } from "@/types/user";
 
-import { useSecureCookies, domain } from "@/lib/cookies";
+import { UserRole } from "@prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {

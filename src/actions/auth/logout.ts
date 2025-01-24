@@ -1,7 +1,8 @@
 "use server";
 
-import "server-only";
 import { signOut } from "@/lib/auth";
+
+import "server-only";
 
 export async function logout(): Promise<void> {
   await signOut();

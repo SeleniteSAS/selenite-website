@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, ReactNode, type RefObject, type MouseEvent, type MutableRefObject } from "react";
+import { type MouseEvent, type MutableRefObject, ReactNode, type RefObject, useEffect, useRef } from "react";
 
 type ClickSparkProps = {
   sparkColor?: string;

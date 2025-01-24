@@ -1,7 +1,9 @@
 "use client";
+
 import { useThree } from "@react-three/fiber";
-import { CubeTextureLoader } from "three";
 import { memo } from "react";
+
+import { CubeTextureLoader } from "three";
 
 const Skybox = memo(function (): null {
   const { scene } = useThree();
