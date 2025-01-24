@@ -75,7 +75,7 @@ export default function ConfettiProvider({ children }: ConfettiProviderProps): R
       window.removeEventListener("keydown", handleKeydown);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [handleKeydown, handleClick]);
 
   return (
     <div ref={containerRef}>
