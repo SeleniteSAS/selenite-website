@@ -60,7 +60,8 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.171.0",
     "ua-parser-js": "^2.0.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.1",
