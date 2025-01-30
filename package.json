@@ -10,11 +10,11 @@
     "lint:fix": "next lint --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "db:generate": "prisma generate --schema=./src/db/schema.prisma",
+    "db:generate": "prisma generate --schema=./src/db/schema.prisma --no-hints",
     "db:migrate": "prisma migrate dev --schema=./src/db/schema.prisma",
     "db:studio": "prisma studio --schema=./src/db/schema.prisma",
     "db:push": "prisma db push --schema=./src/db/schema.prisma",
-    "postinstall": "prisma generate --schema=./src/db/schema.prisma"
+    "postinstall": "prisma generate --schema=./src/db/schema.prisma --no-hints"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
