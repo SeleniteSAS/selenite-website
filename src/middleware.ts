@@ -7,7 +7,7 @@ import { buildSubdomainUrl, getSubdomains, isValidSubdomain } from "@/services/s
 import { Subdomain } from "@/types/subdomain";
 
 export const config: MiddlewareConfig = {
-  matcher: ["/((?!api/|_next/|images/|textures/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
+  matcher: ["/((?!api/|_next/|images/|textures/|sources/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
 };
 
 async function subdomains(req: NextRequest): Promise<NextResponse> {

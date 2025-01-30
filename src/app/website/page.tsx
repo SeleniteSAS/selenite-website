@@ -1,16 +1,20 @@
-import { type ReactNode } from "react";
+import { lazy, type ReactNode } from "react";
 
 import Link from "next/link";
 
 import Canvas from "@/components/website/canvas/canvas";
 import Clock from "@/components/website/clock/clock";
-import Moon from "@/components/website/moon/moon";
+import Loader from "@/components/website/loader/loader";
 
 import { env } from "@/lib/env";
+import SpaceShip from "@/components/website/spaceship/spaceship";
+
+const Moon = lazy(() => import("@/components/website/moon/moon"));
 
 export default async function WebsitePage(): Promise<ReactNode> {
   return (
     <div className="mt-32 h-[400vh]">
+      <Loader />
       <div className="h-[300vh]">
         <div className="ml-16 flex items-center gap-2">
           <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,11 +53,12 @@ export default async function WebsitePage(): Promise<ReactNode> {
         <div className="fixed inset-0 -z-10 h-screen w-screen">
           <Canvas style={{ width: "100%", height: "100%", pointerEvents: "none" }}>
             <Moon />
+            <SpaceShip />
           </Canvas>
         </div>
       </div>
       <div className="h-screen bg-blue-100"></div>
-      <div className="fixed bottom-8 left-8 font-orbitron text-lg">
+      <div className="font-orbitron fixed bottom-8 left-8 text-lg">
         DEVELOPED BY
         <br />
         <Link
