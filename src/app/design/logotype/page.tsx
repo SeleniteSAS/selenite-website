@@ -45,7 +45,10 @@ export default function DesignMainPage() {
           </svg>
         </div>
       </section>
-      <section className="relative flex h-screen w-full items-center justify-center px-24 py-12 text-black" id="meatball">
+      <section
+        className="relative flex h-screen w-full items-center justify-center px-24 py-12 text-black"
+        id="meatball"
+      >
         <LogoDisplay logo="meatball" title="Meatball" />
       </section>
       <section className="relative flex h-screen w-full items-center justify-center px-24 py-12 text-black">

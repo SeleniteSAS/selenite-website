@@ -1,7 +1,6 @@
-type Variant = 
-  | { name: string; mainColor: string; secondaryColor: string, contrastColor: string}
-  | { name: string; color: string, contrastColor: string };
-
+type Variant =
+  | { name: string; mainColor: string; secondaryColor: string; contrastColor: string }
+  | { name: string; color: string; contrastColor: string };
 
 const variants: Variant[] = [
   {
@@ -14,16 +13,18 @@ const variants: Variant[] = [
     name: "Dark",
     color: "#000000",
     contrastColor: "#FFFFFF",
-  }, {
+  },
+  {
     name: "Light",
     color: "#F8F7F5",
     contrastColor: "#000000",
-  }, {
+  },
+  {
     name: "Human Blue",
     mainColor: "#009898",
     secondaryColor: "#F8F7F5",
     contrastColor: "#000000",
-  }
+  },
 ];
 
 export default variants;
