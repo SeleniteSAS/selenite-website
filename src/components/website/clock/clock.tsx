@@ -5,7 +5,7 @@ import { type ReactNode, useEffect, useMemo, useState } from "react";
 type Unit = { label: string; value: string };
 
 export default function Clock(): ReactNode {
-  const release: Date = new Date(2025, 0, 25, 13, 0, 0);
+  const release: Date = new Date(2025, 3, 6, 10, 30, 0);
   const [now, setNow] = useState<Date>(new Date());
 
   useEffect((): (() => void) => {
