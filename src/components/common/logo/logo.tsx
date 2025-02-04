@@ -2,14 +2,17 @@ type LogoProps = {
   size: number;
   mainColor: string;
   secondaryColor: string;
+  className?: string;
 };
 
-export function Logo({ size, mainColor, secondaryColor }: LogoProps) {
+export function Logo({ size, mainColor, secondaryColor, className }: LogoProps) {
   const height = (size * 139) / 138;
   const width = size;
 
   return (
-    <svg width={width} height={height} viewBox="0 0 138 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 138 139" fill="none" xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
       <path
         d="M3.96145 134.93C15.1094 119.98 27.9102 106.334 41.0085 93.1035C54.2285 79.9984 67.8744 67.1942 82.8352 56.0564C71.6974 71.0172 58.8932 84.6597 45.7881 97.8831C32.558 110.981 18.9121 123.782 3.96145 134.93Z"
         fill={secondaryColor}
