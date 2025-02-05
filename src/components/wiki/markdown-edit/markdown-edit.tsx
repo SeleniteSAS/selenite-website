@@ -173,14 +173,11 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
                     <Textarea
                       {...field}
                       placeholder="Write your markdown here"
-                      className="min-h-24 h-44 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      className="h-44 min-h-24 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       ref={textareaRef}
                     />
                   </FormControl>
-                  <div
-                    className="h-auto rounded-md border border-input bg-background px-3 py-2"
-                    ref={markdownRef}
-                  >
+                  <div className="h-auto rounded-md border border-input bg-background px-3 py-2" ref={markdownRef}>
                     <MarkdownClient>{field.value}</MarkdownClient>
                   </div>
                 </div>

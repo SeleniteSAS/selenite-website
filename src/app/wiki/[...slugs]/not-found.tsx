@@ -14,7 +14,7 @@ export default function NotFound() {
       <p className="mb-8 text-center text-lg font-semibold tracking-tight text-foreground">
         Oops, il semblerait que tu te sois trompé de planète. Celle-ci n&apos;existe pas.
       </p>
-      <ul className="flex flex-wrap gap-2 items-center justify-center">
+      <ul className="flex flex-wrap items-center justify-center gap-2">
         <li>
           <Link href={env.NEXT_PUBLIC_WIKI_URL} className="p-2 text-primary underline">
             Retourner à l&apos;accueil

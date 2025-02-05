@@ -10,7 +10,12 @@ export function Logo({ size, mainColor, secondaryColor, className }: LogoProps) 
   const width = size;
 
   return (
-    <svg width={width} height={height} viewBox="0 0 138 139" fill="none" xmlns="http://www.w3.org/2000/svg"
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 138 139"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
       <path

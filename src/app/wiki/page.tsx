@@ -11,9 +11,7 @@ export default async function WikiPage(): Promise<ReactNode> {
   return (
     <Fragment>
       <Header session={session} path="/" />
-      <section className="p-4 text-foreground">
-        This is the main page
-      </section>
+      <section className="p-4 text-foreground">This is the main page</section>
     </Fragment>
   );
 }
