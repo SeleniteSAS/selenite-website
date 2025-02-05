@@ -31,9 +31,27 @@ export default function EditButton(props: EditButtonProps): ReactNode {
     setOpenMobile(false);
   };
 
+  const handleHomePageClick = () => {
+    toast({
+      description: "You can't edit the home page.",
+      variant: "destructive",
+      title: "Error",
+    })
+
+    setOpenMobile(false);
+  }
+
   if (pathname === "/new") {
     return (
       <Button className={props.className} onClick={handleNewClick}>
+        {props.children}
+      </Button>
+    );
+  }
+
+  if (pathname === "/") {
+    return (
+      <Button className={props.className} onClick={handleHomePageClick}>
         {props.children}
       </Button>
     );
