@@ -5,7 +5,7 @@ import { ComponentProps, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type EditButtonProps = ComponentProps<typeof Link>;
+type EditButtonProps = Omit<ComponentProps<typeof Link>, "href">;
 
 export default function EditButton(props: EditButtonProps): ReactNode {
   const pathname: string = usePathname();

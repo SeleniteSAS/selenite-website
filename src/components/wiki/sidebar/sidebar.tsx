@@ -30,7 +30,7 @@ export default async function Sidebar() {
   const session: Session | null = await auth();
 
   return (
-    <SidebarComponent collapsible={"offcanvas"} side={"left"} variant="floating">
+    <SidebarComponent collapsible={"offcanvas"} side={"left"} variant="floating" className="z-10">
       <SidebarHeader className="px-4 pt-4">
         <SidebarMenuComponent>
           <SidebarMenuItem className="relative">
@@ -93,7 +93,6 @@ export default async function Sidebar() {
           <li className="flex-1">
             <EditButton
               className={cn(buttonVariants({ size: "icon" }), "w-full")}
-              href={session ? "/profile" : `${env.NEXT_PUBLIC_AUTH_URL}/login`}
             >
               <PenIcon />
             </EditButton>

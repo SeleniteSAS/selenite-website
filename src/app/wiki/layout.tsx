@@ -11,7 +11,8 @@ export default function Layout({ children }: WikiLayoutProps): ReactNode {
     <SidebarProvider>
       <ThemeProvider>
         <AppSidebar />
-        <main className="w-full">{children}</main>
+        <main className="w-full z-10">{children}</main>
+        <div className="fixed w-screen h-screen inset-0 bg-background pointer-events-none z-0"></div>
       </ThemeProvider>
     </SidebarProvider>
   );
