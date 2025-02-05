@@ -1,6 +1,9 @@
+import { Fragment } from "react";
+
 import { Session } from "next-auth";
 import { notFound } from "next/navigation";
 
+import Header from "@/components/wiki/header/header";
 import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 
 import { auth } from "@/lib/auth";
@@ -16,8 +19,11 @@ export default async function NewWikiPage() {
   const parentArticles: { slug: string; title: string }[] = await getParentArticles();
 
   return (
-    <section className="p-4">
-      <MarkdownEdit article={null} parentArticles={parentArticles} />
-    </section>
+    <Fragment>
+      <Header path="/new" session={session} />
+      <section className="p-4 text-foreground">
+        <MarkdownEdit article={null} parentArticles={parentArticles} />
+      </section>
+    </Fragment>
   );
 }

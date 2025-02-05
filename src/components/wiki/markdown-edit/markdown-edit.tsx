@@ -19,6 +19,7 @@ import MarkdownClient from "@/components/wiki/markdown-client/markdown-client";
 
 import create from "@/actions/wiki/create";
 import edit from "@/actions/wiki/edit";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { CreateUpdateWikiPage, createUpdateWikiPage } from "@/schemas/wiki";
@@ -43,6 +44,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const markdownRef = useRef<HTMLDivElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const isMobile = useIsMobile();
 
   const form = useForm<CreateUpdateWikiPage>({
     resolver: zodResolver(createUpdateWikiPage),
@@ -73,14 +75,14 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
     if (!textareaRef.current || !markdownRef.current) return;
 
     resizeObserverRef.current = new ResizeObserver(([entry]) => {
-      if (markdownRef.current) {
+      if (markdownRef.current && !isMobile) {
         markdownRef.current.style.height = `calc(${entry.contentRect.height}px + 2rem)`;
       }
     });
     resizeObserverRef.current.observe(textareaRef.current);
 
     return () => resizeObserverRef.current?.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <Form {...form}>
@@ -99,7 +101,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
             </FormItem>
           )}
         />
-        <div className="flew-wrap flex space-x-4">
+        <div className="flex flex-wrap gap-4">
           <FormField
             control={form.control}
             name="icon"
@@ -165,30 +167,46 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
           render={({ field }) => (
             <FormItem className="text-foreground">
               <FormLabel>Write your article in markdown here :</FormLabel>
-              <ResizablePanelGroup direction="horizontal">
-                <ResizablePanel defaultSize={50}>
+              {isMobile ? (
+                <div className="flex flex-col gap-2">
                   <FormControl>
                     <Textarea
                       {...field}
                       placeholder="Write your markdown here"
-                      className="min-h-96 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                      onResize={(e) => console.log(e)}
+                      className="min-h-24 h-44 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       ref={textareaRef}
                     />
                   </FormControl>
-                </ResizablePanel>
-                <ResizableHandle withHandle={true}
-                  className="mx-2"
-                />
-                <ResizablePanel  defaultSize={50}>
                   <div
-                    className="h-full overflow-auto rounded-md border border-input bg-background px-3 py-2"
+                    className="h-auto rounded-md border border-input bg-background px-3 py-2"
                     ref={markdownRef}
                   >
                     <MarkdownClient>{field.value}</MarkdownClient>
                   </div>
-                </ResizablePanel>
-              </ResizablePanelGroup>
+                </div>
+              ) : (
+                <ResizablePanelGroup direction="horizontal">
+                  <ResizablePanel defaultSize={50}>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Write your markdown here"
+                        className="min-h-96 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        ref={textareaRef}
+                      />
+                    </FormControl>
+                  </ResizablePanel>
+                  <ResizableHandle withHandle={true} className="mx-2" />
+                  <ResizablePanel defaultSize={50}>
+                    <div
+                      className="h-full overflow-auto rounded-md border border-input bg-background px-3 py-2"
+                      ref={markdownRef}
+                    >
+                      <MarkdownClient>{field.value}</MarkdownClient>
+                    </div>
+                  </ResizablePanel>
+                </ResizablePanelGroup>
+              )}
               <FormMessage />
             </FormItem>
           )}

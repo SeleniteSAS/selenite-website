@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { SidebarProvider } from "@/components/_ui/sidebar";
 import AppSidebar from "@/components/wiki/sidebar/sidebar";
@@ -8,12 +8,19 @@ type WikiLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function Layout({ children }: WikiLayoutProps): ReactNode {
   return (
-    <SidebarProvider>
-      <ThemeProvider>
+    <ThemeProvider>
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "20rem",
+            "--sidebar-width-mobile": "20rem !important",
+          } as CSSProperties
+        }
+      >
         <AppSidebar />
-        <main className="w-full z-10">{children}</main>
-        <div className="fixed w-screen h-screen inset-0 bg-background pointer-events-none z-0"></div>
-      </ThemeProvider>
-    </SidebarProvider>
+        <main className="z-10 w-full">{children}</main>
+        <div className="pointer-events-none fixed inset-0 z-0 h-screen w-screen bg-background"></div>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }

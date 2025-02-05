@@ -1,16 +1,17 @@
 "use client";
 
-import { forwardRef } from "react";
+import { ElementRef, forwardRef } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/_ui/button";
+import { DropdownMenuItem } from "@/components/_ui/dropdown-menu";
 
-type ThemeButtonProps = React.ComponentProps<typeof Button> & { theme: string };
+type ThemeButtonProps = React.ComponentPropsWithoutRef<typeof DropdownMenuItem> & { theme: string };
+type ThemeButtonRef = ElementRef<typeof DropdownMenuItem>;
 
-const ThemeButton = forwardRef<HTMLButtonElement, ThemeButtonProps>(
+const ThemeButton = forwardRef<ThemeButtonRef, ThemeButtonProps>(
   ({ theme, ...props }, ref) => {
     const { setTheme } = useTheme();
 
-    return <Button {...props} ref={ref} onClick={() => setTheme(theme)} />;
+    return <DropdownMenuItem {...props} ref={ref} onClick={() => setTheme(theme)} />;
   }
 );
 

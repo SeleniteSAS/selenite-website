@@ -37,6 +37,18 @@ export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
             {index < labels.length - 1 && <BreadcrumbSeparator />}
           </Fragment>
         ))}
+        {(labels.length === 0 && slug === "/") && (
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
+          </BreadcrumbItem>
+        )}
+        {
+          (labels.length === 0 && slug === "/new") && (
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/new">Nouvel article</BreadcrumbLink>
+            </BreadcrumbItem>
+          )
+        }
       </BreadcrumbList>
     </Breadcrumb>
   );
