@@ -53,7 +53,7 @@ export default async function WikiSlugLayout({ children, params: { slugs } }: Wi
         </div>
         
       </header>
-      <section className="px-4">{children}</section>
+      <section className="px-4 text-foreground">{children}</section>
     </>
   );
 }
