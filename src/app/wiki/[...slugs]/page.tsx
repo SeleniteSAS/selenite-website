@@ -27,7 +27,8 @@ export async function generateMetadata({ params: { slugs } }: WikiPageProps): Pr
 
   if (!article) return { title: "Page non trouvée" };
 
-  const title: string = (isEditMode ? `Édition de ${article.label}` : article.label) + " | Selenite - Wiki & Documentation";
+  const title: string =
+    (isEditMode ? `Édition de ${article.label}` : article.label) + " | Selenite - Wiki & Documentation";
   const description: string = extractPlainText(article.markdown);
   const image: string | null = getFirstImageUrl(article.markdown);
 
