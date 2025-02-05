@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
 
 import { Session } from "next-auth";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remote";
 
 import { auth } from "@/lib/auth";
+import { env } from "@/lib/env";
 import { getArticleBySlug, getParentArticles } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
@@ -24,6 +25,8 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
   const article: Article | null = await getArticleBySlug(slugs.join("/").replace("/edit", ""));
 
   if (!article) return notFound();
+
+  if (isEditMode && !session) return redirect(`${env.NEXT_PUBLIC_AUTH_URL}/login`);
 
   if (isEditMode && session?.user.role === UserRole.ADMIN) {
     const parentArticles: { slug: string; title: string }[] = await getParentArticles(article.id);

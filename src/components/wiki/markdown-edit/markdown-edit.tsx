@@ -1,7 +1,7 @@
 "use client";
 
-import { ChevronsUpDownIcon } from "lucide-react";
-import { type JSX, useTransition } from "react";
+import { ChevronsUpDownIcon, SaveIcon, XIcon } from "lucide-react";
+import { type JSX, useCallback, useEffect, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 import Link from "next/link";
@@ -12,11 +12,14 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/_ui/form";
 import { Input } from "@/components/_ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/_ui/popover";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/_ui/resizable";
 import { Textarea } from "@/components/_ui/textarea";
 import IconPicker from "@/components/wiki/icon-picker/icon-picker";
+import MarkdownClient from "@/components/wiki/markdown-client/markdown-client";
 
 import create from "@/actions/wiki/create";
 import edit from "@/actions/wiki/edit";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { CreateUpdateWikiPage, createUpdateWikiPage } from "@/schemas/wiki";
@@ -38,6 +41,11 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
   const { toast } = useToast();
   const router = useRouter();
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const markdownRef = useRef<HTMLDivElement>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const isMobile = useIsMobile();
+
   const form = useForm<CreateUpdateWikiPage>({
     resolver: zodResolver(createUpdateWikiPage),
     defaultValues: {
@@ -48,35 +56,58 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
     },
   });
 
-  const handleSubmit = (data: CreateUpdateWikiPage) => {
-    startTransition(async () => {
-      const result = await action(data);
-      if ("error" in result) {
-        toast({
-          variant: "destructive",
-          description: result.error,
-          title: "An error occured",
-        });
-      } else {
-        toast({
-          description: "The article has been successfully saved",
-          title: "Article saved",
-        });
-        router.push(`/${result.slug}`);
+  const handleSubmit = useCallback(
+    (data: CreateUpdateWikiPage) => {
+      startTransition(async () => {
+        const result = await action(data);
+        if ("error" in result) {
+          toast({ variant: "destructive", description: result.error, title: "An error occurred" });
+        } else {
+          toast({ description: "The article has been successfully saved", title: "Article saved" });
+          router.push(`/${result.slug}`);
+        }
+      });
+    },
+    [action, router, toast],
+  );
+
+  useEffect(() => {
+    if (!textareaRef.current || !markdownRef.current) return;
+
+    resizeObserverRef.current = new ResizeObserver(([entry]) => {
+      if (markdownRef.current && !isMobile) {
+        markdownRef.current.style.height = `calc(${entry.contentRect.height}px + 2rem)`;
       }
     });
-  };
+    resizeObserverRef.current.observe(textareaRef.current);
+
+    return () => resizeObserverRef.current?.disconnect();
+  }, [isMobile]);
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <div className="flex items-center">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">{article ? "Edit" : "Create"} page</h2>
+        <FormField
+          control={form.control}
+          name="label"
+          render={({ field }) => (
+            <FormItem className="flex flex-col text-foreground">
+              <FormLabel>Choose a title for this page :</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Label" className="w-full text-foreground" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex flex-wrap gap-4">
           <FormField
             control={form.control}
             name="icon"
             render={({ field }) => (
-              <FormItem className="mr-4 flex flex-col">
-                <FormLabel>Icon</FormLabel>
+              <FormItem className="mr-4 flex flex-col text-foreground">
+                <FormLabel>Choose an icon for the page :</FormLabel>
                 <IconPicker onChange={field.onChange} value={field.value ?? ""} />
                 <FormMessage />
               </FormItem>
@@ -86,12 +117,12 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
             control={form.control}
             name={"slug"}
             render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Path</FormLabel>
+              <FormItem className="flex flex-col text-foreground">
+                <FormLabel>Choose a parent page for this page :</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild={true}>
                     <FormControl>
-                      <Button variant="outline" role="combobox" className="w-[250px] justify-between">
+                      <Button variant="outline" role="combobox" className="w-[300px] justify-between text-foreground">
                         {field.value
                           ? `Wiki${
                               parentArticles.find((article) => article.slug === field.value)
@@ -103,7 +134,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-[250px] p-0">
+                  <PopoverContent className="w-[300px] p-0">
                     <Command>
                       <CommandInput placeholder="Search parent article" />
                       <CommandList>
@@ -129,46 +160,63 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
               </FormItem>
             )}
           />
-          <div className="flex h-10 w-8 items-center justify-center self-end">/</div>
-          <FormField
-            control={form.control}
-            name="label"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Label" className={"w-[200px]"} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
-        <div className="mt-4 grid grid-cols-1">
-          <FormField
-            control={form.control}
-            name="markdown"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    placeholder="Write your markdown here"
-                    className="min-h-96 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="markdown"
+          render={({ field }) => (
+            <FormItem className="text-foreground">
+              <FormLabel>Write your article in markdown here :</FormLabel>
+              {isMobile ? (
+                <div className="flex flex-col gap-2">
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      placeholder="Write your markdown here"
+                      className="h-44 min-h-24 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      ref={textareaRef}
+                    />
+                  </FormControl>
+                  <div className="h-auto rounded-md border border-input bg-background px-3 py-2" ref={markdownRef}>
+                    <MarkdownClient>{field.value}</MarkdownClient>
+                  </div>
+                </div>
+              ) : (
+                <ResizablePanelGroup direction="horizontal">
+                  <ResizablePanel defaultSize={50}>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Write your markdown here"
+                        className="min-h-96 overflow-x-scroll focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        ref={textareaRef}
+                      />
+                    </FormControl>
+                  </ResizablePanel>
+                  <ResizableHandle withHandle={true} className="mx-2" />
+                  <ResizablePanel defaultSize={50}>
+                    <div
+                      className="h-full overflow-auto rounded-md border border-input bg-background px-3 py-2"
+                      ref={markdownRef}
+                    >
+                      <MarkdownClient>{field.value}</MarkdownClient>
+                    </div>
+                  </ResizablePanel>
+                </ResizablePanelGroup>
+              )}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="my-4 flex justify-end space-x-4">
           {article && (
-            <Link className={cn(buttonVariants({ variant: "destructive" }), "h-8")} href={`/${article.slug}`}>
+            <Link className={cn(buttonVariants({ variant: "destructive", size: "default" }))} href={`/${article.slug}`}>
+              <XIcon />
               Cancel
             </Link>
           )}
-          <Button className="h-8" type="submit" disabled={pending}>
+          <Button type="submit" disabled={pending} size="default" variant="default">
+            <SaveIcon />
             {article ? "Update" : "Create"}
           </Button>
         </div>

@@ -7,7 +7,7 @@ import * as React from "react";
 import { Button } from "@/components/_ui/button";
 import { Input } from "@/components/_ui/input";
 import { Separator } from "@/components/_ui/separator";
-import { Sheet, SheetContent } from "@/components/_ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/_ui/sheet";
 import { Skeleton } from "@/components/_ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/_ui/tooltip";
 
@@ -156,6 +156,8 @@ const Sidebar = React.forwardRef<
   if (isMobile) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+        <SheetTitle className="sr-only">Sidebar</SheetTitle>
+        <SheetDescription className="sr-only">Swipe up to close</SheetDescription>
         <SheetContent
           data-sidebar="sidebar"
           data-mobile="true"
