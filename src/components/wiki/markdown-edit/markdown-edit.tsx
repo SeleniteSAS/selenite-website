@@ -90,10 +90,12 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
     return () => resizeObserverRef.current?.disconnect();
   }, [isMobile]);
 
-
   const markdownValue: string = form.watch("markdown");
 
-  const renderedMarkdown: JSX.Element = useMemo(() => <MarkdownClient>{markdownValue}</MarkdownClient>, [markdownValue]);
+  const renderedMarkdown: JSX.Element = useMemo(
+    () => <MarkdownClient>{markdownValue}</MarkdownClient>,
+    [markdownValue],
+  );
 
   return (
     <Form {...form}>

@@ -36,10 +36,10 @@ export default function EditButton(props: EditButtonProps): ReactNode {
       description: "You can't edit the home page.",
       variant: "destructive",
       title: "Error",
-    })
+    });
 
     setOpenMobile(false);
-  }
+  };
 
   if (pathname === "/new") {
     return (
