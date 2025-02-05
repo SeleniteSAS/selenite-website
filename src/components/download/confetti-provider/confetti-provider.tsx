@@ -40,23 +40,23 @@ export default function ConfettiProvider({ children }: ConfettiProviderProps): R
     };
   };
 
-  const handleClick = (e: MouseEvent): void => {
-    const target = e.target as Element;
-    if (target.getAttribute("data-disabled") === "true") return;
-
-    triggerConfetti(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
-  };
-
-  const handleKeydown = (e: KeyboardEvent): void => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-      e.preventDefault();
-      const { x, y } = mousePosition.current;
-      triggerConfetti(x, y);
-    }
-  };
-
   useEffect((): (() => void) => {
     const container: HTMLDivElement | null = containerRef.current;
+
+    const handleClick = (e: MouseEvent): void => {
+      const target = e.target as Element;
+      if (target.getAttribute("data-disabled") === "true") return;
+
+      triggerConfetti(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+    };
+
+    const handleKeydown = (e: KeyboardEvent): void => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        const { x, y } = mousePosition.current;
+        triggerConfetti(x, y);
+      }
+    };
 
     if (container) {
       const elements: NodeListOf<Element> = container.querySelectorAll("[data-confetti='true']");
@@ -76,7 +76,7 @@ export default function ConfettiProvider({ children }: ConfettiProviderProps): R
       window.removeEventListener("keydown", handleKeydown);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [handleKeydown, handleClick]);
+  }, []);
 
   return (
     <div ref={containerRef}>
