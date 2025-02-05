@@ -86,3 +86,7 @@ export async function getChildArticlesBySlug(slug: string): Promise<Article[]> {
     },
   });
 }
+
+export async function getHomePageArticle(): Promise<Article | null> {
+  return prisma.article.findFirst({ where: { slug: "home" } });
+}

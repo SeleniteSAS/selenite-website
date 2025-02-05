@@ -16,6 +16,8 @@ model Article {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   isPublished Boolean  @default(false)
+  keywords    String[]
+  author      String?
 }
 
 model User {

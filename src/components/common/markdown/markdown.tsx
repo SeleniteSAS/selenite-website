@@ -32,7 +32,7 @@ const markdownComponents = {
     href !== undefined && href.startsWith("/") ? (
       <Link className="text-blue-500 hover:underline" {...props} href={href} />
     ) : (
-      <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
+      <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" href={href} {...props} />
     ),
   input: ({ type, ...props }: ComponentProps<"input">): ReactNode =>
     type === "checkbox" ? (
