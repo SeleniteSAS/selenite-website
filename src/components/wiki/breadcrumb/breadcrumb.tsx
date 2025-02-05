@@ -20,15 +20,19 @@ export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
       <BreadcrumbList>
         {labels.map((label: string, index: number) => (
           <Fragment key={index}>
-            <BreadcrumbItem key={slug}>
-              <BreadcrumbLink
-                href={`/${slug
-                  .split("/")
-                  .slice(0, index + 1)
-                  .join("/")}`}
-              >
-                {label}
-              </BreadcrumbLink>
+            <BreadcrumbItem>
+              {index === 0 ? (
+                <span>{label}</span> 
+              ) : (
+                <BreadcrumbLink
+                  href={`/${slug
+                    .split("/")
+                    .slice(0, index + 1)
+                    .join("/")}`}
+                >
+                  {label}
+                </BreadcrumbLink>
+              )}
             </BreadcrumbItem>
             {index < labels.length - 1 && <BreadcrumbSeparator />}
           </Fragment>

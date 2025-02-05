@@ -34,12 +34,15 @@ export default async function WikiSlugLayout({ children, params: { slugs } }: Wi
             <WikiBreadcrumbs slug={path.replace("/edit", "")} />
           </Suspense>
         </div>
-        <div className="px-4 flex items-center gap-2">
+        <div className="px-4 flex items-center gap-2">  
           {!path.includes("/edit") && (
-            <EditButton className={cn(buttonVariants({ variant: "outline" }), "text-foreground")}>
+            <EditButton className={cn(buttonVariants({ variant: "outline", size: "sm" }), "text-foreground")}>
               <PenIcon className="size-2" />
               Edit
             </EditButton>
+          )}
+          {(!path.includes("/edit") && session?.user) && (
+            <Separator orientation="vertical" className="h-4 mx-2" />
           )}
           {session?.user && (
             <Avatar
@@ -51,7 +54,6 @@ export default async function WikiSlugLayout({ children, params: { slugs } }: Wi
             />
           )}
         </div>
-        
       </header>
       <section className="px-4 text-foreground">{children}</section>
     </>

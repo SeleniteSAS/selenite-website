@@ -7,5 +7,9 @@ import { ThemeProvider as Provider } from "next-themes";
 type ThemeProviderProps = Readonly<{ children: ReactNode }>;
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  return <Provider attribute={"class"}>{children}</Provider>;
+  return (
+    <Provider attribute={"class"} disableTransitionOnChange={true}>
+      {children}
+    </Provider>
+  );
 }
