@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronsUpDownIcon, SaveIcon, XIcon } from "lucide-react";
-import { type JSX, useCallback, useEffect, useRef, useTransition } from "react";
+import { type JSX, useCallback, useEffect, useMemo, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 import Link from "next/link";
@@ -46,13 +46,19 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const isMobile = useIsMobile();
 
+  const defaultSlug = useMemo(() => {
+    if (!article) return "/";
+    const parts = article.slug.split("/");
+    return parts.length > 1 ? parts.slice(0, -1).join("/") : "/";
+  }, [article]);
+
   const form = useForm<CreateUpdateWikiPage>({
     resolver: zodResolver(createUpdateWikiPage),
     defaultValues: {
-      label: article ? article.label : "",
-      markdown: article ? article.markdown : "",
-      icon: article ? (article.icon ?? undefined) : "",
-      slug: article ? (article.slug.split("/").length > 1 ? article.slug.split("/").slice(0, -1).join("/") : "/") : "/",
+      label: article?.label || "",
+      markdown: article?.markdown || "",
+      icon: article?.icon ?? "",
+      slug: defaultSlug,
     },
   });
 
@@ -83,6 +89,13 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
 
     return () => resizeObserverRef.current?.disconnect();
   }, [isMobile]);
+
+  const markdownValue: string = form.watch("markdown");
+
+  const renderedMarkdown: JSX.Element = useMemo(
+    () => <MarkdownClient>{markdownValue}</MarkdownClient>,
+    [markdownValue],
+  );
 
   return (
     <Form {...form}>
@@ -199,7 +212,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
                       className="h-full overflow-auto rounded-md border border-input bg-background px-3 py-2"
                       ref={markdownRef}
                     >
-                      <MarkdownClient>{field.value}</MarkdownClient>
+                      {renderedMarkdown}
                     </div>
                   </ResizablePanel>
                 </ResizablePanelGroup>
