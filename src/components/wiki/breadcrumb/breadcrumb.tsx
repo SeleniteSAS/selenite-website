@@ -22,7 +22,7 @@ export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
           <Fragment key={index}>
             <BreadcrumbItem>
               {index === 0 ? (
-                <span>{label}</span> 
+                <span>{label}</span>
               ) : (
                 <BreadcrumbLink
                   href={`/${slug
@@ -37,18 +37,21 @@ export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
             {index < labels.length - 1 && <BreadcrumbSeparator />}
           </Fragment>
         ))}
-        {(labels.length === 0 && slug === "/") && (
+        {labels.length === 0 && slug === "/" && (
           <BreadcrumbItem>
             <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
           </BreadcrumbItem>
         )}
-        {
-          (labels.length === 0 && slug === "/new") && (
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/new">Nouvel article</BreadcrumbLink>
-            </BreadcrumbItem>
-          )
-        }
+        {labels.length === 0 && slug === "/new" && (
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/new">Nouvel article</BreadcrumbLink>
+          </BreadcrumbItem>
+        )}
+        {labels.length === 0 && slug !== "/new" && slug !== "/" && (
+          <BreadcrumbItem>
+            <span>Aucune page trouvée</span>
+          </BreadcrumbItem>
+        )}
       </BreadcrumbList>
     </Breadcrumb>
   );
