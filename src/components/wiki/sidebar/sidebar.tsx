@@ -118,7 +118,7 @@ export default async function Sidebar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link className={cn(buttonVariants({ size: "icon" }), "w-full")} href={`${env.NEXT_PUBLIC_AUTH_URL}`}>
+              <Link className={cn(buttonVariants({ size: "icon" }), "w-full")} href={`${env.NEXT_PUBLIC_AUTH_URL}/login`}>
                 <UserIcon />
                 <span className="sr-only">Log into your account</span>
               </Link>
