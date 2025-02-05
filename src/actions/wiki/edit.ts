@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
-import { updateArticle } from "@/services/wiki-articles/wiki-articles";
+import { getArticleSlug, getChildArticlesBySlug, updateArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
@@ -21,10 +21,31 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
   }
 
   try {
+    const oldSlug: string | null = await getArticleSlug(id);
+
     const article: Article | null = await updateArticle(id, {
       ...values,
       slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
     });
+
+    try {
+      if (oldSlug) {
+        const children: Article[] = await getChildArticlesBySlug(oldSlug);
+
+        for (const child of children) {
+          const newSlug: string = child.slug.replace(
+            oldSlug,
+            `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
+          );
+          const childWithoutId = { ...child, id: undefined };
+          await updateArticle(child.id, { ...childWithoutId, icon: child.icon || undefined, slug: newSlug });
+        }
+      }
+    } catch (e: unknown) {
+      console.log(e);
+      revalidatePath("/wiki");
+      return { error: "An error occurred updating children slugs" };
+    }
 
     if (article) {
       revalidatePath("/wiki");
