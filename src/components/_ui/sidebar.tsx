@@ -10,6 +10,7 @@ import { Separator } from "@/components/_ui/separator";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/_ui/sheet";
 import { Skeleton } from "@/components/_ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/_ui/tooltip";
+import { domain, useSecureCookies } from "@/lib/cookies";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -67,8 +68,7 @@ const SidebarProvider = React.forwardRef<
 
       _setOpen(value);
 
-      // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+      document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}; SameSite=Lax; domain=${domain} ${useSecureCookies ? "; Secure" : ""}`;
     },
     [setOpenProp, open],
   );
