@@ -50,7 +50,7 @@ export default function FontSection({ fontClass, fontName, isVariable, children,
   const form = useForm<z.infer<typeof fontFormSchema>>({
     resolver: zodResolver(fontFormSchema),
     defaultValues: {
-      fontsize: 30,
+      fontsize: 40,
       wght: 400,
       weight: 400,
     },
