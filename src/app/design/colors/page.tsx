@@ -2,11 +2,11 @@ import { CopyIcon } from "lucide-react";
 import { Fragment } from "react";
 
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/_ui/context-menu";
+import Hero from "@/components/wiki/hero/hero";
 
 import { getCMYK, getContrasted, getHSL, getRGB } from "@/lib/color";
 import { colors } from "@/lib/design-color-theme";
 import { cn } from "@/lib/utils";
-import Hero from "@/components/wiki/hero/hero";
 
 export default function ColorsPage() {
   return (
@@ -16,11 +16,11 @@ export default function ColorsPage() {
         subtitle="A color defines a side. For humans, blue represents hope and resilience. For aliens, red embodies fear and danger. Each shade tells a story, each hue marks a territory. In a universe where colors signify allegiance, choose your side wisely."
         description="Here are the colors that define our brand. Use them to create a consistent experience for our users."
       />
-      <section className="relative min-h-screen w-full px-6 md:px-24 py-12">
+      <section className="relative min-h-screen w-full px-6 py-12 md:px-24">
         <div className="space-y-4 border border-black p-4">
           {Object.entries(colors).map(([name, colors]: [string, string[]]) => (
             <div key={name} className="w-full">
-              <ul className="flex md:h-96 h-[30rem] w-full gap-4 flex-col md:flex-row">
+              <ul className="flex h-[30rem] w-full flex-col gap-4 md:h-96 md:flex-row">
                 {colors.map((color: string, i: number) => (
                   <ContextMenu key={color}>
                     <ContextMenuTrigger asChild={true}>

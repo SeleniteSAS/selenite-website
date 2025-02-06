@@ -1,6 +1,7 @@
+import vmPlugin from "./src/lib/tailwind-wm";
+
 import type { Config } from "tailwindcss";
 import animatePlugin from "tailwindcss-animate";
-import vmPlugin from "./src/lib/tailwind-wm";
 
 const config: Config = {
   darkMode: ["class"],

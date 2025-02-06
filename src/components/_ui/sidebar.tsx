@@ -10,9 +10,9 @@ import { Separator } from "@/components/_ui/separator";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/_ui/sheet";
 import { Skeleton } from "@/components/_ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/_ui/tooltip";
-import { domain, useSecureCookies } from "@/lib/cookies";
 
 import { useIsMobile } from "@/hooks/use-mobile";
+import { domain, useSecureCookies } from "@/lib/cookies";
 import { cn } from "@/lib/utils";
 
 import { VariantProps, cva } from "class-variance-authority";
