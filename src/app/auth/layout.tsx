@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import Link from "next/link";
 
-type AuthLayoutProps = { children: ReactNode };
+type AuthLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function AuthLayout({ children }: AuthLayoutProps): ReactNode {
   const link = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://selenite.live";

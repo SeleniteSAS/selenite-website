@@ -19,7 +19,7 @@ export default async function WikiBreadcrumbs({ slug }: WikiBreadcrumbsProps) {
     <Breadcrumb>
       <BreadcrumbList>
         {labels.map((label: string, index: number) => (
-          <Fragment key={index}>
+          <Fragment key={label}>
             <BreadcrumbItem>
               {index === 0 ? (
                 <span>{label}</span>

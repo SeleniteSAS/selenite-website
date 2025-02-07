@@ -9,10 +9,10 @@ import Logo from "@/components/wiki/logo/logo";
 
 import { env } from "@/lib/env";
 
-type WikiPageErrorProps = {
+type WikiPageErrorProps = Readonly<{
   error: Error & { digest?: string };
   reset: () => void;
-};
+}>;
 
 export default function WikiPageError({ error, reset }: WikiPageErrorProps) {
   const [showError, setShowError] = useState(false);

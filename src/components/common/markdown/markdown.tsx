@@ -9,30 +9,46 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { cn } from "@/lib/utils";
 
 const markdownComponents = {
-  h1: ({ className, ...props }: ComponentProps<"h1">): ReactNode => (
-    <h1 className={cn("mb-2.5 mt-5 text-4xl font-bold", className)} {...props} />
+  h1: ({ className, children, ...props }: ComponentProps<"h1">): ReactNode => (
+    <h1 className={cn("mb-2.5 mt-5 text-4xl font-bold", className)} {...props}>
+      {children}
+    </h1>
   ),
-  h2: ({ className, ...props }: ComponentProps<"h2">): ReactNode => (
-    <h2 className={cn("mb-2.5 mt-5 text-3xl font-bold", className)} {...props} />
+  h2: ({ className, children, ...props }: ComponentProps<"h2">): ReactNode => (
+    <h2 className={cn("mb-2.5 mt-5 text-3xl font-bold", className)} {...props}>
+      {children}
+    </h2>
   ),
-  h3: ({ className, ...props }: ComponentProps<"h3">): ReactNode => (
-    <h3 className={cn("mb-2.5 mt-5 text-2xl font-bold", className)} {...props} />
+  h3: ({ className, children, ...props }: ComponentProps<"h3">): ReactNode => (
+    <h3 className={cn("mb-2.5 mt-5 text-2xl font-bold", className)} {...props}>
+      {children}
+    </h3>
   ),
-  h4: ({ className, ...props }: ComponentProps<"h4">): ReactNode => (
-    <h4 className={cn("my-2.5 text-xl font-bold", className)} {...props} />
+  h4: ({ className, children, ...props }: ComponentProps<"h4">): ReactNode => (
+    <h4 className={cn("my-2.5 text-xl font-bold", className)} {...props}>
+      {children}
+    </h4>
   ),
-  h5: ({ className, ...props }: ComponentProps<"h5">): ReactNode => (
-    <h5 className={cn("my-2.5 text-lg font-bold", className)} {...props} />
+  h5: ({ className, children, ...props }: ComponentProps<"h5">): ReactNode => (
+    <h5 className={cn("my-2.5 text-lg font-bold", className)} {...props}>
+      {children}
+    </h5>
   ),
-  h6: ({ className, ...props }: ComponentProps<"h6">): ReactNode => (
-    <h6 className={cn("my-2.5 text-base font-bold", className)} {...props} />
+  h6: ({ className, children, ...props }: ComponentProps<"h6">): ReactNode => (
+    <h6 className={cn("my-2.5 text-base font-bold", className)} {...props}>
+      {children}
+    </h6>
   ),
   hr: ({ className }: ComponentProps<"hr">): ReactNode => <Separator className={cn("my-5", className)} />,
-  a: ({ href, ...props }: ComponentProps<"a">): ReactNode =>
-    href !== undefined && href.startsWith("/") ? (
-      <Link className="text-blue-500 hover:underline" {...props} href={href} />
+  a: ({ href, children, ...props }: ComponentProps<"a">): ReactNode =>
+    href?.startsWith("/") ? (
+      <Link className="text-blue-500 hover:underline" {...props} href={href}>
+        {children}
+      </Link>
     ) : (
-      <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" href={href} {...props} />
+      <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" href={href} {...props}>
+        {children}
+      </a>
     ),
   input: ({ type, ...props }: ComponentProps<"input">): ReactNode =>
     type === "checkbox" ? (

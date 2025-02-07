@@ -2,23 +2,19 @@
 
 import { cn } from "@/lib/utils";
 
+type MirrorTextProps = Readonly<{
+  text: string;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right";
+  containerClassName?: string;
+}>;
+
 export default function MirrorText({
   text = "This is a text",
   className,
   direction = "up",
   containerClassName,
-}: {
-  text: string;
-  className?: string;
-  /**
-   * The direction of the animation
-   *
-   * @default "up"
-   */
-  direction?: "up" | "down" | "left" | "right";
-
-  containerClassName?: string;
-}) {
+}: MirrorTextProps) {
   const animation = cn("transition-all duration-500 ease-slow", {
     "group-hover:-translate-y-4": direction === "up",
     "group-hover:translate-y-8": direction === "down",

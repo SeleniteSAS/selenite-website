@@ -2,17 +2,19 @@
 
 import { cn } from "@/lib/utils";
 
+type BoldCopyProps = Readonly<{
+  text: string;
+  className?: string;
+  textClassName?: string;
+  backgroundTextClassName?: string;
+}>;
+
 export default function BoldCopy({
   text = "animata",
   className,
   textClassName,
   backgroundTextClassName,
-}: {
-  text: string;
-  className?: string;
-  textClassName?: string;
-  backgroundTextClassName?: string;
-}) {
+}: BoldCopyProps) {
   if (!text?.length) {
     return null;
   }

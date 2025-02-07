@@ -30,6 +30,9 @@ export interface InputBaseProps extends React.ComponentPropsWithoutRef<typeof Pr
   disabled?: boolean;
 }
 
+const Div = Primitive.div;
+const Input = Primitive.input;
+
 export const InputBase = React.forwardRef<React.ElementRef<typeof Primitive.div>, InputBaseProps>(
   ({ autoFocus, disabled, className, onClick, ...props }, ref) => {
     const [focused, setFocused] = React.useState(false);
@@ -45,7 +48,7 @@ export const InputBase = React.forwardRef<React.ElementRef<typeof Primitive.div>
           onFocusedChange: setFocused,
         }}
       >
-        <Primitive.div
+        <Div
           ref={ref}
           onClick={composeEventHandlers(onClick, (event) => {
             // Based on MUI's <InputBase /> implementation.
@@ -72,7 +75,7 @@ export const InputBaseFlexWrapper = React.forwardRef<
   React.ElementRef<typeof Primitive.div>,
   React.ComponentPropsWithoutRef<typeof Primitive.div>
 >(({ className, ...props }, ref) => (
-  <Primitive.div ref={ref} className={cn("flex flex-1 flex-wrap", className)} {...props} />
+  <Div ref={ref} className={cn("flex flex-1 flex-wrap", className)} {...props} />
 ));
 InputBaseFlexWrapper.displayName = "InputBaseFlexWrapper";
 
@@ -147,7 +150,7 @@ export const InputBaseInput = React.forwardRef<
   React.ElementRef<typeof Primitive.input>,
   React.ComponentPropsWithoutRef<typeof Primitive.input>
 >(({ className, ...props }, ref) => (
-  <Primitive.input
+  <Input
     ref={ref}
     className={cn(
       "w-full flex-1 bg-transparent file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus:outline-none disabled:pointer-events-none",

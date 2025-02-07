@@ -7,9 +7,9 @@ import { items } from "@/lib/design-sidebar-items";
 
 import { motion } from "framer-motion";
 
-type DesignTemplateProps = {
+type DesignTemplateProps = Readonly<{
   children: ReactNode;
-};
+}>;
 
 export default function DesignTemplate({ children }: DesignTemplateProps): ReactNode {
   const { previousPath, currentPath } = usePath();
