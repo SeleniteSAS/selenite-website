@@ -3,7 +3,7 @@ import { Orbitron, Poppins } from "next/font/google";
 
 export const poppins: NextFontWithVariable = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   style: ["normal"],
   display: "swap",
   variable: "--poppins",
