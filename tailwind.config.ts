@@ -1,3 +1,5 @@
+import vmPlugin from "./src/lib/tailwind-wm";
+
 import type { Config } from "tailwindcss";
 import animatePlugin from "tailwindcss-animate";
 
@@ -72,7 +74,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [animatePlugin],
+  plugins: [animatePlugin, vmPlugin],
 };
 
 export default config;

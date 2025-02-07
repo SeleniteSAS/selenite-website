@@ -9,9 +9,26 @@ import { Fragment, type ReactNode, type RefObject, useEffect, useRef } from "rea
 import Lenis from "lenis";
 import { useControls } from "leva";
 import { DirectionalLightHelper, type PerspectiveCamera as PC, TextureLoader } from "three";
+import { useLoaderStore, type LoaderState } from "@/store/3d-store";
 
 export default function Moon(): ReactNode {
-  const [color, normal] = useLoader(TextureLoader, ["/textures/moon/moon-color.png", "/textures/moon/moon-normal.png"]);
+  const setLoaded = useLoaderStore((state: LoaderState) => state.setMoonLoaded);
+  const setProgress = useLoaderStore((state: LoaderState) => state.setMoonProgress);
+
+  const [color, normal] = useLoader(
+    TextureLoader,
+    ["/textures/moon/moon-color.webp", "/textures/moon/moon-normal.webp"],
+    (loader: TextureLoader): void => {
+      loader.manager.onProgress = (_: string, loaded: number, total: number): void => {
+        const progress: number = (loaded / total) * 100;
+        setProgress(progress);
+      };
+
+      loader.manager.onLoad = (): void => {
+        setLoaded(true);
+      };
+    },
+  );
 
   const cameraRef: RefObject<PC> = useRef<PC>(null);
   const lightRef = useRef(null);
@@ -162,7 +179,13 @@ export default function Moon(): ReactNode {
         makeDefault={true}
       />
       <EffectComposer>
-        <Bloom mipmapBlur intensity={bloomIntensity} radius={bloomRadius} luminanceThreshold={bloomThreshold} />
+        <Bloom
+          mipmapBlur
+          intensity={bloomIntensity}
+          radius={bloomRadius}
+          luminanceThreshold={bloomThreshold}
+          kernelSize={5}
+        />
       </EffectComposer>
     </Fragment>
   );

@@ -22,7 +22,10 @@ export default function Header(): ReactNode {
   return (
     <header className={cn("sticky left-0 top-12 z-50 my-12 h-16 w-full")}>
       <div
-        className={cn("mx-auto flex h-16 justify-between px-24 transition-[padding]", state === "expanded" && "px-8")}
+        className={cn(
+          "mx-auto flex h-16 justify-between px-6 transition-[padding] sm:px-12 md:px-24",
+          state === "expanded" && "px-8",
+        )}
       >
         <Link href={env.NEXT_PUBLIC_ROOT_URL} className="flex h-fit items-center font-orbitron text-2xl">
           <Image

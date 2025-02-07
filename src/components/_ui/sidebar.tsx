@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/_ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/_ui/tooltip";
 
 import { useIsMobile } from "@/hooks/use-mobile";
+import { domain, useSecureCookies } from "@/lib/cookies";
 import { cn } from "@/lib/utils";
 
 import { VariantProps, cva } from "class-variance-authority";
@@ -67,8 +68,7 @@ const SidebarProvider = React.forwardRef<
 
       _setOpen(value);
 
-      // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+      document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}; SameSite=Lax; domain=${domain} ${useSecureCookies ? "; Secure" : ""}`;
     },
     [setOpenProp, open],
   );
