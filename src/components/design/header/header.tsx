@@ -20,20 +20,20 @@ export default function Header(): ReactNode {
   const flattenItems = Object.values(items).flat();
 
   return (
-    <header className={cn("sticky left-0 top-12 z-50 my-12 h-16 w-full")}>
+    <header className={cn("sticky left-0 top-6 z-50 my-6 h-16 w-full md:top-12 md:my-12")}>
       <div
         className={cn(
           "mx-auto flex h-16 justify-between px-6 transition-[padding] sm:px-12 md:px-24",
           state === "expanded" && "px-8",
         )}
       >
-        <Link href={env.NEXT_PUBLIC_ROOT_URL} className="flex h-fit items-center font-orbitron text-2xl">
+        <Link href={env.NEXT_PUBLIC_ROOT_URL} className="flex h-fit items-center font-orbitron text-xl sm:text-2xl">
           <Image
             src={"/images/studio-logo.png"}
             alt={"SELENITE STUDIO"}
             width={64}
             height={64}
-            className={"relative size-16 rounded"}
+            className={"relative size-12 rounded md:size-16"}
           />
           <span className="relative ml-4 text-black">SELENITE STUDIO</span>
         </Link>

@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 
 import BoldCopy from "@/components/_animate/bold-copy";
 import FallingText from "@/components/_animate/falling-text";
+import MirrorText from "@/components/_animate/mirror-text";
 import SpotlightCard from "@/components/_animate/spotlight-card";
 import TextPressure from "@/components/_animate/text-pressure";
 import Waves from "@/components/_animate/waves";
 
 import { cn } from "@/lib/utils";
-import MirrorText from "@/components/_animate/mirror-text";
 
 type ContainerProps = { children: ReactNode; className?: string };
 
@@ -77,14 +77,16 @@ export function PoppinsDisplayThree() {
 }
 
 export function OrbitronDisplayOne() {
-  return <Container>
-    <MirrorText 
-      text="welcome to selenite"
-      className="text-[2rem] uppercase font-orbitro text-center font-semibold leading-9"
-      direction="down"
-      containerClassName=" w-full h-full flex items-center justify-center flex-col"
-    />
-  </Container>;
+  return (
+    <Container>
+      <MirrorText
+        text="welcome to selenite"
+        className="font-orbitro text-center text-[2rem] font-semibold uppercase leading-9"
+        direction="down"
+        containerClassName=" w-full h-full flex items-center justify-center flex-col"
+      />
+    </Container>
+  );
 }
 
 export function OrbitronDisplayTwo() {

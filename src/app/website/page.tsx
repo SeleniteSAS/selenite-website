@@ -1,12 +1,12 @@
-import { lazy, type ReactNode } from "react";
+import { type ReactNode, lazy } from "react";
 
 import Link from "next/link";
 
 import Canvas from "@/components/website/canvas/canvas";
 import Clock from "@/components/website/clock/clock";
+import SpaceShip from "@/components/website/spaceship/spaceship";
 
 import { env } from "@/lib/env";
-import SpaceShip from "@/components/website/spaceship/spaceship";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
 
@@ -57,7 +57,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </div>
       <div className="h-screen"></div>
-      <div className="font-orbitron fixed bottom-8 left-8 text-lg">
+      <div className="fixed bottom-8 left-8 font-orbitron text-lg">
         DEVELOPED BY
         <br />
         <Link

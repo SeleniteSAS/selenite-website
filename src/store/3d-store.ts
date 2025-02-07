@@ -1,6 +1,6 @@
 "use client";
 
-import { create, StoreApi, UseBoundStore } from "zustand";
+import { StoreApi, UseBoundStore, create } from "zustand";
 
 export interface LoaderState {
   isMooonLoaded: boolean;
