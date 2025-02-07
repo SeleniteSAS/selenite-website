@@ -177,12 +177,10 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
       <h1
         ref={titleRef}
-        className={`text-pressure-title ${className} ${
-          flex ? "flex justify-between" : ""
-        } ${stroke ? "stroke" : ""} text-center uppercase`}
+        className={`text-pressure-title ${className} ${flex ? "flex justify-between" : ""} ${stroke ? "stroke" : ""} text-center uppercase`}
         style={{
           fontFamily,
-          fontSize: fontSize,
+          fontSize,
           lineHeight,
           transform: `scale(1, ${scaleY})`,
           transformOrigin: "center top",
@@ -192,9 +190,9 @@ const TextPressure: React.FC<TextPressureProps> = ({
         }}
       >
         {chars.map((char, i) => (
-          <span key={i} ref={(el) => (spansRef.current[i] = el)} data-char={char} className="inline-block">
-            {char}
-          </span>
+          <span key={i} ref={(el) => { spansRef.current[i] = el; }} data-char={char} className="inline-block">
+          {char}
+        </span>
         ))}
       </h1>
     </div>
