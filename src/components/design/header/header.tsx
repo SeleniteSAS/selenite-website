@@ -20,7 +20,7 @@ export default function Header(): ReactNode {
   const flattenItems = Object.values(items).flat();
 
   return (
-    <header className={cn("sticky left-0 top-6 md:top-12 z-50 my-6 md:my-12 h-16 w-full")}>
+    <header className={cn("sticky left-0 top-6 z-50 my-6 h-16 w-full md:top-12 md:my-12")}>
       <div
         className={cn(
           "mx-auto flex h-16 justify-between px-6 transition-[padding] sm:px-12 md:px-24",
@@ -33,7 +33,7 @@ export default function Header(): ReactNode {
             alt={"SELENITE STUDIO"}
             width={64}
             height={64}
-            className={"relative size-12 md:size-16 rounded"}
+            className={"relative size-12 rounded md:size-16"}
           />
           <span className="relative ml-4 text-black">SELENITE STUDIO</span>
         </Link>

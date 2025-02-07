@@ -21,7 +21,7 @@ export default function DesignMainPage({ children }: DesignLayoutProps): ReactNo
     >
       <PathProvider>
         <LenisProvider>
-          <div className="min-h-screen w-full bg-white overflow-hidden">
+          <div className="min-h-screen w-full overflow-hidden bg-white">
             <Header />
             <div className="transition-[padding]">{children}</div>
           </div>

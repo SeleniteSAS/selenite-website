@@ -6,10 +6,11 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useLenis } from "lenis/react";
 import { Fragment, type ReactNode, type RefObject, useEffect, useRef } from "react";
 
+import { type LoaderState, useLoaderStore } from "@/store/3d-store";
+
 import Lenis from "lenis";
 import { useControls } from "leva";
 import { DirectionalLightHelper, type PerspectiveCamera as PC, TextureLoader } from "three";
-import { useLoaderStore, type LoaderState } from "@/store/3d-store";
 
 export default function Moon(): ReactNode {
   const setLoaded = useLoaderStore((state: LoaderState) => state.setMoonLoaded);

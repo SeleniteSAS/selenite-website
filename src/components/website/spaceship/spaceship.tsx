@@ -1,10 +1,11 @@
 "use client";
 
 import { useGLTF } from "@react-three/drei";
-import { GLTF } from "three-stdlib";
 import { ObjectMap, useFrame } from "@react-three/fiber";
 import { Fragment, useEffect, useState } from "react";
+
 import * as THREE from "three";
+import { GLTF } from "three-stdlib";
 
 export default function SpaceShip() {
   const spaceship: GLTF & ObjectMap = useGLTF("/sources/spaceship.glb");

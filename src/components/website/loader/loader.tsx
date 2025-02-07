@@ -1,8 +1,10 @@
 "use client";
 
-import { useLoaderStore, type LoaderState } from "@/store/3d-store";
-import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
+import { useEffect, useState } from "react";
+
+import { type LoaderState, useLoaderStore } from "@/store/3d-store";
+
 import Lenis from "lenis";
 
 export default function Loader() {
@@ -14,7 +16,7 @@ export default function Loader() {
   const [startTime] = useState<number>(Date.now());
 
   const [currentTime, setCurrentTime] = useState<number>(Date.now());
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
@@ -52,10 +54,9 @@ export default function Loader() {
   }, [isLoaded, startTime]);
 
   useEffect((): void => {
-    if(isDisplayed) return;
-    
-    document.body.classList.add('is-loaded');
+    if (isDisplayed) return;
 
+    document.body.classList.add("is-loaded");
   }, [isDisplayed]);
 
   if (!isDisplayed) {
@@ -76,7 +77,7 @@ export default function Loader() {
           {/* Percentage in the form 001% or 100%*/}
           <p className="font-orbitron text-2xl">{progress.toString().padStart(3, "0")}%</p>
 
-          <p className="font-orbitron flex justify-center text-2xl leading-none">
+          <p className="flex justify-center font-orbitron text-2xl leading-none">
             {`${Math.floor((currentTime - startTime) / 60000)
               .toString()
               .padStart(2, "0")}:${Math.floor(((currentTime - startTime) % 60000) / 1000)
