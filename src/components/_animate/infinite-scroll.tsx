@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
+import { randomUUID } from "node:crypto";
 
 gsap.registerPlugin(Observer);
 
@@ -11,23 +12,19 @@ interface InfiniteScrollItem {
   content: React.ReactNode;
 }
 
-interface InfiniteScrollProps {
-  // ----- Layout / Style Props -----
-  width?: string; // Width of the outer wrapper
-  maxHeight?: string; // Max-height of the outer wrapper
-  negativeMargin?: string; // Negative margin to reduce spacing between items
-  // ----- Items Prop -----
-  items?: InfiniteScrollItem[]; // Array of items with { content: ... }
-  itemMinHeight?: number; // Fixed height for each item
-  // ----- Tilt Props -----
-  isTilted?: boolean; // Whether the container is in "skewed" perspective
-  tiltDirection?: "left" | "right"; // tiltDirection: "left" or "right"
-  // ----- Autoplay Props -----
-  autoplay?: boolean; // Whether it should automatically scroll
-  autoplaySpeed?: number; // Speed (pixels/frame approx.)
-  autoplayDirection?: "down" | "up"; // "down" or "up"
-  pauseOnHover?: boolean; // Pause autoplay on hover
-}
+type InfiniteScrollProps = Readonly<{
+  width?: string;
+  maxHeight?: string;
+  negativeMargin?: string;
+  items?: InfiniteScrollItem[];
+  itemMinHeight?: number;
+  isTilted?: boolean;
+  tiltDirection?: "left" | "right";
+  autoplay?: boolean;
+  autoplaySpeed?: number;
+  autoplayDirection?: "down" | "up";
+  pauseOnHover?: boolean;
+}>;
 
 const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   width = "30rem",
@@ -233,8 +230,8 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
             transform: getTiltTransform(),
           }}
         >
-          {items.map((item, i) => (
-            <div className="infinite-scroll-item" key={i}>
+          {items.map((item) => (
+            <div className="infinite-scroll-item" key={randomUUID()}>
               {item.content}
             </div>
           ))}

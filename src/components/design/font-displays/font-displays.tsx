@@ -9,7 +9,7 @@ import Waves from "@/components/_animate/waves";
 
 import { cn } from "@/lib/utils";
 
-type ContainerProps = { children: ReactNode; className?: string };
+type ContainerProps = Readonly<{ children: ReactNode; className?: string }>;
 
 function Container({ children, className }: ContainerProps) {
   return (

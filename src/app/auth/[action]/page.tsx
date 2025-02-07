@@ -9,10 +9,10 @@ import RegisterForm from "@/components/auth/register-form/register-form";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 
-type AuthActionPageProps = {
+type AuthActionPageProps = Readonly<{
   params: { action: string };
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}>;
 
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();

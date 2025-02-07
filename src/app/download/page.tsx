@@ -80,7 +80,7 @@ export default function DownloadPage(): ReactNode {
           <h1 className="mb-4 text-center font-orbitron text-2xl font-bold uppercase">Download Selenite</h1>
           {currentDownload && (
             <Link
-              href={currentDownload.url || "#"}
+              href={currentDownload.url ?? "#"}
               className={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full")}
               data-confetti={currentDownload.disabled ? "false" : "true"}
               data-disabled={currentDownload.disabled ? "true" : "false"}
@@ -98,7 +98,7 @@ export default function DownloadPage(): ReactNode {
             {rest.map((download) => (
               <Link
                 key={download.os}
-                href={download.url || "#"}
+                href={download.url ?? "#"}
                 className={cn(
                   buttonVariants({ variant: "default", size: "sm" }),
                   "w-full",

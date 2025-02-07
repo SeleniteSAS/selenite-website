@@ -12,7 +12,6 @@ import { orbitron, poppins } from "@/lib/fonts";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
-  // TODO : remove this robots when the site is ready to be indexed
   robots: "noindex, nofollow",
 };
 

@@ -7,10 +7,10 @@ import { Logo, Text } from "@/components/common/logo/logo";
 import variants from "@/lib/design-logo-items";
 import { cn } from "@/lib/utils";
 
-type LogoDisplayProps = {
+type LogoDisplayProps = Readonly<{
   logo: "meatball" | "text";
   title: string;
-};
+}>;
 
 export default function LogoDisplay({ logo, title }: LogoDisplayProps) {
   const [current, setCurrent] = useState(0);
@@ -22,15 +22,18 @@ export default function LogoDisplay({ logo, title }: LogoDisplayProps) {
       <div className="flex flex-1 items-center justify-center space-x-48">
         <ul className="flex h-full flex-col items-center justify-center gap-8">
           {variants.map((variant, i) => {
-            const color: string =
-              "mainColor" in variant
-                ? variant.mainColor !== "#000000" && variant.mainColor !== "#FFFFFF"
-                  ? variant.mainColor
-                  : variant.secondaryColor
-                : variant.color;
+            let color: string;
+
+            if ("mainColor" in variant) {
+              color = variant.mainColor !== "#000000" && variant.mainColor !== "#FFFFFF"
+                ? variant.mainColor
+                : variant.secondaryColor;
+            } else {
+              color = variant.color;
+            }
 
             return (
-              <li key={i}>
+              <li key={variant.name}>
                 <button className="relative" onClick={() => handleChange(i)}>
                   <div
                     className={cn(

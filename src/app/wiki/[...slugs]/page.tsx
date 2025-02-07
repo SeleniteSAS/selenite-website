@@ -14,11 +14,11 @@ import { getArticleBySlug, getParentArticles } from "@/services/wiki-articles/wi
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
-type WikiPageProps = {
+type WikiPageProps = Readonly<{
   params: {
     slugs: string[];
   };
-};
+}>;
 
 export async function generateMetadata({ params: { slugs } }: WikiPageProps): Promise<Metadata> {
   const isEditMode: boolean = slugs.join("/").includes("/edit");

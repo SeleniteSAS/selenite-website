@@ -17,7 +17,6 @@ export default function Sidebar(): ReactNode {
   const pathname: string = usePathname();
 
   return (
-    <Fragment>
       <ShadSidebar side="right" collapsible="offcanvas" className="border-0" variant="sidebar">
         <SidebarContent className="flex h-full">
           <ul className="flex h-full w-full flex-col bg-[#2E2334] font-poppins text-white">
@@ -73,6 +72,5 @@ export default function Sidebar(): ReactNode {
           </ul>
         </SidebarContent>
       </ShadSidebar>
-    </Fragment>
   );
 }

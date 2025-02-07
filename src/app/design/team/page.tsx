@@ -75,9 +75,9 @@ const teamMembers: TeamMember[] = [
 
 export default function TeamPage() {
 
-  const elements: JSX.Element[] = teamMembers.map((member, index) => (
+  const elements: JSX.Element[] = teamMembers.map((member) => (
     <div
-      key={index}
+      key={member.name}
       className="flex flex-col items-center gap-4 rounded-md border border-input p-4 md:flex-row"
       suppressHydrationWarning={true}
     >
@@ -122,8 +122,8 @@ export default function TeamPage() {
           )}
         </ul>
         <BadgeGroup type="single" className="flex-col">
-          {member.roles.map((role, index) => (
-            <BadgeGroupItem key={index} value={role} className="justify-center">
+          {member.roles.map((role) => (
+            <BadgeGroupItem key={role} value={role} className="justify-center">
               {role}
             </BadgeGroupItem>
           ))}

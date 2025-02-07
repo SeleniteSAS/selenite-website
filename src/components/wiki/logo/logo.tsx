@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { Logo as DefaultLogo } from "@/components/common/logo/logo";
 
-type LogoProps = Omit<ComponentProps<typeof DefaultLogo>, "mainColor" | "secondaryColor">;
+type LogoProps = Readonly<Omit<ComponentProps<typeof DefaultLogo>, "mainColor" | "secondaryColor">>;
 
 const light: [string, string] = ["#CDCDCD", "#BDBDBD"];
 const dark: [string, string] = ["#666666", "#888888"];

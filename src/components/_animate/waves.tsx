@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 
 class Grad {
-  private x: number;
-  private y: number;
-  private z: number;
+  private readonly x: number;
+  private readonly y: number;
+  private readonly z: number;
 
   constructor(x: number, y: number, z: number) {
     this.x = x;
@@ -92,7 +92,7 @@ class Noise {
   }
 }
 
-interface WavesProps {
+type WavesProps = Readonly<{
   lineColor?: string;
   backgroundColor?: string;
   waveSpeedX?: number;
@@ -106,7 +106,7 @@ interface WavesProps {
   maxCursorMove?: number;
   style?: React.CSSProperties;
   className?: string;
-}
+}>;
 
 interface Points {
   x: number;

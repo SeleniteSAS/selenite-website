@@ -16,7 +16,7 @@ import { LoginSchema, loginSchema } from "@/schemas/auth";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type AuthLoginFormProps = { redirectTo?: string };
+type AuthLoginFormProps = Readonly<{ redirectTo?: string }>;
 
 export default function LoginForm({ redirectTo }: AuthLoginFormProps): ReactNode {
   const { toast } = useToast();

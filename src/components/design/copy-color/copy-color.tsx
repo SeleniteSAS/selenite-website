@@ -6,10 +6,10 @@ import { ContextMenuItem } from "@/components/_ui/context-menu";
 
 import { useToast } from "@/hooks/use-toast";
 
-type ContextMenuItemColorCopyProps = {
+type ContextMenuItemColorCopyProps = Readonly<{
   color: string;
   label: string;
-};
+}>;
 
 export default function ContextMenuItemColorCopy({ color, label }: ContextMenuItemColorCopyProps): JSX.Element {
   const { toast } = useToast();

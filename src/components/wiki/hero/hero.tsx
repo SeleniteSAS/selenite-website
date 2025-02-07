@@ -1,8 +1,8 @@
-type HeroProps = {
+type HeroProps = Readonly<{
   title: string;
   subtitle: string;
   description: string;
-};
+}>;
 
 export default function Hero({ title, subtitle, description }: HeroProps) {
   return (

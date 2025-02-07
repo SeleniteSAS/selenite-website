@@ -3,9 +3,9 @@
 import ReactLenis from "lenis/react";
 import type { ReactNode } from "react";
 
-type LenisProviderProps = {
+type LenisProviderProps = Readonly<{
   children: ReactNode;
-};
+}>;
 
 export default function LenisProvider({ children }: LenisProviderProps): ReactNode {
   return <ReactLenis root>{children}</ReactLenis>;
