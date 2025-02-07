@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: RootLayoutProps): Promise
   const messages: AbstractIntlMessages = await getMessages();
 
   return (
-    <html lang={locale} dir="ltr">
+    <html lang={locale} dir="ltr" suppressHydrationWarning={true}>
       <body
         className={`antialiased ${poppins.variable} ${orbitron.variable} bg-black text-white`}
         suppressHydrationWarning={true}

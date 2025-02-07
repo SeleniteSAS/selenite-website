@@ -70,3 +70,23 @@ export async function createArticle(data: {
     },
   });
 }
+
+export async function getArticleSlug(id: string): Promise<string | null> {
+  const article = await prisma.article.findUnique({ where: { id } });
+  return article ? article.slug : null;
+}
+
+export async function getChildArticlesBySlug(slug: string): Promise<Article[]> {
+  return prisma.article.findMany({
+    where: {
+      slug: {
+        startsWith: `${slug}/`,
+        not: slug,
+      },
+    },
+  });
+}
+
+export async function getHomePageArticle(): Promise<Article | null> {
+  return prisma.article.findFirst({ where: { slug: "home" } });
+}

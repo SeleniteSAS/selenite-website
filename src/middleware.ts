@@ -7,30 +7,23 @@ import { buildSubdomainUrl, getSubdomains, isValidSubdomain } from "@/services/s
 import { Subdomain } from "@/types/subdomain";
 
 export const config: MiddlewareConfig = {
-  matcher: ["/((?!api/|_next/|images/|textures/|sources/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
+  matcher: ["/((?!api/|_next/|images/|textures/|sources/|icones/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
 };
 
 async function subdomains(req: NextRequest): Promise<NextResponse> {
   const requestUrl: NextURL = req.nextUrl;
-  const hostname: string | undefined = req.headers
-    .get("host")
-    ?.replace("localhost:3000", `${new URL(env.NEXT_PUBLIC_ROOT_URL).hostname}`);
+  const rootHostname = new URL(env.NEXT_PUBLIC_ROOT_URL).hostname;
+  const hostname = req.headers.get("host")?.replace("localhost:3000", rootHostname) ?? "";
 
-  const params: string = requestUrl.searchParams.toString();
-  const path: string = `${requestUrl.pathname}${params.length > 0 ? `?${params}` : ""}`;
-
-  if (!hostname) throw new Error("No hostname found");
+  if (!hostname) throw new Error("No hostname found in request");
 
   const subdomains: Subdomain[] = getSubdomains();
+  const subdomain = subdomains.find((sub) => isValidSubdomain(sub, hostname)) ?? subdomains[0];
 
-  for (const subdomain of subdomains) {
-    if (isValidSubdomain(subdomain, hostname))
-      return NextResponse.rewrite(buildSubdomainUrl(subdomain, path, requestUrl.href));
-  }
-
-  return NextResponse.rewrite(buildSubdomainUrl(subdomains[0], path, requestUrl.href));
+  return NextResponse.rewrite(buildSubdomainUrl(subdomain, requestUrl.pathname + requestUrl.search, requestUrl.href));
 }
 
-const middleware = process.env.NODE_ENV === "production" ? auth(subdomains) : subdomains;
+const isProduction = process.env.NODE_ENV === "production";
+const middleware = isProduction ? auth(subdomains) : subdomains;
 
 export default middleware;

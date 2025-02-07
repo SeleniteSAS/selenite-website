@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "lucide-react";
-import { JSX } from "react";
+import type { JSX } from "react";
 
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ export default async function SidebarMenu(): Promise<JSX.Element> {
   return (
     <>
       {navigationItems.map(({ title, items }: WikiNavigation) => (
-        <SidebarGroup key={title}>
+        <SidebarGroup key={title} className="px-0">
           <SidebarGroupLabel>{title}</SidebarGroupLabel>
           <SidebarMenuComponent>
             {items.map((item: WikiNavigationGroup) => (

@@ -15,14 +15,21 @@ type WikiIconPickerProps = HTMLAttributes<HTMLInputElement> & { value: string; o
 const IconPicker = (props: WikiIconPickerProps) => {
   return (
     <Popover>
-      <PopoverTrigger asChild={true}>
+      <PopoverTrigger asChild={true} className="text-foreground">
         <FormControl>
-          <Button variant="outline" role="combobox" className="flex items-center justify-center" size={"icon"}>
+          <Button variant="outline" role="combobox" className="flex w-[300px] items-center justify-start">
             <Icon name={props.value} />
+            <span className="capitalize">
+              {props.value
+                .replace(/([A-Z])/g, " $1")
+                .replace(/^-/, "")
+                .replace("Icon", "")
+                .replaceAll("-", " ") || "Select icon"}
+            </span>
           </Button>
         </FormControl>
       </PopoverTrigger>
-      <PopoverContent className="w-[250px] p-0">
+      <PopoverContent className="w-[300px] p-0" align="start" side="bottom">
         <Command>
           <CommandInput placeholder={"Search icon"} />
           <CommandList>
@@ -43,7 +50,7 @@ const IconPicker = (props: WikiIconPickerProps) => {
                   return (
                     <CommandItem key={i} onSelect={() => props.onChange(iconName)}>
                       <Icon name={iconName} />
-                      {name.replace("Icon", "")}
+                      <span className="capitalize">{iconName.replaceAll("-", " ")}</span>
                     </CommandItem>
                   );
                 }
