@@ -43,7 +43,10 @@ export default function FontSection({ fontClass, fontName, isVariable, children,
 
   const fontFormSchema = z.object({
     fontsize: z.number().min(10).max(60),
-    wght: z.number().min(100).max(900),
+    wght: z
+      .number()
+      .min(fontName === "Orbitron" ? 400 : 100)
+      .max(900),
     weight: z.number(),
   });
 
@@ -108,7 +111,7 @@ export default function FontSection({ fontClass, fontName, isVariable, children,
                     </FormLabel>
                     <FormControl>
                       <Slider
-                        min={100}
+                        min={fontName === "Orbitron" ? 400 : 100}
                         max={900}
                         step={50}
                         defaultValue={[field.value]}
@@ -132,7 +135,10 @@ export default function FontSection({ fontClass, fontName, isVariable, children,
                 render={({ field }) => (
                   <FormItem className="flex items-center gap-4">
                     <FormControl>
-                      <Select defaultValue={`${field.value}`}>
+                      <Select
+                        defaultValue={`${field.value}`}
+                        onValueChange={(value) => form.setValue("weight", parseInt(value))}
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="Font Weight :" />
                         </SelectTrigger>
@@ -162,7 +168,7 @@ export default function FontSection({ fontClass, fontName, isVariable, children,
             className={cn("h-full text-center text-sm", fontClass)}
             style={{
               fontSize: `${form.watch("fontsize")}px`,
-              fontWeight: form.watch("wght"),
+              fontWeight: isVariable?.wght ? form.watch("wght") : form.watch("weight"),
               lineHeight: 1,
             }}
           >
