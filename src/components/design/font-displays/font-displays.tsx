@@ -32,7 +32,7 @@ export function PoppinsDisplayOne() {
         spotlightColor="rgba(0, 229, 229, 0.3)"
       >
         <p className="text-center text-2xl font-bold text-white">
-          This is our writing font. It's a sans-serif typeface that's designed to be easy to read on screens.
+          This is our writing font. It&apos;s a sans-serif typeface that&apos;s designed to be easy to read on screens.
         </p>
       </SpotlightCard>
     </Container>

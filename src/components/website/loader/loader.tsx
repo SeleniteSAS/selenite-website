@@ -4,7 +4,6 @@ import { useLoaderStore, type LoaderState } from "@/store/3d-store";
 import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
 import Lenis from "lenis";
-import { usePathname } from "next/navigation";
 
 export default function Loader() {
   const progress: number = useLoaderStore((state: LoaderState): number => state.moonProgress);

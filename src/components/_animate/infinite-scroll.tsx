@@ -138,7 +138,9 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       } else {
         return () => {
           observer.kill();
-          rafId && cancelAnimationFrame(rafId);
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+          }
         };
       }
     }

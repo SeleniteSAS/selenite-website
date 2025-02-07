@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import Canvas from "@/components/website/canvas/canvas";
 import Clock from "@/components/website/clock/clock";
-import Loader from "@/components/website/loader/loader";
 
 import { env } from "@/lib/env";
 import SpaceShip from "@/components/website/spaceship/spaceship";
