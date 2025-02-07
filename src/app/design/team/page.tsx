@@ -4,7 +4,7 @@ import { Fragment, type JSX } from "react";
 import { Marquee } from "@/components/_animate/marquee";
 import { BadgeGroup, BadgeGroupItem } from "@/components/_ui/badge-group";
 import Hero from "@/components/wiki/hero/hero";
-import { AnchorIcon, GithubIcon, LinkedinIcon, LinkIcon } from "lucide-react";
+import { GithubIcon, LinkedinIcon, LinkIcon } from "lucide-react";
 import { buttonVariants } from "@/components/_ui/button";
 
 type TeamMember = {
