@@ -6,7 +6,7 @@ type HeroProps = {
 
 export default function Hero({ title, subtitle, description }: HeroProps) {
   return (
-    <section className="flex h-[calc(100vh-10rem)] w-full flex-col items-start justify-center px-6 pb-32 font-poppins text-black md:px-24">
+    <section className="flex h-screen w-full flex-col items-start justify-center px-6 font-poppins text-black md:px-24">
       <div>
         <div className="flex flex-col items-center gap-8 px-8 md:flex-row">
           <h1 className="text-2xl font-bold uppercase md:text-xl md:wm-vertical">{title}</h1>

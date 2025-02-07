@@ -16,11 +16,14 @@ import { cn } from "@/lib/utils";
 export default function Header(): ReactNode {
   const { toggleSidebar, state } = useSidebar();
   const pathname: string = usePathname();
-
   const flattenItems = Object.values(items).flat();
 
   return (
-    <header className={cn("sticky left-0 top-6 z-50 my-6 h-16 w-full md:top-12 md:my-12")}>
+    <header className={cn("fixed left-0 top-6 z-50 h-16 w-full md:top-12 transition-[width]")}
+      style={{
+        width: state === "expanded" ? "calc(100% - var(--sidebar-width))" : "100%",
+      }}
+    >
       <div
         className={cn(
           "mx-auto flex h-16 justify-between px-6 transition-[padding] sm:px-12 md:px-24",

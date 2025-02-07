@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { GithubIcon, LinkIcon, LinkedinIcon } from "lucide-react";
 import { Fragment, type JSX } from "react";
 
 import { Marquee } from "@/components/_animate/marquee";
 import { BadgeGroup, BadgeGroupItem } from "@/components/_ui/badge-group";
-import Hero from "@/components/wiki/hero/hero";
-import { GithubIcon, LinkedinIcon, LinkIcon } from "lucide-react";
 import { buttonVariants } from "@/components/_ui/button";
+import Hero from "@/components/wiki/hero/hero";
 
 type TeamMember = {
   name: string;
@@ -74,52 +74,64 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function TeamPage() {
-  const elements: JSX.Element[] = teamMembers
-    .sort(() => Math.random() - 0.5)
-    .map((member, index) => (
-      <div key={index} className="flex flex-col items-center gap-4 rounded-md border border-input p-4 md:flex-row">
-        <div>
-          <h3 className="mb-4 text-center text-2xl">{member.name}</h3>
-          <ul className="flex items-center justify-center gap-2 mb-4">
-            {member.links?.portfolio && (
-              <li>
-                <a href={member.links.portfolio} target="_blank" rel="noreferrer"
-                  className={buttonVariants({ variant: "default", size: "icon"})}
-                >
-                  <LinkIcon />
-                </a>
-              </li>
-            )}
-            {member.links?.github && (
-              <li>
-                <a href={member.links.github} target="_blank" rel="noreferrer"
-                  className={buttonVariants({ variant: "default", size: "icon"})}
-                >
-                  <GithubIcon />
-                </a>
-              </li>
-            )}
-            {member.links?.linkedin && (
-              <li>
-                <a href={member.links.linkedin} target="_blank" rel="noreferrer"
-                  className={buttonVariants({ variant: "default", size: "icon"})}
-                >
-                  <LinkedinIcon />
-                </a>
-              </li>
-            )}
-          </ul>
-          <BadgeGroup type="single" className="flex-col">
-            {member.roles.map((role, index) => (
-              <BadgeGroupItem key={index} value={role} className="justify-center">
-                {role}
-              </BadgeGroupItem>
-            ))}
-          </BadgeGroup>
-        </div>
-        <img src={member.gif} alt={member.name} className="h-40 rounded-sm" />
+
+  const elements: JSX.Element[] = teamMembers.map((member, index) => (
+    <div
+      key={index}
+      className="flex flex-col items-center gap-4 rounded-md border border-input p-4 md:flex-row"
+      suppressHydrationWarning={true}
+    >
+      <div>
+        <h3 className="mb-4 text-center text-2xl">{member.name}</h3>
+        <ul className="mb-4 flex items-center justify-center gap-2">
+          {member.links?.portfolio && (
+            <li>
+              <a
+                href={member.links.portfolio}
+                target="_blank"
+                rel="noreferrer"
+                className={buttonVariants({ variant: "default", size: "icon" })}
+              >
+                <LinkIcon />
+              </a>
+            </li>
+          )}
+          {member.links?.github && (
+            <li>
+              <a
+                href={member.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className={buttonVariants({ variant: "default", size: "icon" })}
+              >
+                <GithubIcon />
+              </a>
+            </li>
+          )}
+          {member.links?.linkedin && (
+            <li>
+              <a
+                href={member.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className={buttonVariants({ variant: "default", size: "icon" })}
+              >
+                <LinkedinIcon />
+              </a>
+            </li>
+          )}
+        </ul>
+        <BadgeGroup type="single" className="flex-col">
+          {member.roles.map((role, index) => (
+            <BadgeGroupItem key={index} value={role} className="justify-center">
+              {role}
+            </BadgeGroupItem>
+          ))}
+        </BadgeGroup>
       </div>
-    ));
+      <img src={member.gif} alt={member.name} className="h-40 rounded-sm" />
+    </div>
+  ));
 
   return (
     <Fragment>
@@ -128,14 +140,16 @@ export default function TeamPage() {
         subtitle="Good teams create great work. Behind every idea, every design, every line of code, there's a collective effort—a balance of skill, passion, and vision. Strength comes from collaboration, innovation thrives on diversity, and success is built on trust."
         description="These are the people who shape our brand. Together, we turn ambition into reality."
       />
-      <section className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden font-poppins text-foreground">
-        <Marquee pauseOnHover={true} reverse={false}>
+      <section
+        className={`flex min-h-screen flex-col items-center justify-center overflow-hidden w-full font-poppins text-foreground`}
+      >
+        <Marquee pauseOnHover={true} reverse={false} className="w-full">
           {elements}
         </Marquee>
-        <Marquee reverse={true} pauseOnHover={true}>
+        <Marquee reverse={true} pauseOnHover={true} className="w-full">
           {elements}
         </Marquee>
-        <Marquee pauseOnHover={true} reverse={false}>
+        <Marquee pauseOnHover={true} reverse={false} className="w-full">
           {elements}
         </Marquee>
       </section>
