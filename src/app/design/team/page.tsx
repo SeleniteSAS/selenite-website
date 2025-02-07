@@ -70,7 +70,7 @@ export default function TeamPage() {
         subtitle="Good teams create great work. Behind every idea, every design, every line of code, there's a collective effort—a balance of skill, passion, and vision. Strength comes from collaboration, innovation thrives on diversity, and success is built on trust."
         description="These are the people who shape our brand. Together, we turn ambition into reality."
       />
-      <section className="flex min-h-screen w-full flex-col items-center justify-center font-poppins text-foreground">
+      <section className="flex min-h-screen w-full flex-col items-center justify-center font-poppins text-foreground overflow-hidden">
         <Marquee pauseOnHover={true} reverse={false}>
           {elements}
         </Marquee>
