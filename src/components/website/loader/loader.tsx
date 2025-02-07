@@ -1,20 +1,21 @@
 "use client";
 
-import { useLoaderStore, type LoaderState } from "@/store/moon-store";
+import { useLoaderStore, type LoaderState } from "@/store/3d-store";
 import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 
 export default function Loader() {
-  const progress: number = useLoaderStore((state: LoaderState): number => state.progress);
-  const isLoaded: boolean = useLoaderStore((state: LoaderState): boolean => state.isLoaded);
+  const progress: number = useLoaderStore((state: LoaderState): number => state.moonProgress);
+  const isLoaded: boolean = useLoaderStore((state: LoaderState): boolean => state.isMooonLoaded);
 
   const [isLoadingOver, setIsLoadingOver] = useState<boolean>(false);
   const [isDisplayed, setIsDisplayed] = useState<boolean>(true);
   const [startTime] = useState<number>(Date.now());
 
   const [currentTime, setCurrentTime] = useState<number>(Date.now());
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
@@ -50,6 +51,13 @@ export default function Loader() {
       }, delay + 500);
     }
   }, [isLoaded, startTime]);
+
+  useEffect((): void => {
+    if(isDisplayed) return;
+    
+    document.body.classList.add('is-loaded');
+
+  }, [isDisplayed]);
 
   if (!isDisplayed) {
     return null;

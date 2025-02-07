@@ -14,7 +14,7 @@ const Moon = lazy(() => import("@/components/website/moon/moon"));
 export default async function WebsitePage(): Promise<ReactNode> {
   return (
     <div className="mt-32 h-[400vh]">
-      <Loader />
+      {/* <Loader /> */}
       <div className="h-[300vh]">
         <div className="ml-16 flex items-center gap-2">
           <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
           </Canvas>
         </div>
       </div>
-      <div className="h-screen bg-blue-100"></div>
+      <div className="h-screen"></div>
       <div className="font-orbitron fixed bottom-8 left-8 text-lg">
         DEVELOPED BY
         <br />

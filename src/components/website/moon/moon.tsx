@@ -9,11 +9,11 @@ import { Fragment, type ReactNode, type RefObject, useEffect, useRef } from "rea
 import Lenis from "lenis";
 import { useControls } from "leva";
 import { DirectionalLightHelper, type PerspectiveCamera as PC, TextureLoader } from "three";
-import { useLoaderStore, type LoaderState } from "@/store/moon-store";
+import { useLoaderStore, type LoaderState } from "@/store/3d-store";
 
 export default function Moon(): ReactNode {
-  const setLoaded = useLoaderStore((state: LoaderState) => state.setLoaded);
-  const setProgress = useLoaderStore((state: LoaderState) => state.setProgress);
+  const setLoaded = useLoaderStore((state: LoaderState) => state.setMoonLoaded);
+  const setProgress = useLoaderStore((state: LoaderState) => state.setMoonProgress);
 
   const [color, normal] = useLoader(
     TextureLoader,
