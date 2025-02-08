@@ -25,9 +25,10 @@ export default function LogoDisplay({ logo, title }: LogoDisplayProps) {
             let color: string;
 
             if ("mainColor" in variant) {
-              color = variant.mainColor !== "#000000" && variant.mainColor !== "#FFFFFF"
-                ? variant.mainColor
-                : variant.secondaryColor;
+              color =
+                variant.mainColor !== "#000000" && variant.mainColor !== "#FFFFFF"
+                  ? variant.mainColor
+                  : variant.secondaryColor;
             } else {
               color = variant.color;
             }

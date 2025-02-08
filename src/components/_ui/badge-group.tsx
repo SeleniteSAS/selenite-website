@@ -5,16 +5,16 @@ import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { X } from "lucide-react";
 import {
+  type ComponentProps,
   type ComponentPropsWithoutRef,
+  ElementRef,
+  type ForwardedRef,
   type KeyboardEvent,
   type MouseEvent,
-  type ForwardedRef,
-  type ComponentProps,
   createContext,
   forwardRef,
   useContext,
   useMemo,
-  ElementRef,
 } from "react";
 
 import { cn } from "@/lib/utils";
@@ -154,10 +154,7 @@ export const BadgeGroupItem = forwardRef<
 BadgeGroupItem.displayName = "BadgeGroupItem";
 
 interface BadgeGroupItemImplProps extends ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> {
-  onRemove?: (
-    event: MouseEvent | KeyboardEvent,
-    reason: "closeClick" | "backspaceKeyDown" | "deleteKeyDown",
-  ) => void;
+  onRemove?: (event: MouseEvent | KeyboardEvent, reason: "closeClick" | "backspaceKeyDown" | "deleteKeyDown") => void;
 }
 
 const BadgeGroupItemImpl = forwardRef<ElementRef<typeof ToggleGroupPrimitive.Item>, BadgeGroupItemImplProps>(
