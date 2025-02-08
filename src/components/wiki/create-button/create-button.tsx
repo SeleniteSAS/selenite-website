@@ -8,7 +8,7 @@ import { useSidebar } from "@/components/_ui/sidebar";
 
 import { env } from "@/lib/env";
 
-type CreateButtonProps = Omit<ComponentProps<typeof Link>, "href">;
+type CreateButtonProps = Readonly<Omit<ComponentProps<typeof Link>, "href">>;
 
 export default function CreateButton(props: CreateButtonProps): ReactNode {
   const { setOpenMobile } = useSidebar();

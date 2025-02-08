@@ -27,13 +27,13 @@ import { Article } from "@/types/article";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type WikiMarkdownEditProps = {
+type WikiMarkdownEditProps = Readonly<{
   article: Article | null;
   parentArticles: {
     slug: string;
     title: string;
   }[];
-};
+}>;
 
 export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEditProps): JSX.Element {
   const [pending, startTransition] = useTransition();
@@ -135,7 +135,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
                 <Popover>
                   <PopoverTrigger asChild={true}>
                     <FormControl>
-                      <Button variant="outline" role="combobox" className="w-[300px] justify-between text-foreground">
+                      <Button variant="outline" className="w-[300px] justify-between text-foreground">
                         {field.value
                           ? `Wiki${
                               parentArticles.find((article) => article.slug === field.value)

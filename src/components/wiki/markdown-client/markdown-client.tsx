@@ -7,7 +7,7 @@ import markdownComponents from "@/components/common/markdown/markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
-type MarkdownClientProps = { children: string };
+type MarkdownClientProps = Readonly<{ children: string }>;
 
 export default function MarkdownClient({ children }: MarkdownClientProps): JSX.Element {
   return (

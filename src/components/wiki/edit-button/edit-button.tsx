@@ -10,7 +10,7 @@ import { useSidebar } from "@/components/_ui/sidebar";
 
 import { useToast } from "@/hooks/use-toast";
 
-type EditButtonProps = Omit<ComponentProps<typeof Link>, "href">;
+type EditButtonProps = Readonly<Omit<ComponentProps<typeof Link>, "href">>;
 
 export default function EditButton(props: EditButtonProps): ReactNode {
   const pathname: string = usePathname();
