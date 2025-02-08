@@ -20,8 +20,8 @@ interface TextPressureProps {
 }
 
 const TextPressure: React.FC<TextPressureProps> = ({
-  text = "Compressa",
-  fontFamily = "Compressa VF",
+  text = "Orbitron",
+  fontFamily = "Orbitron",
   width = true,
   weight = true,
   italic = true,
@@ -115,6 +115,11 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
   useEffect(() => {
     let rafId: number;
+    const getAttr = (distance: number, minVal: number, maxVal: number, maxDist: number) => {
+      const val = maxVal - Math.abs((maxVal * distance) / maxDist);
+      return Math.max(minVal, val + minVal);
+    };
+
     const animate = () => {
       mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
       mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
@@ -134,15 +139,12 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           const d = dist(mouseRef.current, charCenter);
 
-          const getAttr = (distance: number, minVal: number, maxVal: number) => {
-            const val = maxVal - Math.abs((maxVal * distance) / maxDist);
-            return Math.max(minVal, val + minVal);
-          };
 
-          const wdth = width ? Math.floor(getAttr(d, 5, 200)) : 100;
-          const wght = weight ? Math.floor(getAttr(d, 100, 900)) : 400;
-          const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : "0";
-          const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : "1";
+
+          const wdth = width ? Math.floor(getAttr(d, 5, 200, maxDist)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, 100, 900, maxDist)) : 400;
+          const italVal = italic ? getAttr(d, 0, 1, maxDist).toFixed(2) : "0";
+          const alphaVal = alpha ? getAttr(d, 0, 1, maxDist).toFixed(2) : "1";
 
           span.style.opacity = alphaVal;
           span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
@@ -191,7 +193,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
       >
         {chars.map((char, i) => (
           <span
-            key={i}
+            key={`${char}-${i}`}
             ref={(el) => {
               spansRef.current[i] = el;
             }}
