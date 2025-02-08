@@ -27,7 +27,7 @@ const FallingText: React.FC<FallingTextProps> = ({
   fontSize = "1rem",
   highlightClass = "",
 }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLButtonElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const canvasContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,7 +42,7 @@ const FallingText: React.FC<FallingTextProps> = ({
         const isHighlighted = highlightWords.some((hw) => word.startsWith(hw));
 
         const max = 50;
-        const fontSize = Math.max(12, max - word.length * 3); // Ajuste les valeurs 12 et 32 selon ton besoin
+        const fontSize = Math.max(12, max - word.length * 3);
 
         return `<span
       class="inline-block mx-[2px] select-none ${isHighlighted ? highlightClass : ""}"
@@ -93,7 +93,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     if (width <= 0 || height <= 0) return;
 
     const engine = Engine.create();
-    engine.world.gravity.y = gravity;
+    engine.gravity.y = gravity;
 
     const render = Render.create({
       element: canvasContainer,
@@ -193,7 +193,7 @@ const FallingText: React.FC<FallingTextProps> = ({
   };
 
   return (
-    <div
+    <button
       ref={containerRef}
       className="relative z-[1] h-full w-full cursor-pointer overflow-hidden pt-8 text-center"
       onClick={trigger === "click" ? handleTrigger : undefined}
@@ -209,7 +209,7 @@ const FallingText: React.FC<FallingTextProps> = ({
       />
 
       <div className="absolute left-0 top-0 z-0" ref={canvasContainerRef} />
-    </div>
+    </button>
   );
 };
 

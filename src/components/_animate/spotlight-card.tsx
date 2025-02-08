@@ -17,12 +17,12 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   className = "",
   spotlightColor = "rgba(255, 255, 255, 0.25)",
 }) => {
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLButtonElement>(null);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState<number>(0);
 
-  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleMouseMove: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (!divRef.current || isFocused) return;
 
     const rect = divRef.current.getBoundingClientRect();
@@ -48,7 +48,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   };
 
   return (
-    <div
+    <button
       ref={divRef}
       onMouseMove={handleMouseMove}
       onFocus={handleFocus}
@@ -65,7 +65,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
         }}
       />
       {children}
-    </div>
+    </button>
   );
 };
 
