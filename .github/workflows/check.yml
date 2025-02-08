@@ -39,7 +39,7 @@ jobs:
             fi
 
             curl -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{
                 "ref": "${{ github.ref }}",
