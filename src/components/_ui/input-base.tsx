@@ -39,12 +39,15 @@ export const InputBase = React.forwardRef<React.ElementRef<typeof Primitive.div>
 
     const controlRef = React.useRef<HTMLElement>(null);
 
-    const contextValue = React.useMemo(() => ({
-      autoFocus,
-      controlRef,
-      disabled,
-      onFocusedChange: setFocused,
-    }), [autoFocus, controlRef, disabled]);
+    const contextValue = React.useMemo(
+      () => ({
+        autoFocus,
+        controlRef,
+        disabled,
+        onFocusedChange: setFocused,
+      }),
+      [autoFocus, controlRef, disabled],
+    );
 
     return (
       <InputBaseContext.Provider value={contextValue}>
@@ -74,9 +77,7 @@ InputBase.displayName = "InputBase";
 export const InputBaseFlexWrapper = React.forwardRef<
   React.ElementRef<typeof Primitive.div>,
   React.ComponentPropsWithoutRef<typeof Primitive.div>
->(({ className, ...props }, ref) => (
-  <Div ref={ref} className={cn("flex flex-1 flex-wrap", className)} {...props} />
-));
+>(({ className, ...props }, ref) => <Div ref={ref} className={cn("flex flex-1 flex-wrap", className)} {...props} />);
 InputBaseFlexWrapper.displayName = "InputBaseFlexWrapper";
 
 export const InputBaseControl = React.forwardRef<

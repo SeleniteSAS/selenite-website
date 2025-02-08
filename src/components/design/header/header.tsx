@@ -19,7 +19,8 @@ export default function Header(): ReactNode {
   const flattenItems = Object.values(items).flat();
 
   return (
-    <header className={cn("fixed left-0 top-6 z-50 h-16 w-full md:top-12 transition-[width]")}
+    <header
+      className={cn("fixed left-0 top-6 z-50 h-16 w-full transition-[width] md:top-12")}
       style={{
         width: state === "expanded" ? "calc(100% - var(--sidebar-width))" : "100%",
       }}

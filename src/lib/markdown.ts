@@ -1,6 +1,6 @@
 export function extractPlainText(markdown: string, maxLength = 200): string {
   const plainText = markdown
-    .replace(/!\[[^[\]]*?\]\([^()]*?\)/g, "") 
+    .replace(/!\[[^[\]]*?\]\([^()]*?\)/g, "")
     .replace(/\[([^[\]]+)\]\([^()]+\)/g, "$1")
     .replace(/[*_~`>#-]+/g, "")
     .replace(/\s+/g, " ")

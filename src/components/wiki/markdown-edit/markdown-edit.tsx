@@ -141,42 +141,43 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
               }
 
               return (
-              <FormItem className="flex flex-col text-foreground">
-                <FormLabel>Choose a parent page for this page :</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild={true}>
-                    <FormControl>
-                      <Button variant="outline" className="w-[300px] justify-between text-foreground">
-                        {parentArticleTitle}
-                        <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[300px] p-0">
-                    <Command>
-                      <CommandInput placeholder="Search parent article" />
-                      <CommandList>
-                        <CommandEmpty>No parent article found</CommandEmpty>
-                        <CommandGroup>
-                          <CommandItem value="/" onSelect={() => form.setValue("slug", "/")}>
-                            Wiki
-                          </CommandItem>
-                          {parentArticles.map((article) => (
-                            <CommandItem
-                              value={article.slug}
-                              key={article.slug}
-                              onSelect={() => form.setValue("slug", article.slug)}
-                            >
-                              {`Wiki / ${article.title}`}
+                <FormItem className="flex flex-col text-foreground">
+                  <FormLabel>Choose a parent page for this page :</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild={true}>
+                      <FormControl>
+                        <Button variant="outline" className="w-[300px] justify-between text-foreground">
+                          {parentArticleTitle}
+                          <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[300px] p-0">
+                      <Command>
+                        <CommandInput placeholder="Search parent article" />
+                        <CommandList>
+                          <CommandEmpty>No parent article found</CommandEmpty>
+                          <CommandGroup>
+                            <CommandItem value="/" onSelect={() => form.setValue("slug", "/")}>
+                              Wiki
                             </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </CommandList>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-              </FormItem>
-            )}}
+                            {parentArticles.map((article) => (
+                              <CommandItem
+                                value={article.slug}
+                                key={article.slug}
+                                onSelect={() => form.setValue("slug", article.slug)}
+                              >
+                                {`Wiki / ${article.title}`}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                </FormItem>
+              );
+            }}
           />
         </div>
         <FormField

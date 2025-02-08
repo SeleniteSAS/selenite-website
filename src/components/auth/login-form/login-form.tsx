@@ -35,7 +35,7 @@ export default function LoginForm({ redirectTo }: AuthLoginFormProps): ReactNode
       const result = await login(data, redirectTo);
       if ("error" in result) {
         toast({
-          title: "An error occured",
+          title: "An error occurred",
           description: result.error,
           variant: "destructive",
         });
@@ -73,7 +73,7 @@ export default function LoginForm({ redirectTo }: AuthLoginFormProps): ReactNode
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Email Adress" {...field} />
+                      <Input placeholder="Email Address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

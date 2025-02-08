@@ -74,7 +74,6 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function TeamPage() {
-
   const elements: JSX.Element[] = teamMembers.map((member) => (
     <div
       key={member.name}
@@ -141,7 +140,7 @@ export default function TeamPage() {
         description="These are the people who shape our brand. Together, we turn ambition into reality."
       />
       <section
-        className={`flex min-h-screen flex-col items-center justify-center overflow-hidden w-full font-poppins text-foreground`}
+        className={`flex min-h-screen w-full flex-col items-center justify-center overflow-hidden font-poppins text-foreground`}
       >
         <Marquee pauseOnHover={true} reverse={false} className="w-full">
           {elements}

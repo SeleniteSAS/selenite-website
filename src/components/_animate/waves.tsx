@@ -302,16 +302,12 @@ export default function Waves({
       container.style.setProperty("--y", `${mouse.sy}px`);
 
       movePoints(t);
-      drawLines(
-        ctxRef.current as CanvasRenderingContext2D,
-        boundingRef.current,
-        linesRef.current
-      );
+      drawLines(ctxRef.current as CanvasRenderingContext2D, boundingRef.current, linesRef.current);
       requestAnimationFrame(tick);
-        if (ctxRef.current && boundingRef.current) {
-          drawLines(ctxRef.current, boundingRef.current, linesRef.current);
-        }
+      if (ctxRef.current && boundingRef.current) {
+        drawLines(ctxRef.current, boundingRef.current, linesRef.current);
       }
+    }
 
     function onResize() {
       setSize();

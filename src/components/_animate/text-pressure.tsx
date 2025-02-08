@@ -139,8 +139,6 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           const d = dist(mouseRef.current, charCenter);
 
-
-
           const wdth = width ? Math.floor(getAttr(d, 5, 200, maxDist)) : 100;
           const wght = weight ? Math.floor(getAttr(d, 100, 900, maxDist)) : 400;
           const italVal = italic ? getAttr(d, 0, 1, maxDist).toFixed(2) : "0";
