@@ -34,7 +34,7 @@ jobs:
             SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
             DEPLOY_STATE=$(echo $DEPLOY_STATE_$SITE_NAME)
 
-            DEPLOYMENT_ID=$(curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments") \
+            DEPLOYMENT_ID=$(curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
               -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{
