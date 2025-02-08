@@ -129,20 +129,25 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
           <FormField
             control={form.control}
             name={"slug"}
-            render={({ field }) => (
+            render={({ field }) => {
+              let parentArticleTitle = "Select parent article";
+              if (field.value) {
+                const parentArticle = parentArticles.find((article) => article.slug === field.value);
+                if (parentArticle) {
+                  parentArticleTitle = `Wiki / ${parentArticle.title}`;
+                } else {
+                  parentArticleTitle = "Wiki";
+                }
+              }
+
+              return (
               <FormItem className="flex flex-col text-foreground">
                 <FormLabel>Choose a parent page for this page :</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild={true}>
                     <FormControl>
                       <Button variant="outline" className="w-[300px] justify-between text-foreground">
-                        {field.value
-                          ? `Wiki${
-                              parentArticles.find((article) => article.slug === field.value)
-                                ? ` / ${parentArticles.find((article) => article.slug === field.value)?.title}`
-                                : ""
-                            }`
-                          : "Select parent article"}
+                        {parentArticleTitle}
                         <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
@@ -171,7 +176,7 @@ export default function MarkdownEdit({ article, parentArticles }: WikiMarkdownEd
                   </PopoverContent>
                 </Popover>
               </FormItem>
-            )}
+            )}}
           />
         </div>
         <FormField
