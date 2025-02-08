@@ -1,63 +1,75 @@
-name: Website Availability Check
+name: Websites Availability Check
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Vérification toutes les 24 heures
-  workflow_dispatch: 
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   check-websites:
     runs-on: ubuntu-latest
     steps:
-      - name: Define URLS
+      - name: Define the list of websites to check
         run: |
           echo "URLS=https://selenite.live https://wiki.selenite.live https://auth.selenite.live https://weare.selenite.live https://download.selenite.live" >> $GITHUB_ENV
 
-      - name: Curl websites and response check status code
+      - name: Curl websites and store the response status code
         run: |
           for url in $URLS; do
-            STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "$url")
+            STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" "$url")
             SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
 
             if [ "$STATUS_CODE" -eq 200 ]; then
-              echo "✅ $url is up"
+              echo "✅ $SITE_NAME is up and running"
               echo "DEPLOY_STATE_$SITE_NAME=success" >> $GITHUB_ENV
-              echo "DEPLOY_DESC_$SITE_NAME=Up and running" >> $GITHUB_ENV
             else
-              echo "❌ $url is down (Status: $STATUS_CODE)"
+              echo "❌ $SITE_NAME is down"
               echo "DEPLOY_STATE_$SITE_NAME=failure" >> $GITHUB_ENV
-              echo "DEPLOY_DESC_$SITE_NAME=Down and not responding (Status: $STATUS_CODE)" >> $GITHUB_ENV
             fi
           done
 
-      - name: Create and Update GitHub Deployment Status
+      - name: Create Deployment for each website
         run: |
           for url in $URLS; do
             SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
-            STATE=$(eval echo \$DEPLOY_STATE_$SITE_NAME)
-            DESCRIPTION=$(eval echo \$DEPLOY_DESC_$SITE_NAME)
+            DEPLOY_STATE=$(echo $DEPLOY_STATE_$SITE_NAME)
 
-            DEPLOYMENT_ID=$(curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
+            DEPLOYMENT_ID=$(curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments") \
               -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{
                 "ref": "${{ github.ref }}",
                 "environment": "'"$SITE_NAME"'",
-                "description": "'"$DESCRIPTION"'",
+                "description": "Deploying to '"$SITE_NAME"'",
                 "auto_merge": false,
                 "required_contexts": [],
                 "transient_environment": false
               }' | jq -r '.id')
 
-            echo "Deploy ID: $DEPLOYMENT_ID for $SITE_NAME"
+              echo "DEPLOYMENT_ID_$SITE_NAME=$DEPLOYMENT_ID" >> $GITHUB_ENV
 
-            curl -X POST "https://api.github.com/repos/${{ github.repository }}/deployments/$DEPLOYMENT_ID/statuses" \
+              echo "➡️ Creating deployment for $SITE_NAME with ID $DEPLOYMENT_ID"
+          done
+
+      - name: Update Deployment Status for each website
+        run: |
+          for url in $URLS; do
+            SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
+            DEPLOYMENT_ID=$(echo $DEPLOYMENT_ID_$SITE_NAME)
+
+            DEPLOY_STATE=$(echo $DEPLOY_STATE_$SITE_NAME)
+
+            DESCRIPTION="Deployment status for $SITE_NAME is $DEPLOY_STATE"
+
+            curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments/$DEPLOYMENT_ID/statuses" \
               -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{
-                "state": "'"$STATE"'",
-                "description": "'"$DESCRIPTION"'",
                 "environment": "'"$SITE_NAME"'",
-                "log_url": "'"$url"'"
+                "state": "'"$DEPLOY_STATE"'",
+                "description": "'"$DESCRIPTION"'",
+                "log_url": "'$url'"
               }'
+
+            echo "🚀 Deployment status for $SITE_NAME is $DEPLOY_STATE"
           done
