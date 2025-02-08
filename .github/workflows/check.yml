@@ -2,7 +2,7 @@ name: Website Availability Check
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *"  # Vérification toutes les 24 heures
   workflow_dispatch: 
 
 jobs:
@@ -17,28 +17,27 @@ jobs:
         run: |
           for url in $URLS; do
             STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "$url")
+            SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
+
             if [ "$STATUS_CODE" -eq 200 ]; then
               echo "✅ $url is up"
-              echo "DEPLOY_SUCCESS_$url=true" >> $GITHUB_ENV
+              echo "DEPLOY_STATE_$SITE_NAME=success" >> $GITHUB_ENV
+              echo "DEPLOY_DESC_$SITE_NAME=Up and running" >> $GITHUB_ENV
             else
               echo "❌ $url is down (Status: $STATUS_CODE)"
-              echo "DEPLOY_SUCCESS_$url=false" >> $GITHUB_ENV
+              echo "DEPLOY_STATE_$SITE_NAME=failure" >> $GITHUB_ENV
+              echo "DEPLOY_DESC_$SITE_NAME=Down and not responding (Status: $STATUS_CODE)" >> $GITHUB_ENV
             fi
           done
 
-      - name: Update deployment status
+      - name: Create and Update GitHub Deployment Status
         run: |
           for url in $URLS; do
             SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
-            if [ "$(eval echo \$DEPLOY_SUCCESS_$url)" == "true" ]; then
-              STATE="success"
-              DESCRIPTION="Up and running"
-            else
-              STATE="failure"
-              DESCRIPTION="Down and not responding"
-            fi
+            STATE=$(eval echo \$DEPLOY_STATE_$SITE_NAME)
+            DESCRIPTION=$(eval echo \$DEPLOY_DESC_$SITE_NAME)
 
-            curl -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
+            DEPLOYMENT_ID=$(curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
               -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{
@@ -46,6 +45,19 @@ jobs:
                 "environment": "'"$SITE_NAME"'",
                 "description": "'"$DESCRIPTION"'",
                 "auto_merge": false,
-                "required_contexts": []
+                "required_contexts": [],
+                "transient_environment": false
+              }' | jq -r '.id')
+
+            echo "Deploy ID: $DEPLOYMENT_ID for $SITE_NAME"
+
+            curl -X POST "https://api.github.com/repos/${{ github.repository }}/deployments/$DEPLOYMENT_ID/statuses" \
+              -H "Authorization: token ${{ secrets.SELENITE_PAT }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d '{
+                "state": "'"$STATE"'",
+                "description": "'"$DESCRIPTION"'",
+                "environment": "'"$SITE_NAME"'",
+                "log_url": "'"$url"'"
               }'
           done
