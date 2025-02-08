@@ -219,34 +219,36 @@ export default function Waves({
         mouse = mouseRef.current,
         noise = noiseRef.current;
       lines.forEach((pts) => {
-        pts.forEach((p) => {
-          // Wave noise
-          const move = noise.perlin2((p.x + time * waveSpeedX) * 0.002, (p.y + time * waveSpeedY) * 0.0015) * 12;
-          p.wave.x = Math.cos(move) * waveAmpX;
-          p.wave.y = Math.sin(move) * waveAmpY;
+        updatePoints(pts, time, mouse, noise);
+      });
+    }
 
-          // Mouse effect
-          const dx = p.x - mouse.sx,
-            dy = p.y - mouse.sy;
-          const dist = Math.hypot(dx, dy),
-            l = Math.max(175, mouse.vs);
-          if (dist < l) {
-            const s = 1 - dist / l;
-            const f = Math.cos(dist * 0.001) * s;
-            p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00065;
-            p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00065;
-          }
-          // Tension + friction
-          p.cursor.vx += (0 - p.cursor.x) * tension;
-          p.cursor.vy += (0 - p.cursor.y) * tension;
-          p.cursor.vx *= friction;
-          p.cursor.vy *= friction;
-          p.cursor.x += p.cursor.vx * 2;
-          p.cursor.y += p.cursor.vy * 2;
-          // Clamp
-          p.cursor.x = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.x));
-          p.cursor.y = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.y));
-        });
+    function updatePoints(pts: Points[], time: number, mouse: MouseObject, noise: Noise) {
+      pts.forEach((p) => {
+        const move = noise.perlin2((p.x + time * waveSpeedX) * 0.002, (p.y + time * waveSpeedY) * 0.0015) * 12;
+        p.wave.x = Math.cos(move) * waveAmpX;
+        p.wave.y = Math.sin(move) * waveAmpY;
+
+        const dx = p.x - mouse.sx,
+          dy = p.y - mouse.sy;
+        const dist = Math.hypot(dx, dy),
+          l = Math.max(175, mouse.vs);
+        if (dist < l) {
+          const s = 1 - dist / l;
+          const f = Math.cos(dist * 0.001) * s;
+          p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00065;
+          p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00065;
+        }
+        // Tension + friction
+        p.cursor.vx += (0 - p.cursor.x) * tension;
+        p.cursor.vy += (0 - p.cursor.y) * tension;
+        p.cursor.vx *= friction;
+        p.cursor.vy *= friction;
+        p.cursor.x += p.cursor.vx * 2;
+        p.cursor.y += p.cursor.vy * 2;
+        // Clamp
+        p.cursor.x = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.x));
+        p.cursor.y = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.y));
       });
     }
 
@@ -256,25 +258,27 @@ export default function Waves({
       return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
     }
 
-    function drawLines() {
-      const { width, height } = boundingRef.current;
-      const ctx = ctxRef.current;
-      if (!ctx) return;
+    function drawLines(ctx: CanvasRenderingContext2D, bounding: BoundingElement, lines: Points[][]) {
+      const { width, height } = bounding;
       ctx.clearRect(0, 0, width, height);
       ctx.beginPath();
       ctx.strokeStyle = lineColor;
-      linesRef.current.forEach((points) => {
-        let p1 = moved(points[0], false);
-        ctx.moveTo(p1.x, p1.y);
-        points.forEach((p, idx) => {
-          const isLast = idx === points.length - 1;
-          p1 = moved(p, !isLast);
-          const p2 = moved(points[idx + 1] || points[points.length - 1], !isLast);
-          ctx.lineTo(p1.x, p1.y);
-          if (isLast) ctx.moveTo(p2.x, p2.y);
-        });
+      lines.forEach((points) => {
+        drawLine(ctx, points);
       });
       ctx.stroke();
+    }
+
+    function drawLine(ctx: CanvasRenderingContext2D, points: Points[]) {
+      let p1 = moved(points[0], false);
+      ctx.moveTo(p1.x, p1.y);
+      points.forEach((p, idx) => {
+        const isLast = idx === points.length - 1;
+        p1 = moved(p, !isLast);
+        const p2 = moved(points[idx + 1] || points[points.length - 1], !isLast);
+        ctx.lineTo(p1.x, p1.y);
+        if (isLast) ctx.moveTo(p2.x, p2.y);
+      });
     }
 
     function tick(t: number) {
@@ -298,9 +302,16 @@ export default function Waves({
       container.style.setProperty("--y", `${mouse.sy}px`);
 
       movePoints(t);
-      drawLines();
+      drawLines(
+        ctxRef.current as CanvasRenderingContext2D,
+        boundingRef.current,
+        linesRef.current
+      );
       requestAnimationFrame(tick);
-    }
+        if (ctxRef.current && boundingRef.current) {
+          drawLines(ctxRef.current, boundingRef.current, linesRef.current);
+        }
+      }
 
     function onResize() {
       setSize();

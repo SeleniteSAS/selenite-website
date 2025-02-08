@@ -4,7 +4,18 @@ import { Slottable } from "@radix-ui/react-slot";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { X } from "lucide-react";
-import * as React from "react";
+import {
+  type ComponentPropsWithoutRef,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ForwardedRef,
+  type ComponentProps,
+  createContext,
+  forwardRef,
+  useContext,
+  useMemo,
+  ElementRef,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -24,14 +35,14 @@ export type BadgeGroupContextProps =
       onRemove: (value: string[]) => void;
     };
 
-const BadgeGroupContext = React.createContext<BadgeGroupContextProps>({
+const BadgeGroupContext = createContext<BadgeGroupContextProps>({
   type: "single",
   value: "",
   onValueChange: () => {},
   onRemove: undefined,
 });
 
-const useBadgeGroupContext = () => React.useContext(BadgeGroupContext);
+const useBadgeGroupContext = () => useContext(BadgeGroupContext);
 
 export type BadgeGroupType = "single" | "multiple";
 
@@ -51,7 +62,7 @@ export interface BadgeGroupMultipleProps extends ToggleGroupPrimitive.ToggleGrou
   onRemove?: (value: string[]) => void;
 }
 
-export const BadgeGroup = React.forwardRef(
+export const BadgeGroup = forwardRef(
   <T extends BadgeGroupType = "single">(
     {
       type = "single" as T,
@@ -63,13 +74,23 @@ export const BadgeGroup = React.forwardRef(
       onValueChange,
       ...props
     }: BadgeGroupProps,
-    ref: React.ForwardedRef<React.ElementRef<typeof ToggleGroupPrimitive.Root>>,
+    ref: ForwardedRef<ElementRef<typeof ToggleGroupPrimitive.Root>>,
   ) => {
     const [value = type === "multiple" ? [] : "", setValue] = useControllableState<BadgeGroupValue<T>>({
       prop: valueProp as BadgeGroupValue<T>,
       defaultProp: defaultValue as BadgeGroupValue<T>,
       onChange: onValueChange as (value: BadgeGroupValue<T>) => void,
     });
+
+    const contextValue = useMemo(
+      () => ({
+        type,
+        onRemove,
+        value,
+        onValueChange: setValue,
+      }),
+      [type, onRemove, value, setValue],
+    );
 
     return (
       <ToggleGroupPrimitive.Root
@@ -79,19 +100,10 @@ export const BadgeGroup = React.forwardRef(
           type,
           value,
           onValueChange: setValue,
-        } as React.ComponentProps<typeof ToggleGroupPrimitive.Root>)}
+        } as ComponentProps<typeof ToggleGroupPrimitive.Root>)}
         {...props}
       >
-        <BadgeGroupContext.Provider
-          value={
-            {
-              type,
-              onRemove,
-              value,
-              onValueChange: setValue,
-            } as BadgeGroupContextProps
-          }
-        >
+        <BadgeGroupContext.Provider value={contextValue as BadgeGroupContextProps}>
           <Slottable>{children}</Slottable>
         </BadgeGroupContext.Provider>
       </ToggleGroupPrimitive.Root>
@@ -100,9 +112,9 @@ export const BadgeGroup = React.forwardRef(
 );
 BadgeGroup.displayName = "BadgeGroup";
 
-export const BadgeGroupItem = React.forwardRef<
-  React.ElementRef<typeof ToggleGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item>
+export const BadgeGroupItem = forwardRef<
+  ElementRef<typeof ToggleGroupPrimitive.Item>,
+  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item>
 >(({ value: valueProp, className, ...props }, ref) => {
   const { type, onRemove, value } = useBadgeGroupContext();
 
@@ -141,40 +153,39 @@ export const BadgeGroupItem = React.forwardRef<
 });
 BadgeGroupItem.displayName = "BadgeGroupItem";
 
-interface BadgeGroupItemImplProps extends React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> {
+interface BadgeGroupItemImplProps extends ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> {
   onRemove?: (
-    event: React.MouseEvent | React.KeyboardEvent,
+    event: MouseEvent | KeyboardEvent,
     reason: "closeClick" | "backspaceKeyDown" | "deleteKeyDown",
   ) => void;
 }
 
-const BadgeGroupItemImpl = React.forwardRef<
-  React.ElementRef<typeof ToggleGroupPrimitive.Item>,
-  BadgeGroupItemImplProps
->(({ onRemove, onKeyDown, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Item
-    ref={ref}
-    onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-      if (event.key === "Backspace" || event.key === "Delete") {
-        onRemove?.(event, event.key === "Backspace" ? "backspaceKeyDown" : "deleteKeyDown");
-      }
-    })}
-    {...props}
-  >
-    <Slottable>{children}</Slottable>
-    {onRemove && (
-      <div
-        aria-hidden
-        onClick={(event) => {
-          event.stopPropagation();
-          onRemove(event, "closeClick");
-        }}
-        className="cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 group-data-[disabled]:pointer-events-none"
-      >
-        <X className="size-4" />
-        <span className="sr-only">Remove</span>
-      </div>
-    )}
-  </ToggleGroupPrimitive.Item>
-));
+const BadgeGroupItemImpl = forwardRef<ElementRef<typeof ToggleGroupPrimitive.Item>, BadgeGroupItemImplProps>(
+  ({ onRemove, onKeyDown, children, ...props }, ref) => (
+    <ToggleGroupPrimitive.Item
+      ref={ref}
+      onKeyDown={composeEventHandlers(onKeyDown, (event) => {
+        if (event.key === "Backspace" || event.key === "Delete") {
+          onRemove?.(event, event.key === "Backspace" ? "backspaceKeyDown" : "deleteKeyDown");
+        }
+      })}
+      {...props}
+    >
+      <Slottable>{children}</Slottable>
+      {onRemove && (
+        <div
+          aria-hidden
+          onClick={(event) => {
+            event.stopPropagation();
+            onRemove(event, "closeClick");
+          }}
+          className="cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 group-data-[disabled]:pointer-events-none"
+        >
+          <X className="size-4" />
+          <span className="sr-only">Remove</span>
+        </div>
+      )}
+    </ToggleGroupPrimitive.Item>
+  ),
+);
 BadgeGroupItemImpl.displayName = "BadgeGroupItemImpl";

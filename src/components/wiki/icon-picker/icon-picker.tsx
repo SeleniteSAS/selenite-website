@@ -35,7 +35,7 @@ const IconPicker = (props: WikiIconPickerProps) => {
           <CommandList>
             <CommandEmpty>No icon found</CommandEmpty>
             <CommandGroup>
-              {Object.entries(Lucide).map(([name], i) => {
+              {Object.entries(Lucide).map(([name]) => {
                 if (name.endsWith("Icon")) {
                   const iconName: string = name
                     .replace("Icon", "")
@@ -44,17 +44,17 @@ const IconPicker = (props: WikiIconPickerProps) => {
                     .replace(/^-/, "");
 
                   if (!dynamicIconImports[iconName as keyof typeof dynamicIconImports]) {
-                    return <Fragment key={i} />;
+                    return <Fragment key={name} />;
                   }
 
                   return (
-                    <CommandItem key={i} onSelect={() => props.onChange(iconName)}>
+                    <CommandItem key={name} onSelect={() => props.onChange(iconName)}>
                       <Icon name={iconName} />
                       <span className="capitalize">{iconName.replaceAll("-", " ")}</span>
                     </CommandItem>
                   );
                 }
-                return <Fragment key={i} />;
+                return <Fragment key={name} />;
               })}
             </CommandGroup>
           </CommandList>

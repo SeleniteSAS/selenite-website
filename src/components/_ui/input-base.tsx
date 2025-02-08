@@ -39,15 +39,15 @@ export const InputBase = React.forwardRef<React.ElementRef<typeof Primitive.div>
 
     const controlRef = React.useRef<HTMLElement>(null);
 
+    const contextValue = React.useMemo(() => ({
+      autoFocus,
+      controlRef,
+      disabled,
+      onFocusedChange: setFocused,
+    }), [autoFocus, controlRef, disabled]);
+
     return (
-      <InputBaseContext.Provider
-        value={{
-          autoFocus,
-          controlRef,
-          disabled,
-          onFocusedChange: setFocused,
-        }}
-      >
+      <InputBaseContext.Provider value={contextValue}>
         <Div
           ref={ref}
           onClick={composeEventHandlers(onClick, (event) => {
@@ -105,7 +105,8 @@ export interface InputBaseAdornmentProps extends React.ComponentPropsWithoutRef<
 
 export const InputBaseAdornment = React.forwardRef<React.ElementRef<"div">, InputBaseAdornmentProps>(
   ({ className, disablePointerEvents, asChild, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : typeof children === "string" ? "p" : "div";
+    const childElement = typeof children === "string" ? "p" : "div";
+    const Comp = asChild ? Slot : childElement;
 
     const isAction = React.isValidElement(children) && children.type === InputBaseAdornmentButton;
 
