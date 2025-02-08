@@ -10,7 +10,7 @@ type BoldCopyProps = Readonly<{
 }>;
 
 export default function BoldCopy({
-  text = "animata",
+  text = "Demo text",
   className,
   textClassName,
   backgroundTextClassName,

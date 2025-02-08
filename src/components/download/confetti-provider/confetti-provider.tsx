@@ -1,14 +1,14 @@
 "use client";
 
-import { MutableRefObject, ReactNode, RefObject, useEffect, useRef } from "react";
+import { MutableRefObject, type ReactNode, type RefObject, useEffect, useRef } from "react";
 import Confetti from "react-canvas-confetti";
 import { TCanvasConfettiInstance } from "react-canvas-confetti/src/types";
 
 import { CreateTypes } from "canvas-confetti";
 
-type ConfettiProviderProps = {
+type ConfettiProviderProps = Readonly<{
   children: ReactNode;
-};
+}>;
 
 export default function ConfettiProvider({ children }: ConfettiProviderProps): ReactNode {
   const confettiInstance: MutableRefObject<TCanvasConfettiInstance | null> = useRef<TCanvasConfettiInstance | null>(

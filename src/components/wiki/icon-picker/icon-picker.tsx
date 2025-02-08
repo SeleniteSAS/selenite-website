@@ -17,7 +17,7 @@ const IconPicker = (props: WikiIconPickerProps) => {
     <Popover>
       <PopoverTrigger asChild={true} className="text-foreground">
         <FormControl>
-          <Button variant="outline" role="combobox" className="flex w-[300px] items-center justify-start">
+          <Button variant="outline" className="flex w-[300px] items-center justify-start">
             <Icon name={props.value} />
             <span className="capitalize">
               {props.value

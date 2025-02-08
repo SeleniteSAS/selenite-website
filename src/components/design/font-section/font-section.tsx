@@ -36,7 +36,7 @@ type FontSectionWithoutVariableWeight = BaseFontSectionProps & {
 type FontSectionProps = FontSectionWithVariableWeight | FontSectionWithoutVariableWeight;
 
 export default function FontSection({ fontClass, fontName, isVariable, children, ...props }: FontSectionProps) {
-  const axes: string[] = Object.entries(isVariable || {}).reduce<string[]>((acc, [key, value]) => {
+  const axes: string[] = Object.entries(isVariable ?? {}).reduce<string[]>((acc, [key, value]) => {
     if (value) acc.push(key);
     return acc;
   }, []);

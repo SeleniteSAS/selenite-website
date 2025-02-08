@@ -31,11 +31,9 @@ export default function Loader() {
       if (lenis) {
         lenis.stop();
       }
-    } else {
-      if (lenis) {
+    } else if (lenis) {
         lenis.start();
       }
-    }
   }, [lenis, isLoaded]);
 
   useEffect((): void => {
@@ -87,7 +85,7 @@ export default function Loader() {
               .padStart(2, "0")}`
               .split("")
               .map((char, index) => (
-                <span key={index} className={`inline-block ${char === ":" ? "w-auto" : "w-[1ch]"} text-center`}>
+                <span key={`${char}-${index}`} className={`inline-block ${char === ":" ? "w-auto" : "w-[1ch]"} text-center`}>
                   {char}
                 </span>
               ))}
