@@ -52,7 +52,7 @@ export async function getParentArticles(id?: string): Promise<{ slug: string; ti
 
 export async function updateArticle(
   id: string,
-  data: { label: string; markdown: string; icon?: string | undefined; slug: string },
+  data: { label: string; markdown: string; icon?: string; slug: string },
 ): Promise<Article | null> {
   return prisma.article.update({ where: { id }, data });
 }
@@ -60,7 +60,7 @@ export async function updateArticle(
 export async function createArticle(data: {
   label: string;
   markdown: string;
-  icon?: string | undefined;
+  icon?: string;
   slug: string;
 }): Promise<Article> {
   return prisma.article.create({
