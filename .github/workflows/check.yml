@@ -1,0 +1,51 @@
+name: Website Availability Check
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch: 
+
+jobs:
+  check-websites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Define URLS
+        run: |
+          echo "URLS=https://selenite.live https://wiki.selenite.live https://auth.selenite.live https://weare.selenite.live https://download.selenite.live" >> $GITHUB_ENV
+
+      - name: Curl websites and response check status code
+        run: |
+          for url in $URLS; do
+            STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "$url")
+            if [ "$STATUS_CODE" -eq 200 ]; then
+              echo "✅ $url is up"
+              echo "DEPLOY_SUCCESS_$url=true" >> $GITHUB_ENV
+            else
+              echo "❌ $url is down (Status: $STATUS_CODE)"
+              echo "DEPLOY_SUCCESS_$url=false" >> $GITHUB_ENV
+            fi
+          done
+
+      - name: Update deployment status
+        run: |
+          for url in $URLS; do
+            SITE_NAME=$(echo $url | sed 's/https:\/\///' | sed 's/\//-/g')
+            if [ "$(eval echo \$DEPLOY_SUCCESS_$url)" == "true" ]; then
+              STATE="success"
+              DESCRIPTION="Up and running"
+            else
+              STATE="failure"
+              DESCRIPTION="Down and not responding"
+            fi
+
+            curl -X POST "https://api.github.com/repos/${{ github.repository }}/deployments" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d '{
+                "ref": "${{ github.ref }}",
+                "environment": "'"$SITE_NAME"'",
+                "description": "'"$DESCRIPTION"'",
+                "auto_merge": false,
+                "required_contexts": []
+              }'
+          done
