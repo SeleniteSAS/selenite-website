@@ -54,8 +54,8 @@ export default function Spaceship() {
 
   useFrame((): void => {
     if (spaceshipRef.current && controlsRef.current && moonRef.current) {
-      spaceshipRef.current.position.z -= 1;
-      moonRef.current.position.z -= 1;
+      spaceshipRef.current.position.z -= 0.2;
+      moonRef.current.position.z -= 0.2;
 
       controlsRef.current.target.lerp(spaceshipRef.current.position, 0.1);
     }
