@@ -68,6 +68,7 @@
     "react-resizable-panels": "^2.1.7",
     "rehype-highlight": "^7.0.1",
     "remark-gfm": "^4.0.0",
+    "schema-dts": "^1.1.2",
     "server-only": "^0.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
