@@ -1,5 +1,6 @@
 "use client";
 
+import { MoonIcon } from "lucide-react";
 import { ReactNode } from "react";
 
 import { useTheme } from "next-themes";
@@ -11,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/_ui/dropdown-menu";
-import { MoonIcon } from "lucide-react";
 
 export default function Theme(): ReactNode {
   const { setTheme, theme } = useTheme();
@@ -22,9 +22,7 @@ export default function Theme(): ReactNode {
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true} className={"fixed bottom-8 right-20"}>
         <Button variant={"default"} className={"[&_svg]:size-auto"} size={"icon"}>
-            <MoonIcon 
-                strokeWidth={1}
-            />
+          <MoonIcon strokeWidth={1} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

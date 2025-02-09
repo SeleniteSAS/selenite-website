@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import type { Metadata } from "next";
 import { Session } from "next-auth";
 import { notFound, redirect } from "next/navigation";
 
@@ -8,22 +9,18 @@ import RegisterForm from "@/components/auth/register-form/register-form";
 
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
-import type { Metadata } from "next";
 
 type AuthActionPageProps = Readonly<{
   params: { action: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }>;
 
-export async function generateMetadata(
-  { params }: AuthActionPageProps,
-): Promise<Metadata> {
-
+export async function generateMetadata({ params }: AuthActionPageProps): Promise<Metadata> {
   const { action } = params;
 
   return {
     title: action === "login" ? "Login" : "Register",
-  }
+  };
 }
 
 export async function generateStaticParams(): Promise<string[]> {

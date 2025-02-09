@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 
 import { SidebarProvider } from "@/components/_ui/sidebar";
-import AppSidebar from "@/components/wiki/sidebar/sidebar";
 import ThemeProvider from "@/components/common/theme-provider/theme-provider";
+import AppSidebar from "@/components/wiki/sidebar/sidebar";
 
 type WikiLayoutProps = Readonly<{ children: ReactNode }>;
 
