@@ -18,12 +18,7 @@ export default function AuthLayout({ children }: AuthLayoutProps): ReactNode {
   return (
     <main className="flex h-screen w-screen overflow-hidden bg-background text-foreground">
       <div className="relative flex h-full flex-1 items-end justify-start bg-background">
-        <h1 className="relative z-10 p-16 font-orbitron text-[4rem] font-extrabold uppercase leading-none text-white">
-          <Link href={link}>
-            Welcome <br />
-            to Selenite
-          </Link>
-        </h1>
+        
         <div className="absolute z-0 h-full w-full">
           <Canvas>
             <SpaceShip />

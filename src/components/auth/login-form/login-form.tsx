@@ -61,6 +61,9 @@ export default function LoginForm({ redirectTo }: AuthLoginFormProps): ReactNode
     <>
       <div className="mx-auto flex h-full w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
+          <h2 className="uppercase text-4xl font-semibold tracking-tight font-orbitron">
+            Selenite
+          </h2>
           <h1 className="text-2xl font-semibold tracking-tight">Login into your account</h1>
           <p className="text-sm text-muted-foreground">Enter you credentials to login into your account</p>
         </div>
