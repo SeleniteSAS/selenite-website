@@ -29,7 +29,7 @@ export default function Header({ path, session }: HeaderProps) {
         </Suspense>
       </div>
       <div className="flex items-center gap-2 px-4">
-        {(!path.includes("/edit") && path !== "/") && (
+        {!path.includes("/edit") && path !== "/" && (
           <EditButton
             className={cn(buttonVariants({ variant: "outline", size: "sm" }), "hidden text-foreground md:inline-flex")}
           >

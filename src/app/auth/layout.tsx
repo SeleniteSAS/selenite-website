@@ -1,31 +1,39 @@
 import { ReactNode } from "react";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
+
+import Lang from "@/components/common/lang/lang";
+import Canvas from "@/components/website/canvas/canvas";
+
+import { env } from "@/lib/env";
+
+const SpaceShip = dynamic(() => import("@/components/auth/spaceship/spaceship"));
 
 type AuthLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function AuthLayout({ children }: AuthLayoutProps): ReactNode {
-  const link = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://selenite.live";
+  const link: string = env.NEXT_PUBLIC_ROOT_URL;
+
   return (
-    <main className="relative hidden h-screen flex-col items-center justify-center overflow-hidden md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <aside className="relative hidden h-full flex-col bg-foreground p-10 text-background dark:border-r lg:flex">
-        <div className="relative z-20 flex items-center text-lg font-medium">
-          Connect to{" "}
-          <Link href={link} className={"ml-1"}>
-            selenite.live
+    <main className="flex h-screen w-screen overflow-hidden bg-background text-foreground">
+      <div className="relative flex h-full flex-1 items-end justify-start bg-background">
+        <h1 className="relative z-10 p-16 font-orbitron text-[4rem] font-extrabold uppercase leading-none text-white">
+          <Link href={link}>
+            Welcome <br />
+            to Selenite
           </Link>
+        </h1>
+        <div className="absolute z-0 h-full w-full">
+          <Canvas>
+            <SpaceShip />
+          </Canvas>
         </div>
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              “This library has saved me countless hours of work and helped me deliver stunning designs to my clients
-              faster than ever before.”
-            </p>
-            <footer className="text-sm">Sofia Davis</footer>
-          </blockquote>
-        </div>
-      </aside>
-      <div className="relative h-screen lg:p-8">{children}</div>
+      </div>
+      <section className="h-full px-24 font-poppins">
+        {children}
+        <Lang />
+      </section>
     </main>
   );
 }
