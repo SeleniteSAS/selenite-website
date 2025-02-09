@@ -75,10 +75,10 @@ export default function DownloadPage(): ReactNode {
 
   return (
     <main className="flex h-screen w-screen items-center justify-center overflow-hidden font-poppins">
-      <div>
+      <div className="max-w-[90vw]">
         <ConfettiProvider>
           <h1 className="mb-4 text-center font-orbitron text-2xl font-bold uppercase">Download Selenite</h1>
-          {currentDownload && (
+          {currentDownload ? (
             <Link
               href={currentDownload.url ?? "#"}
               className={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full")}
@@ -88,21 +88,29 @@ export default function DownloadPage(): ReactNode {
               {currentDownload.icon}
               <span className="ml-2">Download for {currentDownload.os}</span>
             </Link>
+          ) : (
+            <div className="rounded-md border py-2 px-4 font-mono text-sm shadow-sm w-full border-border/20">
+              <p className="text-center text-white">Download for your platform is not available</p>
+              </div>
           )}
-          <div className="my-4 flex w-full items-center gap-4">
-            <Separator className="flex-1" />
-            <p className="text-sm text-white">OR</p>
-            <Separator className="flex-1" />
+          <div className="my-4 flex w-full items-center gap-4 justify-center">
+            <Separator className="flex-1 hidden xs:block" />
+            <p className="text-sm text-white uppercase text-center">
+              {(!currentDownload || currentDownload.disabled) ? (
+                "Download for another platform"
+              ) : "Or"}
+            </p>
+            <Separator className="flex-1 hidden xs:block" />
           </div>
-          <div className="flex items-center gap-4">
-            {rest.map((download) => (
+          <div className="flex items-center gap-4 justify-center flex-col md:flex-row w-full">
+            {rest.map((download: Download) => (
               <Link
                 key={download.os}
                 href={download.url ?? "#"}
                 className={cn(
                   buttonVariants({ variant: "default", size: "sm" }),
-                  "w-full",
                   download.disabled && "cursor-not-allowed opacity-50",
+                  "w-full"
                 )}
                 data-confetti={download.disabled ? "false" : "true"}
                 data-disabled={download.disabled ? "true" : "false"}
