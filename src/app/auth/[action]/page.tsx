@@ -8,11 +8,23 @@ import RegisterForm from "@/components/auth/register-form/register-form";
 
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
+import type { Metadata } from "next";
 
 type AuthActionPageProps = Readonly<{
   params: { action: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }>;
+
+export async function generateMetadata(
+  { params }: AuthActionPageProps,
+): Promise<Metadata> {
+
+  const { action } = params;
+
+  return {
+    title: action === "login" ? "Login" : "Register",
+  }
+}
 
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();
