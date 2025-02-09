@@ -43,12 +43,12 @@ export default function Header({ path, session }: HeaderProps) {
         {session?.user && (
           <Avatar
             src="https://that.image.doesnt.exist.fr"
-            alt={session.user.name || session.user.email || "User"}
+            alt={session.user.name ?? session.user.email ?? "User"}
             fallback={
               session.user?.name
                 ?.split(" ")
-                .map((name: string) => name[0].toUpperCase())
-                .join("") || "DU"
+                .map((name: string): string => name[0].toUpperCase())
+                .join("") ?? "DU"
             }
           />
         )}
