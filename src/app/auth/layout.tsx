@@ -1,34 +1,36 @@
 import { ReactNode } from "react";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 
 import Lang from "@/components/common/lang/lang";
-import Canvas from "@/components/website/canvas/canvas";
+import ThemeProvider from "@/components/common/theme-provider/theme-provider";
+import Theme from "@/components/common/theme/theme";
 
-import { env } from "@/lib/env";
-
-const SpaceShip = dynamic(() => import("@/components/auth/spaceship/spaceship"));
+const SpaceShip = dynamic(() => import("@/components/auth/spaceship/spaceship"), { ssr: false });
+const Canvas = dynamic(() => import("@/components/website/canvas/canvas"), { ssr: false });
+const MdOnly = dynamic(() => import("@/components/common/md-only/md-only"), { ssr: false });
 
 type AuthLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function AuthLayout({ children }: AuthLayoutProps): ReactNode {
-  const link: string = env.NEXT_PUBLIC_ROOT_URL;
-
   return (
-    <main className="flex h-screen w-screen overflow-hidden bg-background text-foreground">
-      <div className="relative flex h-full flex-1 items-end justify-start bg-background">
-        
-        <div className="absolute z-0 h-full w-full">
-          <Canvas>
-            <SpaceShip />
-          </Canvas>
+    <ThemeProvider>
+      <main className="flex h-screen w-screen overflow-hidden bg-background text-foreground">
+        <div className="relative h-full flex-1 items-end justify-start bg-background hidden md:flex">
+          <div className="absolute z-0 h-full w-full">
+            <MdOnly>
+              <Canvas>
+                <SpaceShip />
+              </Canvas>
+            </MdOnly>
+          </div>
         </div>
-      </div>
-      <section className="h-full px-24 font-poppins">
-        {children}
-        <Lang />
-      </section>
-    </main>
+        <section className="h-full px-4 sm:px-8 md:px-24 font-poppins w-full md:w-auto">
+          {children}
+          <Lang />
+          <Theme />
+        </section>
+      </main>
+    </ThemeProvider>
   );
 }
