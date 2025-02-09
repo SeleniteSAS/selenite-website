@@ -4,6 +4,7 @@ export const serverEnvSchemas = {
   DATABASE_URL: z.string().min(1),
   AUTH_SECRET: z.string().min(1),
   AUTH_TRUST_HOST: z.enum(["true", "false"]),
+  DISCORD_WEBHOOK_TELEMETRY: z.string().url().min(1),
 };
 
 export const clientEnvSchemas = {
