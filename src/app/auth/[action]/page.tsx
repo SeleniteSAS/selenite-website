@@ -26,6 +26,10 @@ export async function generateMetadata(
   }
 }
 
+export async function generateStaticParams(): Promise<string[]> {
+  return ["login", "register"];
+}
+
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();
 
