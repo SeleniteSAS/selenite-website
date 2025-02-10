@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 
+import { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
 
@@ -10,7 +11,6 @@ import ConfettiProvider from "@/components/download/confetti-provider/confetti-p
 import { env } from "@/lib/env";
 import { getUserPlatform } from "@/lib/user-agent";
 import { cn } from "@/lib/utils";
-import { Metadata } from "next";
 
 type Download = {
   os: string;

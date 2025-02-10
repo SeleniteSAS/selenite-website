@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { Metadata } from "next";
 import { Session } from "next-auth";
 import { notFound } from "next/navigation";
 
@@ -7,9 +8,8 @@ import Header from "@/components/wiki/header/header";
 import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 
 import { auth } from "@/lib/auth";
-import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
-import { Metadata } from "next";
 import { env } from "@/lib/env";
+import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
 
 const title: string = "Nouvelle page | Selenite - Wiki & Documentation";
 const description: string = "Créez une nouvelle page pour le wiki de Selenite.";
