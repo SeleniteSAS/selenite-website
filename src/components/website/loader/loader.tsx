@@ -9,7 +9,7 @@ import Lenis from "lenis";
 
 export default function Loader() {
   const progress: number = useLoaderStore((state: LoaderState): number => state.moonProgress);
-  const isLoaded: boolean = useLoaderStore((state: LoaderState): boolean => state.isMooonLoaded);
+  const isLoaded: boolean = useLoaderStore((state: LoaderState): boolean => state.isMoonLoaded);
 
   const [isLoadingOver, setIsLoadingOver] = useState<boolean>(false);
   const [isDisplayed, setIsDisplayed] = useState<boolean>(true);
