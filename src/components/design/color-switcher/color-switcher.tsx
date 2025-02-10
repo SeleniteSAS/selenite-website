@@ -18,7 +18,7 @@ export default function ColorSwitch() {
   return (
     <div className="flex flex-col gap-4">
       <Separator />
-      <ul className="flex flex-wrap items-center justify-center gap-4 flex-col xs:flex-row">
+      <ul className="flex flex-col flex-wrap items-center justify-center gap-4 xs:flex-row">
         {variants.map((variant: Variant) => (
           <li key={variant.name} className="w-full xs:w-auto">
             <Button
@@ -31,7 +31,7 @@ export default function ColorSwitch() {
               }}
               variant={"outline"}
               size={"lg"}
-              className="px-4 w-full xs:w-auto justify-between xs:justify-center"
+              className="w-full justify-between px-4 xs:w-auto xs:justify-center"
               disabled={name === variant.name}
             >
               <div

@@ -13,7 +13,7 @@ export default function LogoDisplay({ type }: LogoDisplayProps) {
 
   return (
     <div
-      className="flex items-center justify-center rounded-md border border-black px-4 sm:px-8 py-16"
+      className="flex items-center justify-center rounded-md border border-black px-4 py-16 sm:px-8"
       style={{ backgroundColor: colors[2], color: colors[0] }}
     >
       {type === "logo" && <Logo mainColor={colors[0]} secondaryColor={colors[1]} size={400} />}

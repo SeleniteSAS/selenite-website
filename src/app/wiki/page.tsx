@@ -7,9 +7,9 @@ import Header from "@/components/wiki/header/header";
 import MDXRemote from "@/components/wiki/markdown-remote/markdown-remote";
 
 import { auth } from "@/lib/auth";
+import { env } from "@/lib/env";
 import { getHomePageArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
-import { env } from "@/lib/env";
 
 const title: string = "Accueil | Selenite - Wiki & Documentation";
 const description: string =
