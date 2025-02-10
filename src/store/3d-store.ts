@@ -3,7 +3,7 @@
 import { StoreApi, UseBoundStore, create } from "zustand";
 
 export interface LoaderState {
-  isMooonLoaded: boolean;
+  isMoonLoaded: boolean;
   isShipLoaded: boolean;
   setMoonLoaded: (isLoaded: boolean) => void;
   setShipLoaded: (isLoaded: boolean) => void;
@@ -14,9 +14,9 @@ export interface LoaderState {
 }
 
 export const useLoaderStore: UseBoundStore<StoreApi<LoaderState>> = create<LoaderState>((set) => ({
-  isMooonLoaded: false,
+  isMoonLoaded: false,
   isShipLoaded: false,
-  setMoonLoaded: (isLoaded: boolean): void => set({ isMooonLoaded: isLoaded }),
+  setMoonLoaded: (isLoaded: boolean): void => set({ isMoonLoaded: isLoaded }),
   setShipLoaded: (isLoaded: boolean): void => set({ isShipLoaded: isLoaded }),
   moonProgress: 0,
   setMoonProgress: (progress: number): void => set({ moonProgress: progress }),
