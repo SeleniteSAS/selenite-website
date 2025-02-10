@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import type { Metadata } from "next";
 import { Session } from "next-auth";
 import { notFound, redirect } from "next/navigation";
 
@@ -13,6 +14,18 @@ type AuthActionPageProps = Readonly<{
   params: { action: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }>;
+
+export async function generateMetadata({ params }: AuthActionPageProps): Promise<Metadata> {
+  const { action } = params;
+
+  return {
+    title: action === "login" ? "Login" : "Register",
+  };
+}
+
+export async function generateStaticParams(): Promise<string[]> {
+  return ["login", "register"];
+}
 
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
   const session: Session | null = await auth();

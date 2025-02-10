@@ -10,6 +10,7 @@ import ConfettiProvider from "@/components/download/confetti-provider/confetti-p
 import { env } from "@/lib/env";
 import { getUserPlatform } from "@/lib/user-agent";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
 
 type Download = {
   os: string;
@@ -58,6 +59,35 @@ const downloads: Download[] = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Download Selenite: Lost Contact",
+  description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+  openGraph: {
+    title: "Download Selenite: Lost Contact",
+    description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+    images: [{ url: "/images/banner.png" }],
+  },
+  twitter: {
+    title: "Download Selenite: Lost Contact",
+    description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+    card: "summary_large_image",
+    images: [{ url: "/images/banner.png" }],
+  },
+  robots: "index, follow",
+  keywords: ["selenite", "download", "lost contact", "game", "windows", "macos", "linux"],
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
+  authors: [
+    {
+      name: "Selenite Studio",
+      url: env.NEXT_PUBLIC_ROOT_URL,
+    },
+    {
+      name: "Pierre Guéroult",
+      url: "https://pierregueroult.dev",
+    },
+  ],
+};
+
 export default function DownloadPage(): ReactNode {
   const { os } = getUserPlatform(headers());
 
@@ -89,20 +119,18 @@ export default function DownloadPage(): ReactNode {
               <span className="ml-2">Download for {currentDownload.os}</span>
             </Link>
           ) : (
-            <div className="rounded-md border py-2 px-4 font-mono text-sm shadow-sm w-full border-border/20">
+            <div className="w-full rounded-md border border-border/20 px-4 py-2 font-mono text-sm shadow-sm">
               <p className="text-center text-white">Download for your platform is not available</p>
-              </div>
+            </div>
           )}
-          <div className="my-4 flex w-full items-center gap-4 justify-center">
-            <Separator className="flex-1 hidden xs:block" />
-            <p className="text-sm text-white uppercase text-center">
-              {(!currentDownload || currentDownload.disabled) ? (
-                "Download for another platform"
-              ) : "Or"}
+          <div className="my-4 flex w-full items-center justify-center gap-4">
+            <Separator className="hidden flex-1 xs:block" />
+            <p className="text-center text-sm uppercase text-white">
+              {!currentDownload || currentDownload.disabled ? "Download for another platform" : "Or"}
             </p>
-            <Separator className="flex-1 hidden xs:block" />
+            <Separator className="hidden flex-1 xs:block" />
           </div>
-          <div className="flex items-center gap-4 justify-center flex-col md:flex-row w-full">
+          <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
             {rest.map((download: Download) => (
               <Link
                 key={download.os}
@@ -110,7 +138,7 @@ export default function DownloadPage(): ReactNode {
                 className={cn(
                   buttonVariants({ variant: "default", size: "sm" }),
                   download.disabled && "cursor-not-allowed opacity-50",
-                  "w-full"
+                  "w-full",
                 )}
                 data-confetti={download.disabled ? "false" : "true"}
                 data-disabled={download.disabled ? "true" : "false"}

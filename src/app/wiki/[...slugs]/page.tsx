@@ -10,9 +10,15 @@ import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remot
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { extractPlainText, getFirstImageUrl } from "@/lib/markdown";
-import { getArticleBySlug, getParentArticles } from "@/services/wiki-articles/wiki-articles";
+import {
+  getArticleBySlug,
+  getParentArticles,
+  getParentArticlesLabelBySlug,
+} from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
+
+import type { Article as ArticleJsonLd, WithContext } from "schema-dts";
 
 type WikiPageProps = Readonly<{
   params: {
@@ -73,5 +79,21 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
     return <MarkdownEdit article={article} parentArticles={parentArticles} />;
   }
 
-  return <WikiMarkdownRemote source={article.markdown} />;
+  const jsonLd: WithContext<ArticleJsonLd> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.label,
+    description: extractPlainText(article.markdown),
+    datePublished: article.createdAt.toISOString(),
+    dateModified: article.updatedAt.toISOString(),
+    articleSection: await getParentArticlesLabelBySlug(slugs.join("/").replace("/edit", "")),
+    keywords: article.keywords,
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <WikiMarkdownRemote source={article.markdown} />
+    </>
+  );
 }

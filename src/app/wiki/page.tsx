@@ -9,6 +9,7 @@ import MDXRemote from "@/components/wiki/markdown-remote/markdown-remote";
 import { auth } from "@/lib/auth";
 import { getHomePageArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
+import { env } from "@/lib/env";
 
 const title: string = "Accueil | Selenite - Wiki & Documentation";
 const description: string =
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     images: ["/images/banner.png"],
   },
   robots: "index, follow",
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
 };
 
 export default async function WikiPage(): Promise<ReactNode> {

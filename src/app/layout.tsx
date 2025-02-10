@@ -6,6 +6,7 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import { Toaster } from "@/components/_ui/toaster";
 import LevaProvider from "@/components/common/leva-provider/leva-provider";
+import { WebVitals } from "@/components/common/webvitals/webvitals";
 
 import { orbitron, poppins } from "@/lib/fonts";
 
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: RootLayoutProps): Promise
         className={`antialiased ${poppins.variable} ${orbitron.variable} bg-black text-white`}
         suppressHydrationWarning={true}
       >
+        {process.env.NODE_ENV === "production" && <WebVitals />}
         <NextIntlClientProvider messages={messages}>
           <LevaProvider>
             {children}
