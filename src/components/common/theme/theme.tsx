@@ -28,7 +28,7 @@ export default function Theme(): ReactNode {
       <DropdownMenuContent>
         {themes.map((item: string) => (
           <DropdownMenuItem
-            key={theme}
+            key={item}
             onClick={(): void => setTheme(item)}
             className="cursor-pointer"
             disabled={theme === item}
