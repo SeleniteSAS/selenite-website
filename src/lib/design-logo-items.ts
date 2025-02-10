@@ -1,6 +1,8 @@
-type Variant =
-  | { name: string; mainColor: string; secondaryColor: string; contrastColor: string }
-  | { name: string; color: string; contrastColor: string };
+import type { Color } from "@/types/color";
+
+export type Variant =
+  | { name: string; mainColor: Color; secondaryColor: Color; contrastColor: Color }
+  | { name: string; color: Color; contrastColor: Color };
 
 const variants: Variant[] = [
   {
