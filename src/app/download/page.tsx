@@ -10,6 +10,7 @@ import ConfettiProvider from "@/components/download/confetti-provider/confetti-p
 import { env } from "@/lib/env";
 import { getUserPlatform } from "@/lib/user-agent";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
 
 type Download = {
   os: string;
@@ -57,6 +58,35 @@ const downloads: Download[] = [
     ),
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Download Selenite: Lost Contact",
+  description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+  openGraph: {
+    title: "Download Selenite: Lost Contact",
+    description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+    images: [{ url: "/images/banner.png" }],
+  },
+  twitter: {
+    title: "Download Selenite: Lost Contact",
+    description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
+    card: "summary_large_image",
+    images: [{ url: "/images/banner.png" }],
+  },
+  robots: "index, follow",
+  keywords: ["selenite", "download", "lost contact", "game", "windows", "macos", "linux"],
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
+  authors: [
+    {
+      name: "Selenite Studio",
+      url: env.NEXT_PUBLIC_ROOT_URL,
+    },
+    {
+      name: "Pierre Guéroult",
+      url: "https://pierregueroult.dev",
+    },
+  ],
+};
 
 export default function DownloadPage(): ReactNode {
   const { os } = getUserPlatform(headers());
