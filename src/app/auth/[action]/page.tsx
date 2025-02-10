@@ -23,8 +23,10 @@ export async function generateMetadata({ params }: AuthActionPageProps): Promise
   };
 }
 
-export async function generateStaticParams(): Promise<string[]> {
-  return ["login", "register"];
+export async function generateStaticParams() {
+  return ["login", "register"].map((action) => ({
+    action,
+  }));
 }
 
 export default async function AuthActionPage({ params, searchParams }: AuthActionPageProps): Promise<ReactNode> {
