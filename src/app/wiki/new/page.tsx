@@ -8,11 +8,13 @@ import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 
 import { auth } from "@/lib/auth";
 import { getParentArticles } from "@/services/wiki-articles/wiki-articles";
+import { Metadata } from "next";
+import { env } from "@/lib/env";
 
 const title: string = "Nouvelle page | Selenite - Wiki & Documentation";
 const description: string = "Créez une nouvelle page pour le wiki de Selenite.";
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -21,6 +23,7 @@ export const metadata = {
     images: ["/images/banner.png"],
   },
   robots: "noindex, nofollow",
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
 };
 
 export default async function NewWikiPage() {
