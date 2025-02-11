@@ -2,6 +2,7 @@ import { type ReactNode, lazy } from "react";
 
 import Link from "next/link";
 
+import { buttonVariants } from "@/components/_ui/button";
 import Arrows from "@/components/website/arrows/arrows";
 import Canvas from "@/components/website/canvas/canvas";
 import Clock from "@/components/website/clock/clock";
@@ -9,7 +10,6 @@ import Footer from "@/components/website/footer/footer";
 import SpaceShip from "@/components/website/spaceship/spaceship";
 
 import { env } from "@/lib/env";
-import { buttonVariants } from "@/components/_ui/button";
 import { cn } from "@/lib/utils";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
@@ -18,7 +18,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
   return (
     <div className="mt-32 h-[400vh]">
       <div className="flex h-[300vh] flex-col">
-        <div className="h-[calc(100vh-8rem)] relative">
+        <div className="relative h-[calc(100vh-8rem)]">
           <div className="ml-16 flex items-center gap-2">
             <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.8" d="M0.709961 0H47.1399L140 100H93.5701L0.709961 0Z" fill="#FFF" />
@@ -53,8 +53,13 @@ export default async function WebsitePage(): Promise<ReactNode> {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center font-orbitron font-semibold uppercase flex justify-center text-white">
-            <p className={cn(buttonVariants({ variant: "link", size: "lg"}), "text-white text-lg font-semibold no-underline hover:no-underline after:w-0 after:h-px after:absolute after:bottom-2 after:left-8 relative hover:after:w-[calc(100%-4rem)] after:bg-white after:transition-[width]")}>
+          <div className="absolute bottom-16 left-1/2 flex -translate-x-1/2 justify-center text-center font-orbitron font-semibold uppercase text-white">
+            <p
+              className={cn(
+                buttonVariants({ variant: "link", size: "lg" }),
+                "relative text-lg font-semibold text-white no-underline after:absolute after:bottom-2 after:left-8 after:h-px after:w-0 after:bg-white after:transition-[width] hover:no-underline hover:after:w-[calc(100%-4rem)]",
+              )}
+            >
               Scroll down to see more
             </p>
           </div>

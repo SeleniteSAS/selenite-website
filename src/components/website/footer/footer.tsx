@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+
 import Link from "next/link";
 
 import Noise from "@/components/_animate/noise";
@@ -6,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
 
 const links = [
   {
@@ -63,7 +64,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="flex items-center justify-center p-4">
-          <Card className="relative w-full max-w-[350px] bg-transparent text-white border-border/40">
+          <Card className="relative w-full max-w-[350px] border-border/40 bg-transparent text-white">
             <CardHeader className="relative z-10">
               <CardTitle>Download the game now</CardTitle>
               <CardDescription>Get the latest version of the game for your favorite platform</CardDescription>
@@ -95,7 +96,7 @@ export default function Footer() {
           </Card>
         </div>
         <div className="flex items-center justify-center">
-            <p>There will the cover art game here !</p>                
+          <p>There will the cover art game here !</p>
         </div>
       </div>
       <div className="mb-28 flex w-full">
