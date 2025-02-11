@@ -2,19 +2,20 @@ import { type ReactNode, lazy } from "react";
 
 import Link from "next/link";
 
+import Arrows from "@/components/website/arrows/arrows";
 import Canvas from "@/components/website/canvas/canvas";
 import Clock from "@/components/website/clock/clock";
+import Footer from "@/components/website/footer/footer";
 import SpaceShip from "@/components/website/spaceship/spaceship";
 
 import { env } from "@/lib/env";
-import Arrows from "@/components/website/arrows/arrows";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
 
 export default async function WebsitePage(): Promise<ReactNode> {
   return (
     <div className="mt-32 h-[400vh]">
-      <div className="h-[300vh] flex flex-col">
+      <div className="flex h-[300vh] flex-col">
         <div className="h-[calc(100vh-8rem)]">
           <div className="ml-16 flex items-center gap-2">
             <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,12 +53,13 @@ export default async function WebsitePage(): Promise<ReactNode> {
           </div>
         </div>
         <div className="h-screen">Section 2</div>
-        <div className="flex-1 relative">
+        <div className="relative flex-1">
           <div className="absolute bottom-2 right-2 -translate-x-1/2 space-y-4">
-           <Arrows />
-           <p className="text-wrap font-poppins text-sm text-center">
-            Use the arrow keys <br/>to move the spaceship
-           </p>
+            <Arrows />
+            <p className="text-wrap text-center font-poppins text-sm">
+              Use the arrow keys <br />
+              to move the spaceship
+            </p>
           </div>
         </div>
         <div className="fixed inset-0 -z-10 h-screen w-screen">
@@ -67,7 +69,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
           </Canvas>
         </div>
       </div>
-      <div className="h-screen text-white">FOOTER</div>
+      <Footer />
       <div className="fixed bottom-8 left-8 font-orbitron text-lg">
         DEVELOPED BY
         <br />
