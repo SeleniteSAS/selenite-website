@@ -14,7 +14,7 @@ export default function SpaceShip() {
   const [spaceshipRotation, setSpaceshipRotation] = useState([0, 0, 0]);
   const [spaceshipScale] = useState(0.4);
 
-  const [targetX, setTargetX] = useState(0);
+  const [targetX, setTargetX] = useState(-5.5);
 
   useFrame(() => {
     setSpaceshipPosition((prevPosition) => {
