@@ -11,11 +11,6 @@ const links = [
     url: "/",
   },
   {
-    label: "About",
-    url: "/about",
-  },
-
-  {
     label: "Wiki",
     url: env.NEXT_PUBLIC_WIKI_URL,
   },
