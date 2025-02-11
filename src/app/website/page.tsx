@@ -64,7 +64,36 @@ export default async function WebsitePage(): Promise<ReactNode> {
             </p>
           </div>
         </div>
-        <div className="relative flex-1">Section 2</div>
+        <div className="relative flex flex-1 flex-col items-center overflow-hidden">
+          <section className="flex w-full max-w-[1200px] flex-1 items-center justify-between">
+            <div className="w-1/2">
+              <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
+                <span className="text-md">#01</span>
+                <span className="text-5xl">The story</span>
+              </h3>
+              <p className="pl-8 pt-8 font-poppins">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
+                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
+                incidunt nostrum.
+              </p>
+            </div>
+            <div className="h-32 w-1/2 bg-blue-800"></div>
+          </section>
+          <section className="flex w-full max-w-[1200px] flex-1 items-center justify-between">
+            <div className="h-32 w-1/2 bg-blue-800"></div>
+            <div className="w-1/2 flex items-end flex-col">
+              <h3 className="relative text-right flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
+                <span className="text-md">#02</span>
+                <span className="text-5xl">The Selenites</span>
+              </h3>
+              <p className="pl-8 pt-8 font-poppins text-right">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
+                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
+                incidunt nostrum.
+              </p>
+            </div>
+          </section>
+        </div>
         <div className="relative h-screen">
           Section 3
           <div className="absolute bottom-4 right-4 -translate-x-1/2 space-y-4">
