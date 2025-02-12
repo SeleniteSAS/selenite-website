@@ -93,12 +93,14 @@ export default async function Sidebar() {
           </li>
           <li className="flex-1">
             <EditButton className={cn(buttonVariants({ size: "icon" }), "w-full")}>
+              <span className="sr-only">Edit this page</span>
               <PenIcon />
             </EditButton>
           </li>
           {session?.user && (
             <li className="flex-1">
               <CreateButton className={cn(buttonVariants({ size: "icon" }), "w-full")}>
+                <span className="sr-only">Create a new page</span>
                 <PlusIcon />
               </CreateButton>
             </li>
