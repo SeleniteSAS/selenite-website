@@ -1,12 +1,29 @@
 import { CopyIcon } from "lucide-react";
 import { Fragment } from "react";
 
+import { Metadata } from "next";
+
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/_ui/context-menu";
 import Hero from "@/components/wiki/hero/hero";
 
 import { getCMYK, getContrasted, getHSL, getRGB } from "@/lib/color";
 import { colors } from "@/lib/design-color-theme";
 import { cn } from "@/lib/utils";
+
+const title = "Palette de couleurs de Selenite: Lost Contact - Identité visuelle et ambiance";
+const description =
+  "Explorez la palette de couleurs de Selenite: Lost Contact. Découvrez comment nos choix chromatiques renforcent l'ambiance immersive et l'identité visuelle du jeu.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: ["/images/banner.png"],
+  },
+  robots: "index, follow",
+};
 
 export default function ColorsPage() {
   return (

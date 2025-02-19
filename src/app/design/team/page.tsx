@@ -2,6 +2,8 @@
 import { GithubIcon, LinkIcon, LinkedinIcon } from "lucide-react";
 import { Fragment, type JSX } from "react";
 
+import { Metadata } from "next";
+
 import { Marquee } from "@/components/_animate/marquee";
 import { BadgeGroup, BadgeGroupItem } from "@/components/_ui/badge-group";
 import { buttonVariants } from "@/components/_ui/button";
@@ -72,6 +74,21 @@ const teamMembers: TeamMember[] = [
     },
   },
 ];
+
+const title = "L'équipe derrière Selenite: Lost Contact";
+const description =
+  "Découvrez l'équipe passionnée derrière Selenite: Lost Contact, un jeu d'exploration et de survie sur la Lune. De la direction artistique au développement, rencontrez les talents qui ont donné vie à cet univers captivant.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: ["/images/banner.png"],
+  },
+  robots: "index, follow",
+};
 
 export default function TeamPage() {
   const elements: JSX.Element[] = teamMembers.map((member) => (

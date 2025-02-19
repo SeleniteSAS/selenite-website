@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { Metadata } from "next";
+
 import {
   OrbitronDisplayOne,
   OrbitronDisplayThree,
@@ -10,6 +12,22 @@ import {
 } from "@/components/design/font-displays/font-displays";
 import FontSection from "@/components/design/font-section/font-section";
 import Hero from "@/components/wiki/hero/hero";
+
+const title = "Les polices de caractères de Selenite: Lost Contact";
+
+const description =
+  "Découvrez les polices de caractères utilisées dans Selenite: Lost Contact. Explorez l'identité visuelle qui donne son style unique au jeu.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: ["/images/banner.png"],
+  },
+  robots: "index, follow",
+};
 
 export default function FontsPage() {
   return (
