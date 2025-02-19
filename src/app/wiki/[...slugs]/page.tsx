@@ -19,6 +19,7 @@ import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
 import type { Article as ArticleJsonLd, WithContext } from "schema-dts";
+import WikiFooter from "@/components/wiki/wiki-footer/wiki-footer";
 
 type WikiPageProps = Readonly<{
   params: {
@@ -94,6 +95,7 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <WikiMarkdownRemote source={article.markdown} />
+      <WikiFooter articleSlug={article.slug} />
     </>
   );
 }

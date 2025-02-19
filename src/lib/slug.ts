@@ -5,6 +5,7 @@ export function normalizeSlug(baseSlug: string, label: string): string {
     .normalize("NFD")
     .replace(/œ/g, "oe")
     .replace(/'/g, "")
+    .replace("’", "")
     .replace(/"/g, "")
     .replace(/“/g, "")
     .replace(/”/g, "")
