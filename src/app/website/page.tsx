@@ -1,5 +1,6 @@
 import { type ReactNode, lazy } from "react";
 
+import { Metadata } from "next";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/_ui/button";
@@ -13,6 +14,59 @@ import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
+
+const title = "Welcome to Selenite";
+const description =
+  "Bienvenue sur le site officiel de Selenite: Lost Contact, un jeu de tir intense où vous incarnez un pilote de vaisseau sur la surface lunaire. Votre mission : détruire les avant-postes extraterrestres pour désactiver le bouclier de la base ennemie. Combattez des vagues d'ennemis, améliorez votre vaisseau et préparez-vous à la bataille finale pour sauver la Terre en détruisant le canon extraterrestre. Stratégie, action et survie sont au cœur de l'aventure !";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: "/images/banner.png" }], // TODO: Replace with actual image
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@selenite_studio",
+    images: [{ url: "/images/banner.png" }],
+    title,
+    description,
+  },
+  robots: "index, follow",
+  keywords: [
+    "Selenite",
+    "Selenite Lost Contact",
+    "jeu de tir",
+    "survie",
+    "vaisseau spatial",
+    "lune",
+    "avant-postes extraterrestres",
+    "combat spatial",
+    "vagues d'ennemis",
+    "améliorations du vaisseau",
+    "stratégie",
+    "action",
+    "science-fiction",
+    "canon extraterrestre",
+    "mission finale",
+    "bouclier extraterrestre",
+    "bataille lunaire",
+    "jeu de survie spatial",
+  ],
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
+  authors: [
+    {
+      name: "Selenite Studio",
+      url: env.NEXT_PUBLIC_ROOT_URL,
+    },
+    {
+      name: "Pierre Guéroult",
+      url: "https://pierregueroult.dev",
+    },
+  ],
+};
 
 export default async function WebsitePage(): Promise<ReactNode> {
   return (
