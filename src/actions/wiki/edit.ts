@@ -13,6 +13,15 @@ import "server-only";
 
 type EditReturn = { error: string } | { success: true; slug: string };
 
+function normalizeSlug(baseSlug: string, label: string): string {
+  return `${baseSlug}${baseSlug.endsWith("/") ? "" : "/"}${label}`
+    .toLowerCase()
+    .normalize("NFD") 
+    .replace(/[\u0300-\u036f]/g, "") 
+    .replace(/'/g, "") 
+    .replace(/ /g, "-"); 
+}
+
 export default async function edit(id: string, values: CreateUpdateWikiPage): Promise<EditReturn> {
   const session: Session | null = await auth();
 
@@ -25,7 +34,7 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
 
     const article: Article | null = await updateArticle(id, {
       ...values,
-      slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
+      slug: normalizeSlug(values.slug, values.label),
     });
 
     try {
@@ -33,12 +42,9 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
         const children: Article[] = await getChildArticlesBySlug(oldSlug);
 
         for (const child of children) {
-          const newSlug: string = child.slug.replace(
-            oldSlug,
-            `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
-          );
+          const newSlug: string = child.slug.replace(oldSlug, normalizeSlug(values.slug, values.label));
           const childWithoutId = { ...child, id: undefined };
-          await updateArticle(child.id, { ...childWithoutId, icon: child.icon || undefined, slug: newSlug });
+          await updateArticle(child.id, { ...childWithoutId, icon: child.icon ?? undefined, slug: newSlug });
         }
       }
     } catch (e: unknown) {

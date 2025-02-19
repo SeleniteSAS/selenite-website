@@ -23,7 +23,10 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
       ...values,
       slug: `${values.slug !== "/" ? values.slug : ""}${values.slug.endsWith("/") ? "" : "/"}${values.label}`
         .toLowerCase()
-        .replace(/ /g, "-"),
+        .normalize("NFD") 
+        .replace(/[\u0300-\u036f]/g, "") 
+        .replace(/'/g, "") 
+        .replace(/ /g, "-"), 
     });
 
     if (article) {
