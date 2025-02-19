@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
     description: "Continue with your account or connect with github. Register if you don't have an account.",
     card: "summary_large_image",
-    images: ["/images/banner.png"],
+    images: ["/images/og/og-selenite-live.png"],
   },
   metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
   authors: [

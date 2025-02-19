@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Download Selenite: Lost Contact",
     description: "Download the latest version of Selenite: Lost Contact for Windows, macOS and Linux.",
     card: "summary_large_image",
-    images: [{ url: "/images/banner.png" }],
+    images: [{ url: "/images/og/og-selenite-live-download.png" }],
   },
   robots: "index, follow",
   keywords: ["selenite", "download", "lost contact", "game", "windows", "macos", "linux"],

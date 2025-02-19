@@ -25,12 +25,12 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: "/images/banner.png" }], // TODO: Replace with actual image
+    images: [{ url: "/images/og/og-selenite-live.png" }],
   },
   twitter: {
     card: "summary_large_image",
     site: "@selenite_studio",
-    images: [{ url: "/images/banner.png" }],
+    images: [{ url: "/images/og/og-selenite-live.png" }],
     title,
     description,
   },

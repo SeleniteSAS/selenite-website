@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: ["/images/banner.png"],
+    images: ["/images/og/og-selenite-live-weare.png"],
   },
   robots: "index, follow",
 };
