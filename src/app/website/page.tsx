@@ -126,9 +126,12 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 <span className="text-5xl">The story</span>
               </h3>
               <p className="pl-8 pt-8 font-poppins">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
+                En 2168, une découverte sur la Lune déclenche une guerre interstellaire aux enjeux inimaginables. Un
+                artefact extraterrestre, un signal de détresse… et une espèce alien prête à tout pour protéger son
+                territoire. Bienvenue sur Selenite: Lost Contact, explorez
+                l&apos;Alliance Terrienne, les mystérieux Horizon et la mission désespérée du pilote Alex Carter.
+                Plongez au cœur du conflit, découvrez les secrets des extraterrestres et analysez leurs technologies.
+                L&apos;exploration commence maintenant. Saurez-vous percer tous les mystères ?
               </p>
             </div>
             <div className="h-32 w-1/2"></div>
@@ -138,12 +141,14 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="flex w-1/2 flex-col items-end">
               <h3 className="relative flex w-fit flex-col pb-4 text-right font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#02</span>
-                <span className="text-5xl">The Selenites</span>
+                <span className="text-5xl">The Horizon</span>
               </h3>
               <p className="pl-8 pt-8 text-right font-poppins">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
+                Nul ne sait doù ils viennent, ni quelles sont leurs véritables intentions. Les Horizon ne laissent
+                derrière eux que ruines et silence. Leur technologie défie les lois connues de la physique, leur
+                intelligence dépasse l&apos;entendement humain, et leur conscience collective les rend insaisissables.
+                Sont-ils des conquérants, des gardiens ou une force bien plus ancienne ? Ce qui est certain, c&apos;est
+                qu&apos;ils ont répondu à un appel de détresse, et que l&apos;humanité en paiera le prix.
               </p>
             </div>
           </section>
@@ -156,9 +161,13 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 <span className="text-5xl">Your mission</span>
               </h3>
               <p className="max-w-[50vw] pl-8 pt-8 font-poppins">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
+                Une station en ruine, un ennemi inconnu, une menace imminente. Alex Carter est envoyé en mission de
+                reconnaissance sur la Lune, mais ce qu&apos;il découvre dépasse tout ce que l&apos;humanité aurait pu imaginer. Un
+                canon alien prêt à anéantir la Terre, un bouclier impénétrable, des avant-postes ennemis lourdement
+                armés… Pour stopper l&apos;inévitable, il devra infiltrer les lignes ennemies, détruire les défenses
+                extraterrestres et frapper au cœur de leur arsenal. Seul contre une civilisation supérieure, chaque
+                bataille est une lutte pour la survie. La mission est claire : frapper vite, frapper fort… et ne pas
+                échouer.
               </p>
             </div>
           </section>
