@@ -10,17 +10,10 @@ import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
 import "server-only";
+import { normalizeSlug } from "@/lib/slug";
 
 type EditReturn = { error: string } | { success: true; slug: string };
 
-function normalizeSlug(baseSlug: string, label: string): string {
-  return `${baseSlug}${baseSlug.endsWith("/") ? "" : "/"}${label}`
-    .toLowerCase()
-    .normalize("NFD") 
-    .replace(/[\u0300-\u036f]/g, "") 
-    .replace(/'/g, "") 
-    .replace(/ /g, "-"); 
-}
 
 export default async function edit(id: string, values: CreateUpdateWikiPage): Promise<EditReturn> {
   const session: Session | null = await auth();

@@ -8,6 +8,7 @@ import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { createArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
+import { normalizeSlug } from "@/lib/slug";
 
 type CreateReturn = { error: string } | { success: true; slug: string };
 
@@ -21,12 +22,7 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
   try {
     const article: Article | null = await createArticle({
       ...values,
-      slug: `${values.slug !== "/" ? values.slug : ""}${values.slug.endsWith("/") ? "" : "/"}${values.label}`
-        .toLowerCase()
-        .normalize("NFD") 
-        .replace(/[\u0300-\u036f]/g, "") 
-        .replace(/'/g, "") 
-        .replace(/ /g, "-"), 
+      slug: normalizeSlug(values.slug, values.label), 
     });
 
     if (article) {
