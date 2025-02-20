@@ -1,5 +1,8 @@
 import { Metadata } from "next";
 
+import Hero from "@/components/wiki/hero/hero";
+import { useTranslations } from "next-intl";
+
 const title = "Selenite: Lost Contact";
 
 const description =
@@ -17,5 +20,13 @@ export const metadata: Metadata = {
 };
 
 export default function DesignMainPage() {
-  return <p>Introduction page</p>;
+  const t = useTranslations("Design.Intro");
+  return (
+    <Hero
+      title={t("title")}
+      subtitle={t("subtitle")}
+      description={t("description")}
+      isIntro={t("cta")}
+    />
+  );
 }

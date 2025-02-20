@@ -108,6 +108,12 @@
         "cover2": "Second Cover Mockup"
       },
       "ingame": "In-game assets"
+    },
+    "Intro": {
+      "title": "Intro",
+      "subtitle": "Humanity thought it had conquered space. It just realized it was only trespassing.",
+      "description": "A discovery on the Moon has triggered an interstellar war. The Horizon, an advanced and ruthless alien civilization, have responded to a distress call—and they are ready to annihilate Earth. Only Alex Carter stands between them and total destruction. Dive into the universe of Selenite: Lost Contact through our visual resources: concept art, screenshots, 3D models, and more. Explore every detail of this cosmic confrontation.",
+      "cta": "👉 Browse the graphic resources in the sidebar"
     }
   }
 }

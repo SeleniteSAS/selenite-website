@@ -84,7 +84,36 @@
     "Assets": {
       "title": "Illustrations",
       "subtitle": "Un symbole n'est jamais qu'une simple forme. Un élément porte un sens, influençant la perception avant même qu'un mot ne soit lu. Chaque visuel est un pont entre la fonction et l'émotion, guidant les utilisateurs à travers une expérience fluide.",
-      "description": "Voici les principes d'illustration et d'iconographie qui définissent notre marque - utilisez-les pour créer une expérience cohérente et mémorable."
+      "description": "Voici les principes d'illustration et d'iconographie qui définissent notre marque - utilisez-les pour créer une expérience cohérente et mémorable.",
+      "icons": "Icônes",
+      "assets": "Éléments graphiques",
+      "iconsItems": {
+        "global": "Global",
+        "lang": "Langue",
+        "out": "Sortie",
+        "down": "Flèche vers le bas",
+        "planet": "Planète",
+        "center": "Centre",
+        "page": "Page",
+        "cross": "Croix",
+        "reticula": "Réticule",
+        "target": "Cible"
+      },
+      "assetsItems": {
+        "poster": "Affiche",
+        "poster1": "Premier mockup d'affiche",
+        "poster2": "Deuxième mockup d'affiche",
+        "cover": "Couverture",
+        "cover1": "Premier mockup de couverture",
+        "cover2": "Deuxième mockup de couverture"
+      },
+      "ingame": "Éléments en jeu"
+    },
+    "Intro": {
+      "title": "Intro",
+      "description": "Une découverte sur la Lune a déclenché une guerre interstellaire. Les Horizon, une civilisation avancée et impitoyable, ont répondu à un appel de détresse et sont prêts à anéantir la Terre. Seul Alex Carter peut stopper la menace. Plongez dans l'univers de Selenite: Lost Contact à travers nos ressources visuelles : concept arts, captures, modèles 3D et bien plus. Découvrez chaque détail de cet affrontement à l'échelle cosmique.",
+      "subtitle": "L'humanité pensait avoir conquis l'espace. Elle vient de comprendre qu'elle n'y était qu'un intrus.",
+      "cta": "👉 Explorez les ressources graphiques dans la sidebar"
     }
   }
 }
