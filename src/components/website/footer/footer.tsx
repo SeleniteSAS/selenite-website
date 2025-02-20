@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <div className="flex h-screen flex-col px-4 text-white">
-      <div className="mt-24 grid w-full flex-1 grid-cols-3 grid-rows-1">
+      <div className="mt-24 grid w-full flex-1 md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2 lg:grid-cols-3">
         <div className="flex flex-col items-center justify-center">
           <h4 className="mb-8 font-orbitron text-2xl font-semibold uppercase">
             {t("title1")} <br /> {t("title2")}
@@ -68,16 +68,16 @@ export default function Footer() {
         </div>
         <div className="flex items-center justify-center p-4">
           <Card className="relative w-full max-w-[350px] border-border/40 bg-transparent text-white">
-            <CardHeader className="relative z-10">
+            <CardHeader className="relative z-10 p-4 sm:p-6">
               <CardTitle>{t("downloadTitle")}</CardTitle>
               <CardDescription>{t("downloadDesc")}</CardDescription>
             </CardHeader>
-            <CardContent className="relative z-10">
+            <CardContent className="relative z-10 p-4 sm:p-6">
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href={env.NEXT_PUBLIC_DOWNLOAD_URL}
-                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between")}
+                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between text-xs sm:text-md px-2 sm:px-4")}
                   >
                     {t("downloadButton")}
                     <ArrowRight />
@@ -86,7 +86,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href={"https://github.com/selenite-live/selenite-game"}
-                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between")}
+                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between text-xs sm:text-md px-2 sm:px-4")}
                   >
                     {t("downloadGithub")} <ArrowRight />
                   </Link>
@@ -98,33 +98,33 @@ export default function Footer() {
             </div>
           </Card>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="hidden lg:flex items-center justify-center">
           <p>There will the cover art game here !</p>
         </div>
       </div>
       <div className="mb-28 flex w-full">
-        <div className="flex flex-1 flex-col items-start justify-end">
+        <div className="hidden md:flex flex-1 flex-col items-start justify-end">
           <div className="flex w-full">
             <div className="h-px flex-1 bg-gray-400"></div>
             <div className="h-px w-10 flex-none origin-[0_0] -rotate-45 bg-gray-400"></div>
           </div>
         </div>
-        <nav>
-          <ul className="-mb-1.5 flex gap-4 px-2 font-poppins">
+        <nav className="flex-1 xs:flex-none">
+          <ul className="-mb-1.5 flex gap-4 md:px-2 font-poppins px-0">
             <li>
-              <Link className="px-2 text-lg leading-none" href={"/legals"}>
+              <Link className="px-2 text-sm xs:text-md md:text-lg leading-none text-wrap sm:text-nowrap text-center w-full xs:w-auto" href={"/legals"}>
                 {t("legals")}
               </Link>
             </li>
             <li>
-              <Link className="px-2 text-lg leading-none" href={"/privacy-policy"}>
+              <Link className="px-2 text-sm xs:text-md md:text-lg leading-none text-wrap sm:text-nowrap text-center w-full xs:w-auto" href={"/privacy-policy"}>
                 {t("privacy")}
               </Link>
             </li>
           </ul>
-          <div className="relative bottom-7 -mx-3 h-px bg-gray-400"></div>
+          <div className="hidden xs:block relative bottom-7 -mx-3 h-px bg-gray-400"></div>
         </nav>
-        <div className="flex flex-1 flex-col items-end justify-end">
+        <div className="hidden xs:flex flex-1 flex-col items-end justify-end">
           <div className="flex w-full">
             <div className="h-px w-10 flex-none origin-[100%_0] rotate-45 bg-gray-400"></div>
             <div className="h-px flex-1 bg-gray-400"></div>

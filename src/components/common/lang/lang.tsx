@@ -28,7 +28,7 @@ export default function Lang(): ReactNode {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild={true} className={"fixed bottom-8 right-8"}>
+      <DropdownMenuTrigger asChild={true} className={"fixed bottom-4 right-4 sm:bottom-8 sm:right-8"}>
         <Button variant={"default"} className={"[&_svg]:size-auto"} size={"icon"}>
           <svg width="25" height="25" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
