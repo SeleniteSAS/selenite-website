@@ -52,7 +52,7 @@ export default function Clock(): ReactNode {
   );
 
   return (
-    <ul className="relative z-10 flex flex-col xs:flex-row items-center md:justify-around font-light text-white flex-wrap md:flex-nowrap">
+    <ul className="relative z-10 flex flex-col flex-wrap items-center font-light text-white xs:flex-row md:flex-nowrap md:justify-around">
       {units.map((unit: Unit) => (
         <li
           key={unit.label}
@@ -61,7 +61,7 @@ export default function Clock(): ReactNode {
           suppressHydrationWarning={true}
         >
           <p
-            className="font-orbitron tabular-nums text-[32vw] xs:text-[24vw] md:text-[12vw]"
+            className="font-orbitron text-[32vw] tabular-nums xs:text-[24vw] md:text-[12vw]"
             suppressHydrationWarning={true}
             style={{
               lineHeight: "1",

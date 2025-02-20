@@ -73,10 +73,10 @@ export default async function WebsitePage(): Promise<ReactNode> {
   const t = await getTranslations("Website");
 
   return (
-    <div className="mt-16 sm:mt-32 h-[400vh]">
+    <div className="mt-16 h-[400vh] sm:mt-32">
       <div className="flex h-[300vh] flex-col">
         <div className="relative h-[calc(100vh-8rem)]">
-          <div className="ml-2 xs:ml-16 flex items-center gap-2 justify-center xs:justify-start">
+          <div className="ml-2 flex items-center justify-center gap-2 xs:ml-16 xs:justify-start">
             <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.8" d="M0.709961 0H47.1399L140 100H93.5701L0.709961 0Z" fill="#FFF" />
               <path opacity="0.8" d="M93.5701 0H140L232.86 100H186.43L93.5701 0Z" fill="#FFF" />
@@ -84,8 +84,8 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <p className="font-poppins font-bold uppercase">{t("adventures")}</p>
           </div>
           <Clock />
-          <div className="mx-2 md:mx-16 mt-4 flex flex-col sm:flex-row items-start justify-between font-poppins">
-            <div className="text-sm sm:text-md flex flex-col font-bold uppercase opacity-55 self-start md:self-auto">
+          <div className="mx-2 mt-4 flex flex-col items-start justify-between font-poppins sm:flex-row md:mx-16">
+            <div className="sm:text-md flex flex-col self-start text-sm font-bold uppercase opacity-55 md:self-auto">
               <span className="italic">Elbeuf</span>
               <div className="flex items-center gap-2 text-sm sm:text-lg">
                 <svg width="20" height="20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +97,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 <span>1° 0&apos; 32.6736&apos;&apos; E</span>
               </div>
             </div>
-            <div className="mt-4 sm:mt-0 text-sm sm:text-md flex flex-col items-end font-bold uppercase opacity-55 self-end md:self-auto">
+            <div className="sm:text-md mt-4 flex flex-col items-end self-end text-sm font-bold uppercase opacity-55 sm:mt-0 md:self-auto">
               <span className="italic">&copy; 2025 Selenite</span>
               <div className="flex gap-2">
                 <span>Unity Technologies</span>
@@ -110,7 +110,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-16 left-1/2 sm:flex -translate-x-1/2 justify-center text-center font-orbitron font-semibold uppercase text-white hidden">
+          <div className="absolute bottom-16 left-1/2 hidden -translate-x-1/2 justify-center text-center font-orbitron font-semibold uppercase text-white sm:flex">
             <p
               className={cn(
                 buttonVariants({ variant: "link", size: "lg" }),
@@ -121,37 +121,37 @@ export default async function WebsitePage(): Promise<ReactNode> {
             </p>
           </div>
         </div>
-        <div className="relative flex md:flex-1 flex-col items-center overflow-hidden">
-          <section className="flex w-full max-w-[1200px] md:flex-1 items-center justify-start px-8">
-            <div className="w-full md:w-1/2 justify-self-start">
+        <div className="relative flex flex-col items-center overflow-hidden md:flex-1">
+          <section className="flex w-full max-w-[1200px] items-center justify-start px-8 md:flex-1">
+            <div className="w-full justify-self-start md:w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#01</span>
                 <span className="text-5xl">{t("theStory")}</span>
               </h3>
-              <p className="pl-8 pt-8 font-poppins text-xs md:text-md">{t("theStoryText")}</p>
+              <p className="pl-8 pt-8 font-poppins text-xs md:text-lg">{t("theStoryText")}</p>
             </div>
           </section>
-          <section className="flex w-full max-w-[1200px] md:flex-1 items-center justify-end px-8 mt-32 md:mt-0">
-            <div className="flex w-full md:w-1/2 flex-col items-end">
+          <section className="mt-32 flex w-full max-w-[1200px] items-center justify-end px-8 md:mt-0 md:flex-1">
+            <div className="flex w-full flex-col items-end md:w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 text-right font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#02</span>
                 <span className="text-5xl">{t("theHorizon")}</span>
               </h3>
-              <p className="pl-8 pt-8 text-right font-poppins text-xs md:text-md">{t("theHorizonText")}</p>
+              <p className="pl-8 pt-8 text-right font-poppins text-xs md:text-lg">{t("theHorizonText")}</p>
             </div>
           </section>
         </div>
-        <div className="relative flex md:h-[90vh] flex-col items-center flex-1 md:flex-none mt-32 md:mt-0">
+        <div className="relative mt-32 flex flex-1 flex-col items-center md:mt-0 md:h-[90vh] md:flex-none">
           <section className="flex w-full max-w-[1200px] items-center justify-start px-8">
             <div className="w-full">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#03</span>
                 <span className="text-5xl">{t("yourMission")}</span>
               </h3>
-              <p className="pl-8 pt-8 font-poppins text-xs md:text-md">{t("yourMissionText")}</p>
+              <p className="pl-8 pt-8 font-poppins text-xs md:text-lg">{t("yourMissionText")}</p>
             </div>
           </section>
-          <div className="absolute bottom-4 right-4 -translate-x-1/2 space-y-4 hidden md:block">
+          <div className="absolute bottom-4 right-4 hidden -translate-x-1/2 space-y-4 md:block">
             <Arrows />
             <p className="text-wrap text-center font-poppins text-sm">
               {t("moveKeys1")}
@@ -168,7 +168,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </div>
       <Footer />
-      <div className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 font-orbitron text-sm sm:text-lg uppercase">
+      <div className="fixed bottom-4 left-4 font-orbitron text-sm uppercase sm:bottom-8 sm:left-8 sm:text-lg">
         {t("developedBy")}
         <br />
         <Link

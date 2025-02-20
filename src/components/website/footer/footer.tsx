@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <div className="flex h-screen flex-col px-4 text-white">
-      <div className="mt-24 grid w-full flex-1 md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2 lg:grid-cols-3">
+      <div className="mt-24 grid w-full flex-1 grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3">
         <div className="flex flex-col items-center justify-center">
           <h4 className="mb-8 font-orbitron text-2xl font-semibold uppercase">
             {t("title1")} <br /> {t("title2")}
@@ -77,7 +77,10 @@ export default function Footer() {
                 <li>
                   <Link
                     href={env.NEXT_PUBLIC_DOWNLOAD_URL}
-                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between text-xs sm:text-md px-2 sm:px-4")}
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "sm:text-md w-full justify-between px-2 text-xs sm:px-4",
+                    )}
                   >
                     {t("downloadButton")}
                     <ArrowRight />
@@ -86,7 +89,10 @@ export default function Footer() {
                 <li>
                   <Link
                     href={"https://github.com/selenite-live/selenite-game"}
-                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-between text-xs sm:text-md px-2 sm:px-4")}
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "sm:text-md w-full justify-between px-2 text-xs sm:px-4",
+                    )}
                   >
                     {t("downloadGithub")} <ArrowRight />
                   </Link>
@@ -98,33 +104,39 @@ export default function Footer() {
             </div>
           </Card>
         </div>
-        <div className="hidden lg:flex items-center justify-center">
+        <div className="hidden items-center justify-center lg:flex">
           <p>There will the cover art game here !</p>
         </div>
       </div>
       <div className="mb-28 flex w-full">
-        <div className="hidden md:flex flex-1 flex-col items-start justify-end">
+        <div className="hidden flex-1 flex-col items-start justify-end md:flex">
           <div className="flex w-full">
             <div className="h-px flex-1 bg-gray-400"></div>
             <div className="h-px w-10 flex-none origin-[0_0] -rotate-45 bg-gray-400"></div>
           </div>
         </div>
         <nav className="flex-1 xs:flex-none">
-          <ul className="-mb-1.5 flex gap-4 md:px-2 font-poppins px-0">
+          <ul className="-mb-1.5 flex gap-4 px-0 font-poppins md:px-2">
             <li>
-              <Link className="px-2 text-sm xs:text-md md:text-lg leading-none text-wrap sm:text-nowrap text-center w-full xs:w-auto" href={"/legals"}>
+              <Link
+                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg"
+                href={"/legals"}
+              >
                 {t("legals")}
               </Link>
             </li>
             <li>
-              <Link className="px-2 text-sm xs:text-md md:text-lg leading-none text-wrap sm:text-nowrap text-center w-full xs:w-auto" href={"/privacy-policy"}>
+              <Link
+                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg"
+                href={"/privacy-policy"}
+              >
                 {t("privacy")}
               </Link>
             </li>
           </ul>
-          <div className="hidden xs:block relative bottom-7 -mx-3 h-px bg-gray-400"></div>
+          <div className="relative bottom-7 -mx-3 hidden h-px bg-gray-400 xs:block"></div>
         </nav>
-        <div className="hidden xs:flex flex-1 flex-col items-end justify-end">
+        <div className="hidden flex-1 flex-col items-end justify-end xs:flex">
           <div className="flex w-full">
             <div className="h-px w-10 flex-none origin-[100%_0] rotate-45 bg-gray-400"></div>
             <div className="h-px flex-1 bg-gray-400"></div>
