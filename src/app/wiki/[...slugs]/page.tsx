@@ -6,6 +6,7 @@ import { notFound, redirect } from "next/navigation";
 
 import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remote";
+import WikiFooter from "@/components/wiki/wiki-footer/wiki-footer";
 
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
@@ -94,6 +95,7 @@ export default async function WikiPage({ params: { slugs } }: WikiPageProps): Pr
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <WikiMarkdownRemote source={article.markdown} />
+      <WikiFooter articleSlug={article.slug} />
     </>
   );
 }

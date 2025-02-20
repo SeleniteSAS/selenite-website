@@ -12,8 +12,8 @@ export interface LogoState {
 }
 
 export const useLogoStore: UseBoundStore<StoreApi<LogoState>> = create<LogoState>((set) => ({
-  name: "Selenite",
-  colors: ["#000000", "#FFFFFF", "#FF0000"],
+  name: "Alien Red",
+  colors: ["#A4191F", "#171717", "#FFFFFF"],
   setName: (name) => set({ name }),
   setColors: (colors) => set({ colors }),
 }));

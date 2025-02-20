@@ -1,5 +1,7 @@
 import { type ReactNode, lazy } from "react";
 
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/_ui/button";
@@ -14,23 +16,78 @@ import { cn } from "@/lib/utils";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
 
+const title = "Welcome to Selenite";
+const description =
+  "Bienvenue sur le site officiel de Selenite: Lost Contact, un jeu de tir intense où vous incarnez un pilote de vaisseau sur la surface lunaire. Votre mission : détruire les avant-postes extraterrestres pour désactiver le bouclier de la base ennemie. Combattez des vagues d'ennemis, améliorez votre vaisseau et préparez-vous à la bataille finale pour sauver la Terre en détruisant le canon extraterrestre. Stratégie, action et survie sont au cœur de l'aventure !";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: "/images/og/og-selenite-live.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@selenite_studio",
+    images: [{ url: "/images/og/og-selenite-live.png" }],
+    title,
+    description,
+  },
+  robots: "index, follow",
+  keywords: [
+    "Selenite",
+    "Selenite Lost Contact",
+    "jeu de tir",
+    "survie",
+    "vaisseau spatial",
+    "lune",
+    "avant-postes extraterrestres",
+    "combat spatial",
+    "vagues d'ennemis",
+    "améliorations du vaisseau",
+    "stratégie",
+    "action",
+    "science-fiction",
+    "canon extraterrestre",
+    "mission finale",
+    "bouclier extraterrestre",
+    "bataille lunaire",
+    "jeu de survie spatial",
+  ],
+  metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
+  authors: [
+    {
+      name: "Selenite Studio",
+      url: env.NEXT_PUBLIC_ROOT_URL,
+    },
+    {
+      name: "Pierre Guéroult",
+      url: "https://pierregueroult.dev",
+    },
+  ],
+};
+
 export default async function WebsitePage(): Promise<ReactNode> {
+  const t = await getTranslations("Website");
+
   return (
-    <div className="mt-32 h-[400vh]">
+    <div className="mt-16 h-[400vh] sm:mt-32">
       <div className="flex h-[300vh] flex-col">
         <div className="relative h-[calc(100vh-8rem)]">
-          <div className="ml-16 flex items-center gap-2">
+          <div className="ml-2 flex items-center justify-center gap-2 xs:ml-16 xs:justify-start">
             <svg width="29" height="13" viewBox="0 0 233 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.8" d="M0.709961 0H47.1399L140 100H93.5701L0.709961 0Z" fill="#FFF" />
               <path opacity="0.8" d="M93.5701 0H140L232.86 100H186.43L93.5701 0Z" fill="#FFF" />
             </svg>
-            <p className="font-poppins font-bold uppercase">The adventures starts in </p>
+            <p className="font-poppins font-bold uppercase">{t("adventures")}</p>
           </div>
           <Clock />
-          <div className="mx-16 mt-4 flex items-start justify-between font-poppins">
-            <div className="text-md flex flex-col font-bold uppercase opacity-55">
+          <div className="mx-2 mt-4 flex flex-col items-start justify-between font-poppins sm:flex-row md:mx-16">
+            <div className="sm:text-md flex flex-col self-start text-sm font-bold uppercase opacity-55 md:self-auto">
               <span className="italic">Elbeuf</span>
-              <div className="flex items-center gap-2 text-lg">
+              <div className="flex items-center gap-2 text-sm sm:text-lg">
                 <svg width="20" height="20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M25.75 24.25V0H24.25V24.25H0V25.75H24.25V50H25.75V25.75H50V24.25H25.75Z" fill="#FFF" />
                 </svg>
@@ -40,7 +97,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 <span>1° 0&apos; 32.6736&apos;&apos; E</span>
               </div>
             </div>
-            <div className="text-md flex flex-col items-end font-bold uppercase opacity-55">
+            <div className="sm:text-md mt-4 flex flex-col items-end self-end text-sm font-bold uppercase opacity-55 sm:mt-0 md:self-auto">
               <span className="italic">&copy; 2025 Selenite</span>
               <div className="flex gap-2">
                 <span>Unity Technologies</span>
@@ -53,66 +110,53 @@ export default async function WebsitePage(): Promise<ReactNode> {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-16 left-1/2 flex -translate-x-1/2 justify-center text-center font-orbitron font-semibold uppercase text-white">
+          <div className="absolute bottom-16 left-1/2 hidden -translate-x-1/2 justify-center text-center font-orbitron font-semibold uppercase text-white sm:flex">
             <p
               className={cn(
                 buttonVariants({ variant: "link", size: "lg" }),
                 "relative text-lg font-semibold text-white no-underline after:absolute after:bottom-2 after:left-8 after:h-px after:w-0 after:bg-white after:transition-[width] hover:no-underline hover:after:w-[calc(100%-4rem)]",
               )}
             >
-              Scroll down to see more
+              {t("scrollDown")}
             </p>
           </div>
         </div>
-        <div className="relative flex flex-1 flex-col items-center overflow-hidden">
-          <section className="flex w-full max-w-[1200px] flex-1 items-center justify-between px-8">
-            <div className="w-1/2">
+        <div className="relative flex flex-col items-center overflow-hidden md:flex-1">
+          <section className="flex w-full max-w-[1200px] items-center justify-start px-8 md:flex-1">
+            <div className="w-full justify-self-start md:w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#01</span>
-                <span className="text-5xl">The story</span>
+                <span className="text-5xl">{t("theStory")}</span>
               </h3>
-              <p className="pl-8 pt-8 font-poppins">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
-              </p>
+              <p className="pl-8 pt-8 font-poppins text-xs md:text-lg">{t("theStoryText")}</p>
             </div>
-            <div className="h-32 w-1/2"></div>
           </section>
-          <section className="flex w-full max-w-[1200px] flex-1 items-center justify-between px-8">
-            <div className="h-32 w-1/2 "></div>
-            <div className="flex w-1/2 flex-col items-end">
+          <section className="mt-32 flex w-full max-w-[1200px] items-center justify-end px-8 md:mt-0 md:flex-1">
+            <div className="flex w-full flex-col items-end md:w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 text-right font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#02</span>
-                <span className="text-5xl">The Selenites</span>
+                <span className="text-5xl">{t("theHorizon")}</span>
               </h3>
-              <p className="pl-8 pt-8 text-right font-poppins">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
-              </p>
+              <p className="pl-8 pt-8 text-right font-poppins text-xs md:text-lg">{t("theHorizonText")}</p>
             </div>
           </section>
         </div>
-        <div className="relative h-[90vh] flex flex-col items-center">
-          <section className="flex w-full max-w-[1200px] items-center justify-between px-8">
+        <div className="relative mt-32 flex flex-1 flex-col items-center md:mt-0 md:h-[90vh] md:flex-none">
+          <section className="flex w-full max-w-[1200px] items-center justify-start px-8">
             <div className="w-full">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#03</span>
-                <span className="text-5xl">Your mission</span>
+                <span className="text-5xl">{t("yourMission")}</span>
               </h3>
-              <p className="pl-8 pt-8 font-poppins max-w-[50vw]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, corporis exercitationem! Similique unde,
-                fugiat non sed ipsum porro corporis veniam, officiis quibusdam illum quod, at quis laboriosam saepe
-                incidunt nostrum.
-              </p>
+              <p className="pl-8 pt-8 font-poppins text-xs md:text-lg">{t("yourMissionText")}</p>
             </div>
           </section>
-          <div className="absolute bottom-4 right-4 -translate-x-1/2 space-y-4">
+          <div className="absolute bottom-4 right-4 hidden -translate-x-1/2 space-y-4 md:block">
             <Arrows />
             <p className="text-wrap text-center font-poppins text-sm">
-              Use the arrow keys <br />
-              to move the spaceship
+              {t("moveKeys1")}
+              <br />
+              {t("moveKeys2")}
             </p>
           </div>
         </div>
@@ -124,8 +168,8 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </div>
       <Footer />
-      <div className="fixed bottom-8 left-8 font-orbitron text-lg">
-        DEVELOPED BY
+      <div className="fixed bottom-4 left-4 font-orbitron text-sm uppercase sm:bottom-8 sm:left-8 sm:text-lg">
+        {t("developedBy")}
         <br />
         <Link
           href={env.NEXT_PUBLIC_STUDIO_URL}

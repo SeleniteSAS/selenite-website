@@ -4,6 +4,7 @@ import { Session } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
+import { normalizeSlug } from "@/lib/slug";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { createArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
@@ -21,9 +22,7 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
   try {
     const article: Article | null = await createArticle({
       ...values,
-      slug: `${values.slug !== "/" ? values.slug : ""}${values.slug.endsWith("/") ? "" : "/"}${values.label}`
-        .toLowerCase()
-        .replace(/ /g, "-"),
+      slug: normalizeSlug(values.slug, values.label),
     });
 
     if (article) {

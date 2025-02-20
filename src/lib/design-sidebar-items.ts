@@ -7,33 +7,33 @@ export const items: Record<
 > = {
   default: [
     {
-      name: "Introduction",
+      name: "intro",
       path: "/",
     },
     {
-      name: "Communication",
+      name: "communication",
       path: "/communication",
     },
     {
-      name: "Team",
+      name: "team",
       path: "/team",
     },
   ],
-  "Art & Design": [
+  art: [
     {
-      name: "Logotype",
+      name: "logo",
       path: "/logotype",
     },
     {
-      name: "Colors",
+      name: "colors",
       path: "/colors",
     },
     {
-      name: "Fonts",
+      name: "fonts",
       path: "/fonts",
     },
     {
-      name: "Illustration",
+      name: "assets",
       path: "/assets",
     },
   ],

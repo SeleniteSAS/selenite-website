@@ -9,6 +9,7 @@ const i18nPath = "./src/lang/request.ts";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "mdx", "jsx", "js"],
+  productionBrowserSourceMaps: true,
 };
 
 /** @type {import("@next/mdx").NextMDXOptions} */

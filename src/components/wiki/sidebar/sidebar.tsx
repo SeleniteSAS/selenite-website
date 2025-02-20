@@ -2,6 +2,7 @@ import { CogIcon, MoonIcon, PenIcon, PlusIcon, SunIcon, UserIcon } from "lucide-
 import { Suspense } from "react";
 
 import { Session } from "next-auth";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/_ui/alert";
@@ -35,6 +36,7 @@ import { cn } from "@/lib/utils";
 
 export default async function Sidebar() {
   const session: Session | null = await auth();
+  const t = await getTranslations("Wiki");
 
   return (
     <SidebarComponent collapsible={"offcanvas"} side={"left"} variant="floating" className="z-10">
@@ -54,10 +56,8 @@ export default async function Sidebar() {
       </SidebarHeader>
       <SidebarContent className="px-4 py-2">
         <Alert className="p-2">
-          <AlertTitle className="text-md w-full text-center font-semibold">Welcome to the wiki !</AlertTitle>
-          <AlertDescription className="text-center text-xs">
-            The wiki is only available in French for now.
-          </AlertDescription>
+          <AlertTitle className="text-md w-full text-center font-semibold">{t("title")}</AlertTitle>
+          <AlertDescription className="text-center text-xs">{t("description")}</AlertDescription>
         </Alert>
         <Suspense fallback={<SidebarMenuSkeleton />}>
           <SidebarMenu />
@@ -93,12 +93,14 @@ export default async function Sidebar() {
           </li>
           <li className="flex-1">
             <EditButton className={cn(buttonVariants({ size: "icon" }), "w-full")}>
+              <span className="sr-only">Edit this page</span>
               <PenIcon />
             </EditButton>
           </li>
           {session?.user && (
             <li className="flex-1">
               <CreateButton className={cn(buttonVariants({ size: "icon" }), "w-full")}>
+                <span className="sr-only">Create a new page</span>
                 <PlusIcon />
               </CreateButton>
             </li>

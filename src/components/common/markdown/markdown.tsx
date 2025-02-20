@@ -72,6 +72,16 @@ const markdownComponents = {
   tr: (props: ComponentProps<"tr">): ReactNode => <TableRow {...props} />,
   th: (props: ComponentProps<"th">): ReactNode => <TableHead {...props} />,
   td: (props: ComponentProps<"td">): ReactNode => <TableCell {...props} />,
+  li: ({ className, children, ...props }: ComponentProps<"li">): ReactNode => (
+    <li className={cn("ml-5 list-disc", className)} {...props}>
+      {children}
+    </li>
+  ),
+  p: ({ className, children, ...props }: ComponentProps<"p">): ReactNode => (
+    <p className={cn("mb-2.5", className)} {...props}>
+      {children}
+    </p>
+  ),
 };
 
 export default markdownComponents;

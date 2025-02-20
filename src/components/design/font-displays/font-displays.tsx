@@ -96,7 +96,7 @@ export function OrbitronDisplayTwo() {
         <TextPressure
           text="SELENITESTUDIO"
           textColor="#F8F7F5"
-          fontFamily="Orbitron"
+          fontFamily="var(--orbitron)"
           width={false}
           weight={true}
           italic={false}

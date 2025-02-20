@@ -1,6 +1,9 @@
 import { CopyIcon } from "lucide-react";
 import { Fragment } from "react";
 
+import { Metadata } from "next";
+import { useTranslations } from "next-intl";
+
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/_ui/context-menu";
 import Hero from "@/components/wiki/hero/hero";
 
@@ -8,14 +11,27 @@ import { getCMYK, getContrasted, getHSL, getRGB } from "@/lib/color";
 import { colors } from "@/lib/design-color-theme";
 import { cn } from "@/lib/utils";
 
+const title = "Palette de couleurs de Selenite: Lost Contact - Identité visuelle et ambiance";
+const description =
+  "Explorez la palette de couleurs de Selenite: Lost Contact. Découvrez comment nos choix chromatiques renforcent l'ambiance immersive et l'identité visuelle du jeu.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: ["/images/banner.png"],
+  },
+  robots: "index, follow",
+};
+
 export default function ColorsPage() {
+  const t = useTranslations("Design.Colors");
+
   return (
     <Fragment>
-      <Hero
-        title="Colors"
-        subtitle="A color defines a side. For humans, blue represents hope and resilience. For aliens, red embodies fear and danger. Each shade tells a story, each hue marks a territory. In a universe where colors signify allegiance, choose your side wisely."
-        description="Here are the colors that define our brand. Use them to create a consistent experience for our users."
-      />
+      <Hero title={t("title")} subtitle={t("subtitle")} description={t("description")} />
       <section className="relative min-h-screen w-full px-6 py-12 md:px-24">
         <div className="space-y-4 border border-black p-4">
           {Object.entries(colors).map(([name, colors]: [string, string[]]) => (

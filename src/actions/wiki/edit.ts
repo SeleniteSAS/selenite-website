@@ -4,6 +4,7 @@ import { Session } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
+import { normalizeSlug } from "@/lib/slug";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { getArticleSlug, getChildArticlesBySlug, updateArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
@@ -25,7 +26,7 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
 
     const article: Article | null = await updateArticle(id, {
       ...values,
-      slug: `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
+      slug: normalizeSlug(values.slug, values.label),
     });
 
     try {
@@ -33,12 +34,9 @@ export default async function edit(id: string, values: CreateUpdateWikiPage): Pr
         const children: Article[] = await getChildArticlesBySlug(oldSlug);
 
         for (const child of children) {
-          const newSlug: string = child.slug.replace(
-            oldSlug,
-            `${values.slug}${values.slug.endsWith("/") ? "" : "/"}${values.label}`.toLowerCase().replace(/ /g, "-"),
-          );
+          const newSlug: string = child.slug.replace(oldSlug, normalizeSlug(values.slug, values.label));
           const childWithoutId = { ...child, id: undefined };
-          await updateArticle(child.id, { ...childWithoutId, icon: child.icon || undefined, slug: newSlug });
+          await updateArticle(child.id, { ...childWithoutId, icon: child.icon ?? undefined, slug: newSlug });
         }
       }
     } catch (e: unknown) {
