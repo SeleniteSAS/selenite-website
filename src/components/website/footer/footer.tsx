@@ -40,13 +40,15 @@ export default function Footer() {
     <div className="flex h-screen flex-col px-4 text-white">
       <div className="mt-24 grid w-full flex-1 grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3">
         <div className="flex flex-col items-center justify-center">
-          <h4 className="mb-8 font-orbitron text-2xl font-semibold uppercase">
-            {t("title1")} <br /> {t("title2")}
+          <h4 className="mb-8 font-orbitron text-lg sm:text-2xl font-semibold uppercase">
+            {t("title1")} <br
+              className="hidden sm:block"
+            /> {t("title2")}
           </h4>
           <ul className="flex flex-col gap-4 font-poppins">
             {links.map((link) => (
               <li key={link.href} className="group transition-transform hover:translate-x-4">
-                <Link href={link.href} className="flex items-center gap-6">
+                <Link href={link.href} className="flex items-center gap-6 text-sm md:text-lg">
                   <svg
                     width="18"
                     height="18"
@@ -108,7 +110,7 @@ export default function Footer() {
           <p>There will the cover art game here !</p>
         </div>
       </div>
-      <div className="mb-28 flex w-full">
+      <div className="pb-24 flex w-full">
         <div className="hidden flex-1 flex-col items-start justify-end md:flex">
           <div className="flex w-full">
             <div className="h-px flex-1 bg-gray-400"></div>
@@ -119,7 +121,7 @@ export default function Footer() {
           <ul className="-mb-1.5 flex gap-4 px-0 font-poppins md:px-2">
             <li>
               <Link
-                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg"
+                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg block"
                 href={"/legals"}
               >
                 {t("legals")}
@@ -127,7 +129,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg"
+                className="xs:text-md w-full text-wrap px-2 text-center text-sm leading-none xs:w-auto sm:text-nowrap md:text-lg block"
                 href={"/privacy-policy"}
               >
                 {t("privacy")}

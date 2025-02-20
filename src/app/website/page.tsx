@@ -122,7 +122,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
           </div>
         </div>
         <div className="relative flex flex-col items-center overflow-hidden md:flex-1">
-          <section className="flex w-full max-w-[1200px] items-center justify-start px-8 md:flex-1">
+          <section className="flex w-full max-w-[1200px] items-center justify-start px-8 md:flex-1 mt-32 md:mt-0">
             <div className="w-full justify-self-start md:w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#01</span>

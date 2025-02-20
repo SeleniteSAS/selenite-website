@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/_ui/button";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/common/logo/logo";
 
 const links = [
   {
@@ -35,10 +36,15 @@ export default function Header() {
         </div>
       </div>
       <nav className="flex-1 xs:flex-none">
-        <ul className="-mt-1.5 flex gap-4 px-2 font-poppins">
+        <ul className="sm:-mt-1.5 flex gap-4 px-2 font-poppins justify-center sm:justify-start items-center sm:items-start">
+          <li>
+            <Link href="/" className="" title="Home">
+              <Logo mainColor="white" secondaryColor="white" size={32} />
+            </Link>
+          </li>
           {links.map((link) => (
             <li key={link.url}>
-              <Link href={link.url} className="px-2 text-lg leading-none">
+              <Link href={link.url} className="px-2 text-lg sm:leading-none">
                 {t(link.label)}
               </Link>
             </li>
