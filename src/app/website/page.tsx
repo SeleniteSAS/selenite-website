@@ -12,6 +12,7 @@ import SpaceShip from "@/components/website/spaceship/spaceship";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
 
@@ -69,6 +70,9 @@ export const metadata: Metadata = {
 };
 
 export default async function WebsitePage(): Promise<ReactNode> {
+
+  const t = await getTranslations("Website");
+
   return (
     <div className="mt-32 h-[400vh]">
       <div className="flex h-[300vh] flex-col">
@@ -78,7 +82,9 @@ export default async function WebsitePage(): Promise<ReactNode> {
               <path opacity="0.8" d="M0.709961 0H47.1399L140 100H93.5701L0.709961 0Z" fill="#FFF" />
               <path opacity="0.8" d="M93.5701 0H140L232.86 100H186.43L93.5701 0Z" fill="#FFF" />
             </svg>
-            <p className="font-poppins font-bold uppercase">The adventures starts in </p>
+            <p className="font-poppins font-bold uppercase">
+              {t("adventures")}
+            </p>
           </div>
           <Clock />
           <div className="mx-16 mt-4 flex items-start justify-between font-poppins">
@@ -114,7 +120,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 "relative text-lg font-semibold text-white no-underline after:absolute after:bottom-2 after:left-8 after:h-px after:w-0 after:bg-white after:transition-[width] hover:no-underline hover:after:w-[calc(100%-4rem)]",
               )}
             >
-              Scroll down to see more
+              {t('scrollDown')}
             </p>
           </div>
         </div>
@@ -123,15 +129,12 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#01</span>
-                <span className="text-5xl">The story</span>
+                <span className="text-5xl">
+                  {t("theStory")}
+                </span>
               </h3>
               <p className="pl-8 pt-8 font-poppins">
-                En 2168, une découverte sur la Lune déclenche une guerre interstellaire aux enjeux inimaginables. Un
-                artefact extraterrestre, un signal de détresse… et une espèce alien prête à tout pour protéger son
-                territoire. Bienvenue sur Selenite: Lost Contact, explorez
-                l&apos;Alliance Terrienne, les mystérieux Horizon et la mission désespérée du pilote Alex Carter.
-                Plongez au cœur du conflit, découvrez les secrets des extraterrestres et analysez leurs technologies.
-                L&apos;exploration commence maintenant. Saurez-vous percer tous les mystères ?
+                {t("theStoryText")}
               </p>
             </div>
             <div className="h-32 w-1/2"></div>
@@ -141,14 +144,12 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="flex w-1/2 flex-col items-end">
               <h3 className="relative flex w-fit flex-col pb-4 text-right font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#02</span>
-                <span className="text-5xl">The Horizon</span>
+                <span className="text-5xl">
+                  {t("theHorizon")}
+                </span>
               </h3>
               <p className="pl-8 pt-8 text-right font-poppins">
-                Nul ne sait doù ils viennent, ni quelles sont leurs véritables intentions. Les Horizon ne laissent
-                derrière eux que ruines et silence. Leur technologie défie les lois connues de la physique, leur
-                intelligence dépasse l&apos;entendement humain, et leur conscience collective les rend insaisissables.
-                Sont-ils des conquérants, des gardiens ou une force bien plus ancienne ? Ce qui est certain, c&apos;est
-                qu&apos;ils ont répondu à un appel de détresse, et que l&apos;humanité en paiera le prix.
+                {t("theHorizonText")}
               </p>
             </div>
           </section>
@@ -158,24 +159,21 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="w-full">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#03</span>
-                <span className="text-5xl">Your mission</span>
+                <span className="text-5xl">
+                  {t("yourMission")}
+                </span>
               </h3>
               <p className="max-w-[50vw] pl-8 pt-8 font-poppins">
-                Une station en ruine, un ennemi inconnu, une menace imminente. Alex Carter est envoyé en mission de
-                reconnaissance sur la Lune, mais ce qu&apos;il découvre dépasse tout ce que l&apos;humanité aurait pu imaginer. Un
-                canon alien prêt à anéantir la Terre, un bouclier impénétrable, des avant-postes ennemis lourdement
-                armés… Pour stopper l&apos;inévitable, il devra infiltrer les lignes ennemies, détruire les défenses
-                extraterrestres et frapper au cœur de leur arsenal. Seul contre une civilisation supérieure, chaque
-                bataille est une lutte pour la survie. La mission est claire : frapper vite, frapper fort… et ne pas
-                échouer.
+               {t("yourMissionText")}
               </p>
             </div>
           </section>
           <div className="absolute bottom-4 right-4 -translate-x-1/2 space-y-4">
             <Arrows />
             <p className="text-wrap text-center font-poppins text-sm">
-              Use the arrow keys <br />
-              to move the spaceship
+              {t("moveKeys1")}
+              <br />
+              {t("moveKeys2")}
             </p>
           </div>
         </div>
@@ -187,8 +185,8 @@ export default async function WebsitePage(): Promise<ReactNode> {
         </div>
       </div>
       <Footer />
-      <div className="fixed bottom-8 left-8 font-orbitron text-lg">
-        DEVELOPED BY
+      <div className="fixed bottom-8 left-8 font-orbitron text-lg uppercase">
+        {t("developedBy")}
         <br />
         <Link
           href={env.NEXT_PUBLIC_STUDIO_URL}

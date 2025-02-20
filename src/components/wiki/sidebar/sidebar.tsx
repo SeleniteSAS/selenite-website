@@ -32,9 +32,11 @@ import ThemeButton from "@/components/wiki/theme-button/theme-button";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import {  getTranslations } from "next-intl/server";
 
 export default async function Sidebar() {
   const session: Session | null = await auth();
+  const t = await getTranslations("Wiki");
 
   return (
     <SidebarComponent collapsible={"offcanvas"} side={"left"} variant="floating" className="z-10">
@@ -54,9 +56,11 @@ export default async function Sidebar() {
       </SidebarHeader>
       <SidebarContent className="px-4 py-2">
         <Alert className="p-2">
-          <AlertTitle className="text-md w-full text-center font-semibold">Welcome to the wiki !</AlertTitle>
+          <AlertTitle className="text-md w-full text-center font-semibold">
+            {t("title")}
+          </AlertTitle>
           <AlertDescription className="text-center text-xs">
-            The wiki is only available in French for now.
+            {t("description")}
           </AlertDescription>
         </Alert>
         <Suspense fallback={<SidebarMenuSkeleton />}>

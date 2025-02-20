@@ -1,1 +1,46 @@
-{}
+{
+    "Website": {
+        "adventures": "The adventures starts in",
+        "scrollDown": "Scroll own to see more",
+        "theStory": "The Story",
+        "theStoryText": "In 2168, a discovery on the Moon triggers an interstellar war with unimaginable stakes. An extraterrestrial artifact, a distress signal… and an alien species ready to do anything to protect its territory. Welcome to Selenite: Lost Contact. Explore the Terran Alliance, the mysterious Horizon, and the desperate mission of pilot Alex Carter. Dive into the heart of the conflict, uncover the secrets of the aliens, and analyze their technologies. The exploration begins now. Will you be able to unravel all the mysteries?",
+        "theHorizon": "The Horizon",
+        "theHorizonText": "No one knows where they come from or what their true intentions are. The Horizon leave nothing behind but ruins and silence. Their technology defies the known laws of physics, their intelligence surpasses human comprehension, and their collective consciousness makes them elusive. Are they conquerors, guardians, or something far more ancient? One thing is certain: they have answered a distress call, and humanity will pay the price.",
+        "yourMission": "Your Mission",
+        "yourMissionText": "A ruined station, an unknown enemy, an imminent threat. Alex Carter is sent on a reconnaissance mission to the Moon, but what he discovers surpasses anything humanity could have imagined. An alien cannon ready to annihilate Earth, an impenetrable shield, heavily armed enemy outposts… To stop the inevitable, he must infiltrate enemy lines, destroy extraterrestrial defenses, and strike at the heart of their arsenal. Alone against a superior civilization, every battle is a fight for survival. The mission is clear: strike fast, strike hard… and do not fail.",
+        "moveKeys1": "Use the arrow keys",
+        "moveKeys2": "to move the spaceship",
+        "developedBy": "Developed by",
+        "Footer" : {
+            "wiki": "Wiki of Selenite Lost Contact",
+            "studio": "The Selenite Studio",
+            "download": "Download the game",
+            "auth": "Login into your account",
+            "github": "Our github organization",
+            "title1": "Our other websites",
+            "title2": "and links",
+            "downloadTitle": "Download the game now",
+            "downloadDesc": "Get the latest version of the game for your favorite platform",
+            "downloadButton": "Get it through the dedicated website !",
+            "downloadGithub": "Get it from the github repository !",
+            "legals": "Legal mentions",
+            "privacy": "Privacy policy"
+        },
+        "Header" : {
+            "home": "Home",
+            "wiki": "Wiki",
+            "studio": "Studio",
+            "download": "Download"
+        },
+        "Clock" : {
+            "days": "days",
+            "hours": "hours",
+            "minutes": "minutes",
+            "seconds": "seconds"
+        }
+    },
+    "Wiki": {
+        "title": "Welcome to the wiki !",
+        "description": "The wiki is only available in French for now"
+    }
+}

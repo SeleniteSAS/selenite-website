@@ -4,23 +4,25 @@ import { buttonVariants } from "@/components/_ui/button";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const links = [
   {
-    label: "Home",
+    label: "home",
     url: "/",
   },
   {
-    label: "Wiki",
+    label: "wiki",
     url: env.NEXT_PUBLIC_WIKI_URL,
   },
   {
-    label: "Studio",
+    label: "studio",
     url: env.NEXT_PUBLIC_STUDIO_URL,
   },
 ];
 
 export default function Header() {
+  const t = useTranslations("Website.Header");
   return (
     <header className="sticky top-0 z-50 flex justify-start px-8 pt-4">
       <div className="flex flex-1 flex-col items-start">
@@ -37,7 +39,7 @@ export default function Header() {
           {links.map((link) => (
             <li key={link.url}>
               <Link href={link.url} className="px-2 text-lg leading-none">
-                {link.label}
+                {t(link.label)}
               </Link>
             </li>
           ))}
@@ -55,7 +57,7 @@ export default function Header() {
               href={env.NEXT_PUBLIC_DOWNLOAD_URL}
               className={cn("text-black", buttonVariants({ variant: "outline" }))}
             >
-              Download
+              {t("download")}
             </Link>
           </span>
         </div>

@@ -8,37 +8,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const links = [
   {
-    label: "Wiki of Selenite Lost Contact",
+    label: "wiki",
     href: env.NEXT_PUBLIC_WIKI_URL,
   },
   {
-    label: "The Selenite Studio",
+    label: "studio",
     href: env.NEXT_PUBLIC_STUDIO_URL,
   },
   {
-    label: "Download the game",
+    label: "download",
     href: env.NEXT_PUBLIC_DOWNLOAD_URL,
   },
   {
-    label: "Login into your account",
+    label: "auth",
     href: env.NEXT_PUBLIC_AUTH_URL,
   },
   {
-    label: "Our github organization",
+    label: "github",
     href: "https://github.com/selenite-live/",
   },
 ];
 
 export default function Footer() {
+  const t = useTranslations("Website.Footer");
+
   return (
     <div className="flex h-screen flex-col px-4 text-white">
       <div className="mt-24 grid w-full flex-1 grid-cols-3 grid-rows-1">
         <div className="flex flex-col items-center justify-center">
           <h4 className="mb-8 font-orbitron text-2xl font-semibold uppercase">
-            Our other websites <br /> and links :
+            {t("title1")} <br/> {t("title2")}
           </h4>
           <ul className="flex flex-col gap-4 font-poppins">
             {links.map((link) => (
@@ -57,7 +60,7 @@ export default function Footer() {
                       fill="#fff"
                     />
                   </svg>
-                  {link.label}
+                  {t(link.label)}
                 </Link>
               </li>
             ))}
@@ -66,8 +69,12 @@ export default function Footer() {
         <div className="flex items-center justify-center p-4">
           <Card className="relative w-full max-w-[350px] border-border/40 bg-transparent text-white">
             <CardHeader className="relative z-10">
-              <CardTitle>Download the game now</CardTitle>
-              <CardDescription>Get the latest version of the game for your favorite platform</CardDescription>
+              <CardTitle>
+                {t("downloadTitle")}
+              </CardTitle>
+              <CardDescription>
+                {t("downloadDesc")}
+              </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10">
               <ul className="flex flex-col gap-4">
@@ -76,7 +83,7 @@ export default function Footer() {
                     href={env.NEXT_PUBLIC_DOWNLOAD_URL}
                     className={cn(buttonVariants({ variant: "default" }), "w-full justify-between")}
                   >
-                    Get it through the dedicated website !
+                    {t("downloadButton")}
                     <ArrowRight />
                   </Link>
                 </li>
@@ -85,7 +92,7 @@ export default function Footer() {
                     href={"https://github.com/selenite-live/selenite-game"}
                     className={cn(buttonVariants({ variant: "default" }), "w-full justify-between")}
                   >
-                    Get it from the github repository ! <ArrowRight />
+                    {t("downloadGithub")} <ArrowRight />
                   </Link>
                 </li>
               </ul>
@@ -110,12 +117,12 @@ export default function Footer() {
           <ul className="-mb-1.5 flex gap-4 px-2 font-poppins">
             <li>
               <Link className="px-2 text-lg leading-none" href={"/legals"}>
-                Legals
+                {t("legals")}
               </Link>
             </li>
             <li>
               <Link className="px-2 text-lg leading-none" href={"/privacy-policy"}>
-                Privacy Policy
+                {t("privacy")}
               </Link>
             </li>
           </ul>
