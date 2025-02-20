@@ -6,6 +6,7 @@ import { notFound, redirect } from "next/navigation";
 
 import MarkdownEdit from "@/components/wiki/markdown-edit/markdown-edit";
 import WikiMarkdownRemote from "@/components/wiki/markdown-remote/markdown-remote";
+import WikiFooter from "@/components/wiki/wiki-footer/wiki-footer";
 
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
@@ -19,7 +20,6 @@ import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
 import type { Article as ArticleJsonLd, WithContext } from "schema-dts";
-import WikiFooter from "@/components/wiki/wiki-footer/wiki-footer";
 
 type WikiPageProps = Readonly<{
   params: {

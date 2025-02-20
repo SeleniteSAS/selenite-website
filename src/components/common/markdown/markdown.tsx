@@ -73,7 +73,7 @@ const markdownComponents = {
   th: (props: ComponentProps<"th">): ReactNode => <TableHead {...props} />,
   td: (props: ComponentProps<"td">): ReactNode => <TableCell {...props} />,
   li: ({ className, children, ...props }: ComponentProps<"li">): ReactNode => (
-    <li className={cn("list-disc ml-5", className)} {...props}>
+    <li className={cn("ml-5 list-disc", className)} {...props}>
       {children}
     </li>
   ),

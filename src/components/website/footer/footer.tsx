@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import Noise from "@/components/_animate/noise";
@@ -8,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 
 const links = [
   {
@@ -41,7 +41,7 @@ export default function Footer() {
       <div className="mt-24 grid w-full flex-1 grid-cols-3 grid-rows-1">
         <div className="flex flex-col items-center justify-center">
           <h4 className="mb-8 font-orbitron text-2xl font-semibold uppercase">
-            {t("title1")} <br/> {t("title2")}
+            {t("title1")} <br /> {t("title2")}
           </h4>
           <ul className="flex flex-col gap-4 font-poppins">
             {links.map((link) => (
@@ -69,12 +69,8 @@ export default function Footer() {
         <div className="flex items-center justify-center p-4">
           <Card className="relative w-full max-w-[350px] border-border/40 bg-transparent text-white">
             <CardHeader className="relative z-10">
-              <CardTitle>
-                {t("downloadTitle")}
-              </CardTitle>
-              <CardDescription>
-                {t("downloadDesc")}
-              </CardDescription>
+              <CardTitle>{t("downloadTitle")}</CardTitle>
+              <CardDescription>{t("downloadDesc")}</CardDescription>
             </CardHeader>
             <CardContent className="relative z-10">
               <ul className="flex flex-col gap-4">

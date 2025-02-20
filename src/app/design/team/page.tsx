@@ -3,6 +3,7 @@ import { GithubIcon, LinkIcon, LinkedinIcon } from "lucide-react";
 import { Fragment, type JSX } from "react";
 
 import { Metadata } from "next";
+import { useTranslations } from "next-intl";
 
 import { Marquee } from "@/components/_animate/marquee";
 import { BadgeGroup, BadgeGroupItem } from "@/components/_ui/badge-group";
@@ -149,13 +150,11 @@ export default function TeamPage() {
     </div>
   ));
 
+  const t = useTranslations("Design.Team");
+
   return (
     <Fragment>
-      <Hero
-        title="Team"
-        subtitle="Good teams create great work. Behind every idea, every design, every line of code, there's a collective effort—a balance of skill, passion, and vision. Strength comes from collaboration, innovation thrives on diversity, and success is built on trust."
-        description="These are the people who shape our brand. Together, we turn ambition into reality."
-      />
+      <Hero title={t("title")} subtitle={t("subtitle")} description={t("description")} />
       <section
         className={`flex min-h-screen w-full flex-col items-center justify-center overflow-hidden font-poppins text-foreground`}
       >

@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,6 +18,7 @@ export default function Header(): ReactNode {
   const { toggleSidebar, state } = useSidebar();
   const pathname: string = usePathname();
   const flattenItems = Object.values(items).flat();
+  const t = useTranslations("Design.Sidebar");
 
   return (
     <header
@@ -57,7 +59,7 @@ export default function Header(): ReactNode {
             }}
             className="mt-6 font-poppins text-lg font-light text-black"
           >
-            {flattenItems.find((item): boolean => item.path === pathname)?.name}
+            {t(flattenItems.find((item): boolean => item.path === pathname)?.name ?? "default")}
           </span>
         </Button>
       </div>

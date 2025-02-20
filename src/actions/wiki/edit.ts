@@ -4,16 +4,15 @@ import { Session } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
+import { normalizeSlug } from "@/lib/slug";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { getArticleSlug, getChildArticlesBySlug, updateArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
 
 import "server-only";
-import { normalizeSlug } from "@/lib/slug";
 
 type EditReturn = { error: string } | { success: true; slug: string };
-
 
 export default async function edit(id: string, values: CreateUpdateWikiPage): Promise<EditReturn> {
   const session: Session | null = await auth();

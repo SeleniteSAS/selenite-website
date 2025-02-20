@@ -4,11 +4,11 @@ import { Session } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
+import { normalizeSlug } from "@/lib/slug";
 import { CreateUpdateWikiPage } from "@/schemas/wiki";
 import { createArticle } from "@/services/wiki-articles/wiki-articles";
 import { Article } from "@/types/article";
 import { UserRole } from "@/types/user";
-import { normalizeSlug } from "@/lib/slug";
 
 type CreateReturn = { error: string } | { success: true; slug: string };
 
@@ -22,7 +22,7 @@ export default async function create(values: CreateUpdateWikiPage): Promise<Crea
   try {
     const article: Article | null = await createArticle({
       ...values,
-      slug: normalizeSlug(values.slug, values.label), 
+      slug: normalizeSlug(values.slug, values.label),
     });
 
     if (article) {

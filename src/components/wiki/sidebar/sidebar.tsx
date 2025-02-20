@@ -2,6 +2,7 @@ import { CogIcon, MoonIcon, PenIcon, PlusIcon, SunIcon, UserIcon } from "lucide-
 import { Suspense } from "react";
 
 import { Session } from "next-auth";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/_ui/alert";
@@ -32,7 +33,6 @@ import ThemeButton from "@/components/wiki/theme-button/theme-button";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
-import {  getTranslations } from "next-intl/server";
 
 export default async function Sidebar() {
   const session: Session | null = await auth();
@@ -56,12 +56,8 @@ export default async function Sidebar() {
       </SidebarHeader>
       <SidebarContent className="px-4 py-2">
         <Alert className="p-2">
-          <AlertTitle className="text-md w-full text-center font-semibold">
-            {t("title")}
-          </AlertTitle>
-          <AlertDescription className="text-center text-xs">
-            {t("description")}
-          </AlertDescription>
+          <AlertTitle className="text-md w-full text-center font-semibold">{t("title")}</AlertTitle>
+          <AlertDescription className="text-center text-xs">{t("description")}</AlertDescription>
         </Alert>
         <Suspense fallback={<SidebarMenuSkeleton />}>
           <SidebarMenu />

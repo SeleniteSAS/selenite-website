@@ -1,7 +1,8 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
+
+import { useTranslations } from "next-intl";
 
 type Unit = { label: string; value: string };
 
@@ -69,9 +70,7 @@ export default function Clock(): ReactNode {
           >
             {unit.value}
           </p>
-          <p className="text-md w-full text-center font-poppins capitalize">
-            {t(unit.label)}
-          </p>
+          <p className="text-md w-full text-center font-poppins capitalize">{t(unit.label)}</p>
         </li>
       ))}
     </ul>

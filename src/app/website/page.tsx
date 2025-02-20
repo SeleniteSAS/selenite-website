@@ -1,6 +1,7 @@
 import { type ReactNode, lazy } from "react";
 
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/_ui/button";
@@ -12,7 +13,6 @@ import SpaceShip from "@/components/website/spaceship/spaceship";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
-import { getTranslations } from "next-intl/server";
 
 const Moon = lazy(() => import("@/components/website/moon/moon"));
 
@@ -70,7 +70,6 @@ export const metadata: Metadata = {
 };
 
 export default async function WebsitePage(): Promise<ReactNode> {
-
   const t = await getTranslations("Website");
 
   return (
@@ -82,9 +81,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
               <path opacity="0.8" d="M0.709961 0H47.1399L140 100H93.5701L0.709961 0Z" fill="#FFF" />
               <path opacity="0.8" d="M93.5701 0H140L232.86 100H186.43L93.5701 0Z" fill="#FFF" />
             </svg>
-            <p className="font-poppins font-bold uppercase">
-              {t("adventures")}
-            </p>
+            <p className="font-poppins font-bold uppercase">{t("adventures")}</p>
           </div>
           <Clock />
           <div className="mx-16 mt-4 flex items-start justify-between font-poppins">
@@ -120,7 +117,7 @@ export default async function WebsitePage(): Promise<ReactNode> {
                 "relative text-lg font-semibold text-white no-underline after:absolute after:bottom-2 after:left-8 after:h-px after:w-0 after:bg-white after:transition-[width] hover:no-underline hover:after:w-[calc(100%-4rem)]",
               )}
             >
-              {t('scrollDown')}
+              {t("scrollDown")}
             </p>
           </div>
         </div>
@@ -129,13 +126,9 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="w-1/2">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#01</span>
-                <span className="text-5xl">
-                  {t("theStory")}
-                </span>
+                <span className="text-5xl">{t("theStory")}</span>
               </h3>
-              <p className="pl-8 pt-8 font-poppins">
-                {t("theStoryText")}
-              </p>
+              <p className="pl-8 pt-8 font-poppins">{t("theStoryText")}</p>
             </div>
             <div className="h-32 w-1/2"></div>
           </section>
@@ -144,13 +137,9 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="flex w-1/2 flex-col items-end">
               <h3 className="relative flex w-fit flex-col pb-4 text-right font-orbitron after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#02</span>
-                <span className="text-5xl">
-                  {t("theHorizon")}
-                </span>
+                <span className="text-5xl">{t("theHorizon")}</span>
               </h3>
-              <p className="pl-8 pt-8 text-right font-poppins">
-                {t("theHorizonText")}
-              </p>
+              <p className="pl-8 pt-8 text-right font-poppins">{t("theHorizonText")}</p>
             </div>
           </section>
         </div>
@@ -159,13 +148,9 @@ export default async function WebsitePage(): Promise<ReactNode> {
             <div className="w-full">
               <h3 className="relative flex w-fit flex-col pb-4 font-orbitron after:absolute after:bottom-0 after:right-1/2 after:h-px after:w-screen after:bg-[#00E5E5]">
                 <span className="text-md">#03</span>
-                <span className="text-5xl">
-                  {t("yourMission")}
-                </span>
+                <span className="text-5xl">{t("yourMission")}</span>
               </h3>
-              <p className="max-w-[50vw] pl-8 pt-8 font-poppins">
-               {t("yourMissionText")}
-              </p>
+              <p className="max-w-[50vw] pl-8 pt-8 font-poppins">{t("yourMissionText")}</p>
             </div>
           </section>
           <div className="absolute bottom-4 right-4 -translate-x-1/2 space-y-4">

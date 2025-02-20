@@ -1,10 +1,10 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/_ui/button";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 
 const links = [
   {
