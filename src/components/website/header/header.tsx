@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/_ui/button";
+import { Logo } from "@/components/common/logo/logo";
 
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
@@ -31,14 +32,22 @@ export default function Header() {
           <div className="h-px w-10 flex-none origin-[0_0] rotate-45 bg-gray-400"></div>
         </div>
         <div className="absolute top-8 sm:relative sm:top-4 sm:pl-4">
-          <span className="inline-block font-orbitron text-2xl uppercase leading-none sm:text-4xl">Selenite</span>
+          <Link href="/" className="flex gap-4 items-center" title="Home">
+            <Logo mainColor="white" secondaryColor="white" size={32} />
+            <span className="inline-block font-orbitron text-2xl uppercase leading-none sm:text-4xl">Selenite</span>
+          </Link>
         </div>
       </div>
       <nav className="flex-1 xs:flex-none">
-        <ul className="-mt-1.5 flex gap-4 px-2 font-poppins">
+        <ul className="flex items-center justify-center gap-4 px-2 font-poppins sm:-mt-1.5 sm:items-start sm:justify-start">
+          <li className="xs:hidden">
+            <Link href="/" className="" title="Home">
+              <Logo mainColor="white" secondaryColor="white" size={32} />
+            </Link>
+          </li>
           {links.map((link) => (
             <li key={link.url}>
-              <Link href={link.url} className="px-2 text-lg leading-none">
+              <Link href={link.url} className="px-2 text-lg sm:leading-none">
                 {t(link.label)}
               </Link>
             </li>

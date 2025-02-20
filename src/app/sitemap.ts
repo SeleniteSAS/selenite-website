@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     ...wikiPath.map((path) => ({
-      url: `${env.NEXT_PUBLIC_WIKI_URL}${path}`,
+      url: `${env.NEXT_PUBLIC_WIKI_URL}/${path}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,

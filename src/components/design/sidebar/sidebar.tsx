@@ -20,8 +20,8 @@ export default function Sidebar(): ReactNode {
 
   return (
     <ShadSidebar side="right" collapsible="offcanvas" className="border-0" variant="sidebar">
-      <SidebarContent className="flex h-full">
-        <ul className="flex h-full w-full flex-col bg-[#2E2334] font-poppins text-white">
+      <SidebarContent className="flex h-full bg-[#2E2334]">
+        <ul className="flex h-full w-full flex-col font-poppins text-white">
           {Object.keys(items).map((name) => (
             <Fragment key={name}>
               {name !== "default" && (
