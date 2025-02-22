@@ -1,8 +1,6 @@
 import { ChevronRightIcon } from "lucide-react";
 import type { JSX } from "react";
 
-import Link from "next/link";
-
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/_ui/collapsible";
 import Icon from "@/components/_ui/icon";
 import {
@@ -19,6 +17,7 @@ import {
 
 import { getNavigationItems } from "@/services/wiki-navigation/wiki-navigation";
 import { WikiNavigation, WikiNavigationGroup, WikiNavigationItem } from "@/types/wiki-navigation";
+import SidebarLink from "@/components/common/sidebar-link/sidebar-link";
 
 export default async function SidebarMenu(): Promise<JSX.Element> {
   const navigationItems: WikiNavigation[] = await getNavigationItems();
@@ -33,10 +32,10 @@ export default async function SidebarMenu(): Promise<JSX.Element> {
               <Collapsible key={item.title} asChild={true} defaultOpen={false}>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild={true} tooltip={item.title}>
-                    <Link href={item.url}>
+                    <SidebarLink href={item.url}>
                       <Icon name={item.icon ?? "home"} />
                       <span>{item.title}</span>
-                    </Link>
+                    </SidebarLink>
                   </SidebarMenuButton>
                   {item.items?.length ? (
                     <>
@@ -51,9 +50,9 @@ export default async function SidebarMenu(): Promise<JSX.Element> {
                           {item.items?.map((subItem: WikiNavigationItem) => (
                             <SidebarMenuSubItem key={subItem.title}>
                               <SidebarMenuSubButton asChild>
-                                <Link href={subItem.url}>
+                                <SidebarLink href={subItem.url}>
                                   <span>{subItem.title}</span>
-                                </Link>
+                                </SidebarLink>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
                           ))}
