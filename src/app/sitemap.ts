@@ -4,7 +4,7 @@ import prisma from "@/db/prisma";
 import { env } from "@/lib/env";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const studioWebsitePath: string[] = ["/assets", "/colors", "/communication", "/fonts", "/logotype", "/team"];
+  const studioWebsitePath: string[] = ["/assets", "/colors", "/fonts", "/logotype", "/team"];
   const auth: string[] = ["/login", "/register"];
   const wikiPath: string[] = await prisma.article.findMany().then((articles) => articles.map(({ slug }) => slug));
 

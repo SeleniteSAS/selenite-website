@@ -4,7 +4,6 @@ import * as motion from "motion/react-client";
 import { Fragment, ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Sidebar as ShadSidebar, SidebarContent, useSidebar } from "@/components/_ui/sidebar";
@@ -12,6 +11,7 @@ import LangSwitcher from "@/components/design/lang-switcher/lang-switcher";
 
 import { items } from "@/lib/design-sidebar-items";
 import { cn } from "@/lib/utils";
+import SidebarLink from "@/components/common/sidebar-link/sidebar-link";
 
 export default function Sidebar(): ReactNode {
   const { toggleSidebar } = useSidebar();
@@ -36,9 +36,9 @@ export default function Sidebar(): ReactNode {
                   key={item.name}
                   className={cn(name === "default" && i !== 0 ? "border-t border-white" : "", "relative w-full flex-1")}
                 >
-                  <Link href={item.path} className="z-10 flex h-full w-full items-center justify-start p-8">
+                  <SidebarLink href={item.path} className="z-10 flex h-full w-full items-center justify-start p-8">
                     {t(item.name)}
-                  </Link>
+                  </SidebarLink>
                   {pathname == item.path && (
                     <motion.div
                       layoutId="sidebar-underline"

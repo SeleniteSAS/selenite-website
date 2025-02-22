@@ -84,7 +84,36 @@
     "Assets": {
       "title": "Illustrations",
       "subtitle": "A symbol is never just a shape. An element carries meaning, shaping perception before a single word is read. Every visual is a bridge between function and emotion, guiding users through a seamless experience.",
-      "description": "These are the illustration and iconography principles that define our brand—use them to create a cohesive and memorable experience."
+      "description": "These are the illustration and iconography principles that define our brand—use them to create a cohesive and memorable experience.",
+      "icons": "Icons",
+      "assets": "Graphic assets",
+      "iconsItems": {
+        "global": "Global",
+        "lang": "Language",
+        "out": "Exit",
+        "down": "Arrow down",
+        "planet": "Planet",
+        "center": "Center",
+        "page": "Page",
+        "cross": "Cross",
+        "reticula": "Reticula",
+        "target": "Target"
+      },
+      "assetsItems" : {
+        "poster": "Poster",
+        "poster1": "First Poster Mockup",
+        "poster2": "Second Poster Mockup",
+        "cover": "Cover",
+        "cover1": "First Cover Mockup",
+        "cover2": "Second Cover Mockup"
+      },
+      "ingame": "In-game assets"
+    },
+    "Intro": {
+      "title": "Intro",
+      "subtitle": "Humanity thought it had conquered space. It just realized it was only trespassing.",
+      "description": "A discovery on the Moon has triggered an interstellar war. The Horizon, an advanced and ruthless alien civilization, have responded to a distress call—and they are ready to annihilate Earth. Only Alex Carter stands between them and total destruction. Dive into the universe of Selenite: Lost Contact through our visual resources: concept art, screenshots, 3D models, and more. Explore every detail of this cosmic confrontation.",
+      "cta": "👉 Browse the graphic resources in the sidebar"
     }
   }
 }

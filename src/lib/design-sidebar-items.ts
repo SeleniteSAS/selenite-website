@@ -10,10 +10,7 @@ export const items: Record<
       name: "intro",
       path: "/",
     },
-    {
-      name: "communication",
-      path: "/communication",
-    },
+
     {
       name: "team",
       path: "/team",
